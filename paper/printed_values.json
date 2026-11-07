@@ -1,0 +1,5665 @@
+{
+  "schema": "paper.printed_values",
+  "sources": [
+    {
+      "path": "data/items/questions.jsonl",
+      "sha256": "3290f663ecb4febca46f9642f95386f44e2d4d02ab17c3dc4338d75b68d2d6ea"
+    },
+    {
+      "path": "data/runs/main/rows_final.jsonl",
+      "sha256": "949a4969ae720b9226b679da4bee6a6c2c5cf031ef26be39a5064ffb6bdba93e"
+    },
+    {
+      "path": "data/runs/cloud_comparator/rows_final.jsonl",
+      "sha256": "72eab4afd58328e1d3967b6a6500cdc95e2ce5a441dad6fea7fb70fce41e6b96"
+    },
+    {
+      "path": "data/runs/records_built_by_gptoss20b/rows_final.jsonl",
+      "sha256": "974ba03c131834ef77c006ea3f77d4593c96f55ec4ccecaf0c2506474cfa81b3"
+    },
+    {
+      "path": "data/runs/records_built_by_qwen32b/rows_final.jsonl",
+      "sha256": "5c5feed3ee4388c028a78e92009ebc5ca4531e2b847822bd0d1512df007c20df"
+    },
+    {
+      "path": "paper/exploratory.json",
+      "sha256": "bdc0d533a2e264253b4a3fcc83990d4bf1d966d3db9e1d802d89d7d49ce53141"
+    },
+    {
+      "path": "paper/numbers.json",
+      "sha256": "8b927f38166589dcc9b90965c851403274507a49735a9de85d1c2cb185412762"
+    }
+  ],
+  "population_rule": "procedures.analysis.spec.in_population; 158 questions, two per pair",
+  "bootstrap": {
+    "replicates": 2000,
+    "seed": 20260928,
+    "cluster": "unit",
+    "unit_order": "sorted unit_id",
+    "ci": "percentile 95%, sorted draw indices 50 and 1949 (zero-based)",
+    "paired_draws": true,
+    "repeat_resampling": false,
+    "reader_resampling": false,
+    "note": "Completion-adjusted panel intervals condition on the named readers; the report's panel intervals also resample readers."
+  },
+  "estimands": {
+    "main_table": "Mean of observed repeat correctness within question, then equally across observed questions; directly format unrounded mean to three decimals.",
+    "completion_adjusted": "Correct observed answers / (158 questions x 3 planned reads); every non-observed planned read contributes zero task success.",
+    "completion_scope": "the recorded run, route time-outs included",
+    "tier": "Equal mean across fixed named readers, paired by question and unit; no tier verdicts recomputed.",
+    "compressor": "B readers use DeepSeek-built M6; C readers use their own compressor. B/C differences conflate reader panel and compressor assignment."
+  },
+  "population": {
+    "questions": 158,
+    "units": 79,
+    "documents_family_doc": 50,
+    "documents_definition": "Unique (family, doc) identifiers; document revisions separately reported below.",
+    "document_keys": [
+      [
+        "AESO",
+        "AESO-ISO-304.3"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-304.4"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-304.7"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-304.8"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-304.9"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-306.4"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.1"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.15"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.16"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.17"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.19"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.20"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.21"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.22"
+      ],
+      [
+        "AESO",
+        "AESO-ISO-503.7"
+      ],
+      [
+        "CAISO",
+        "CAISO-OP-3220"
+      ],
+      [
+        "CAISO",
+        "CAISO-OP-4110"
+      ],
+      [
+        "CAISO",
+        "CAISO-OP-4420"
+      ],
+      [
+        "CAISO",
+        "CAISO-OP-5110"
+      ],
+      [
+        "CAISO",
+        "CAISO-OP-RC0130"
+      ],
+      [
+        "CAISO",
+        "CAISO-OP-RC0310"
+      ],
+      [
+        "CAISO",
+        "CAISO-OP-RC0420"
+      ],
+      [
+        "IESO",
+        "IESO-MM-7.1"
+      ],
+      [
+        "IESO",
+        "IESO-MM-7.3"
+      ],
+      [
+        "MISO",
+        "MISO-BPM-007"
+      ],
+      [
+        "MISO",
+        "MISO-BPM-008"
+      ],
+      [
+        "NERC",
+        "NERC-BAL-001"
+      ],
+      [
+        "NERC",
+        "NERC-BAL-001-TRE"
+      ],
+      [
+        "NERC",
+        "NERC-EOP-004"
+      ],
+      [
+        "NERC",
+        "NERC-EOP-008"
+      ],
+      [
+        "NERC",
+        "NERC-EOP-012"
+      ],
+      [
+        "NERC",
+        "NERC-IRO-006-EAST"
+      ],
+      [
+        "NERC",
+        "NERC-MOD-025"
+      ],
+      [
+        "NERC",
+        "NERC-PRC-004"
+      ],
+      [
+        "NERC",
+        "NERC-PRC-006-NPCC"
+      ],
+      [
+        "NERC",
+        "NERC-PRC-006-SERC"
+      ],
+      [
+        "NERC",
+        "NERC-PRC-024"
+      ],
+      [
+        "NERC",
+        "NERC-TOP-001"
+      ],
+      [
+        "NERC",
+        "NERC-VAR-002"
+      ],
+      [
+        "NERC",
+        "NERC-VAR-501-WECC"
+      ],
+      [
+        "NYISO",
+        "NYISO-M-12"
+      ],
+      [
+        "NYISO",
+        "NYISO-M-15"
+      ],
+      [
+        "PJM",
+        "M-03"
+      ],
+      [
+        "PJM",
+        "M-07"
+      ],
+      [
+        "PJM",
+        "M-10"
+      ],
+      [
+        "PJM",
+        "M-12"
+      ],
+      [
+        "PJM",
+        "M-13"
+      ],
+      [
+        "PJM",
+        "M-14D"
+      ],
+      [
+        "PJM",
+        "M-36"
+      ],
+      [
+        "PJM",
+        "M-39"
+      ]
+    ],
+    "document_revision_count": 50,
+    "families": {
+      "AESO": 42,
+      "CAISO": 28,
+      "IESO": 12,
+      "MISO": 4,
+      "NERC": 38,
+      "NYISO": 6,
+      "PJM": 28
+    },
+    "units_by_family": {
+      "AESO": 21,
+      "CAISO": 14,
+      "IESO": 6,
+      "MISO": 2,
+      "NERC": 19,
+      "NYISO": 3,
+      "PJM": 14
+    },
+    "lettered_questions": 142,
+    "numeric_or_unlettered_questions": 16,
+    "gold_letter_counts": {
+      "A": 71,
+      "B": 70,
+      "C": 1
+    },
+    "raw_gold_label_counts": {
+      "A": 71,
+      "B": 70,
+      "C": 1,
+      "None": 16
+    },
+    "none_of_these_gold_count": 0,
+    "not_in_effect_gold_count": 0,
+    "abstain_or_na_gold_count": 0,
+    "lettered_number_of_options_counts": {
+      "3": 138,
+      "4": 4
+    }
+  },
+  "main_table_direct_3dp": [
+    {
+      "reader": "A2_sonnet5_nothink",
+      "name": "Claude Sonnet 5",
+      "methods": {
+        "B0": {
+          "accuracy": 0.41139240506329117,
+          "accuracy_3dp": "0.411",
+          "observed_questions": 158,
+          "observed_reads": 158,
+          "correct_reads": 65,
+          "reads_per_observed_question": {
+            "1": 158
+          },
+          "outcomes": {
+            "observed": 158
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.44366197183098594
+        },
+        "M0": {
+          "accuracy": 0.9113924050632911,
+          "accuracy_3dp": "0.911",
+          "observed_questions": 158,
+          "observed_reads": 158,
+          "correct_reads": 144,
+          "reads_per_observed_question": {
+            "1": 158
+          },
+          "outcomes": {
+            "observed": 158
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.9154929577464789
+        },
+        "M2": {
+          "accuracy": 0.8987341772151899,
+          "accuracy_3dp": "0.899",
+          "observed_questions": 158,
+          "observed_reads": 158,
+          "correct_reads": 142,
+          "reads_per_observed_question": {
+            "1": 158
+          },
+          "outcomes": {
+            "observed": 158
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.8943661971830986
+        },
+        "M4": null,
+        "M5_B": null,
+        "M7_B": null,
+        "M7_20b": null,
+        "M7_32b": null,
+        "M6": null
+      }
+    },
+    {
+      "reader": "B1_dsv41flash_hf_deepinfra",
+      "name": "DeepSeek-V4.1-Flash",
+      "methods": {
+        "B0": {
+          "accuracy": 0.44092827004219415,
+          "accuracy_3dp": "0.441",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 209,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.48356807511737093
+        },
+        "M0": {
+          "accuracy": 0.7510548523206751,
+          "accuracy_3dp": "0.751",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 356,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.7699530516431925
+        },
+        "M2": {
+          "accuracy": 0.7721518987341772,
+          "accuracy_3dp": "0.772",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 366,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.7934272300469484
+        },
+        "M4": {
+          "accuracy": 0.5042194092827005,
+          "accuracy_3dp": "0.504",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 239,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5469483568075117
+        },
+        "M5_B": {
+          "accuracy": 0.6856540084388185,
+          "accuracy_3dp": "0.686",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 325,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6995305164319249
+        },
+        "M7_B": {
+          "accuracy": 0.5443037974683544,
+          "accuracy_3dp": "0.544",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 258,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6056338028169014
+        },
+        "M7_20b": null,
+        "M7_32b": null,
+        "M6": {
+          "accuracy": 0.7932489451476793,
+          "accuracy_3dp": "0.793",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 376,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.8098591549295775
+        }
+      }
+    },
+    {
+      "reader": "B2_qwen3_235b_2507_hf_deepinfra",
+      "name": "Qwen3-235B-A22B",
+      "methods": {
+        "B0": {
+          "accuracy": 0.4050632911392405,
+          "accuracy_3dp": "0.405",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 192,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.44366197183098594
+        },
+        "M0": {
+          "accuracy": 0.7194092827004219,
+          "accuracy_3dp": "0.719",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 341,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.7323943661971831
+        },
+        "M2": {
+          "accuracy": 0.7257383966244726,
+          "accuracy_3dp": "0.726",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 344,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.7300469483568075
+        },
+        "M4": {
+          "accuracy": 0.47468354430379744,
+          "accuracy_3dp": "0.475",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 225,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5140845070422535
+        },
+        "M5_B": {
+          "accuracy": 0.6139240506329114,
+          "accuracy_3dp": "0.614",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 291,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6384976525821596
+        },
+        "M7_B": {
+          "accuracy": 0.5843881856540084,
+          "accuracy_3dp": "0.584",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 277,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6431924882629108
+        },
+        "M7_20b": null,
+        "M7_32b": null,
+        "M6": {
+          "accuracy": 0.7805907172995781,
+          "accuracy_3dp": "0.781",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 370,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.7793427230046949
+        }
+      }
+    },
+    {
+      "reader": "tierB_llama33_70b_hf_ovhcloud",
+      "name": "Llama-3.3-70B",
+      "methods": {
+        "B0": {
+          "accuracy": 0.4641350210970464,
+          "accuracy_3dp": "0.464",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 220,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.511737089201878
+        },
+        "M0": {
+          "accuracy": 0.6160337552742615,
+          "accuracy_3dp": "0.616",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 292,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6384976525821596
+        },
+        "M2": {
+          "accuracy": 0.620253164556962,
+          "accuracy_3dp": "0.620",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 294,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6572769953051643
+        },
+        "M4": {
+          "accuracy": 0.45780590717299574,
+          "accuracy_3dp": "0.458",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 217,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5070422535211268
+        },
+        "M5_B": {
+          "accuracy": 0.5654008438818565,
+          "accuracy_3dp": "0.565",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 268,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5985915492957746
+        },
+        "M7_B": {
+          "accuracy": 0.5316455696202531,
+          "accuracy_3dp": "0.532",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 252,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5774647887323944
+        },
+        "M7_20b": null,
+        "M7_32b": null,
+        "M6": {
+          "accuracy": 0.7151898734177216,
+          "accuracy_3dp": "0.715",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 339,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.7206572769953051
+        }
+      }
+    },
+    {
+      "reader": "tierC3_gptoss120b_hf_deepinfra_low",
+      "name": "gpt-oss-120b",
+      "methods": {
+        "B0": {
+          "accuracy": 0.45569620253164556,
+          "accuracy_3dp": "0.456",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 216,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.49295774647887325
+        },
+        "M0": null,
+        "M2": {
+          "accuracy": 0.8459915611814346,
+          "accuracy_3dp": "0.846",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 401,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.863849765258216
+        },
+        "M4": {
+          "accuracy": 0.5063291139240507,
+          "accuracy_3dp": "0.506",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 240,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5422535211267606
+        },
+        "M5_B": {
+          "accuracy": 0.6793248945147679,
+          "accuracy_3dp": "0.679",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 322,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6830985915492958
+        },
+        "M7_B": {
+          "accuracy": 0.6413502109704641,
+          "accuracy_3dp": "0.641",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 304,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.704225352112676
+        },
+        "M7_20b": {
+          "accuracy": 0.5738396624472574,
+          "accuracy_3dp": "0.574",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 272,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5985915492957746
+        },
+        "M7_32b": {
+          "accuracy": 0.620253164556962,
+          "accuracy_3dp": "0.620",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 294,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.65962441314554
+        },
+        "M6": {
+          "accuracy": 0.9065817409766455,
+          "accuracy_3dp": "0.907",
+          "observed_questions": 157,
+          "observed_reads": 471,
+          "correct_reads": 427,
+          "reads_per_observed_question": {
+            "3": 157
+          },
+          "outcomes": {
+            "not_sent_infeasible": 3,
+            "observed": 471
+          },
+          "lettered_questions": 141,
+          "lettered_accuracy": 0.905437352245863
+        }
+      }
+    },
+    {
+      "reader": "tierC2_qwen3_32b_hf_nscale_nothink",
+      "name": "Qwen3-32B",
+      "methods": {
+        "B0": {
+          "accuracy": 0.3438818565400844,
+          "accuracy_3dp": "0.344",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 163,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.3826291079812207
+        },
+        "M0": null,
+        "M2": {
+          "accuracy": 0.5780590717299577,
+          "accuracy_3dp": "0.578",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 274,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5962441314553991
+        },
+        "M4": {
+          "accuracy": 0.37341772151898733,
+          "accuracy_3dp": "0.373",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 177,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4084507042253521
+        },
+        "M5_B": {
+          "accuracy": 0.5337552742616033,
+          "accuracy_3dp": "0.534",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 253,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5446009389671361
+        },
+        "M7_B": {
+          "accuracy": 0.470464135021097,
+          "accuracy_3dp": "0.470",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 223,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5164319248826291
+        },
+        "M7_20b": {
+          "accuracy": 0.4641350210970464,
+          "accuracy_3dp": "0.464",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 220,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4953051643192488
+        },
+        "M7_32b": {
+          "accuracy": 0.4894514767932489,
+          "accuracy_3dp": "0.489",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 232,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5234741784037559
+        },
+        "M6": {
+          "accuracy": 0.6859504132231405,
+          "accuracy_3dp": "0.686",
+          "observed_questions": 121,
+          "observed_reads": 363,
+          "correct_reads": 249,
+          "reads_per_observed_question": {
+            "3": 121
+          },
+          "outcomes": {
+            "not_sent_infeasible": 111,
+            "observed": 363
+          },
+          "lettered_questions": 108,
+          "lettered_accuracy": 0.6759259259259259
+        }
+      }
+    },
+    {
+      "reader": "C3_gptoss20b_hf_deepinfra_low",
+      "name": "gpt-oss-20b",
+      "methods": {
+        "B0": {
+          "accuracy": 0.39029535864978904,
+          "accuracy_3dp": "0.390",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 185,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4295774647887324
+        },
+        "M0": null,
+        "M2": {
+          "accuracy": 0.8776371308016877,
+          "accuracy_3dp": "0.878",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 416,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.8755868544600939
+        },
+        "M4": {
+          "accuracy": 0.4789029535864979,
+          "accuracy_3dp": "0.479",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 227,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.511737089201878
+        },
+        "M5_B": {
+          "accuracy": 0.6540084388185654,
+          "accuracy_3dp": "0.654",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 310,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6549295774647887
+        },
+        "M7_B": {
+          "accuracy": 0.6118143459915613,
+          "accuracy_3dp": "0.612",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 290,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6737089201877935
+        },
+        "M7_20b": {
+          "accuracy": 0.5759493670886076,
+          "accuracy_3dp": "0.576",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 273,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6009389671361502
+        },
+        "M7_32b": {
+          "accuracy": 0.6160337552742615,
+          "accuracy_3dp": "0.616",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 292,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.6502347417840375
+        },
+        "M6": {
+          "accuracy": 0.7341772151898734,
+          "accuracy_3dp": "0.734",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 348,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.7112676056338029
+        }
+      }
+    },
+    {
+      "reader": "C2_qwen3_8b_hf_nscale_nothink",
+      "name": "Qwen3-8B",
+      "methods": {
+        "B0": {
+          "accuracy": 0.3987341772151899,
+          "accuracy_3dp": "0.399",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 189,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.44366197183098594
+        },
+        "M0": null,
+        "M2": {
+          "accuracy": 0.609704641350211,
+          "accuracy_3dp": "0.610",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 289,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.607981220657277
+        },
+        "M4": {
+          "accuracy": 0.44936708860759494,
+          "accuracy_3dp": "0.449",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 213,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4859154929577465
+        },
+        "M5_B": {
+          "accuracy": 0.529535864978903,
+          "accuracy_3dp": "0.530",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 251,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.539906103286385
+        },
+        "M7_B": {
+          "accuracy": 0.4936708860759494,
+          "accuracy_3dp": "0.494",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 234,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5422535211267606
+        },
+        "M7_20b": {
+          "accuracy": 0.4873417721518987,
+          "accuracy_3dp": "0.487",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 231,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5140845070422535
+        },
+        "M7_32b": {
+          "accuracy": 0.5126582278481012,
+          "accuracy_3dp": "0.513",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 243,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.5352112676056338
+        },
+        "M6": {
+          "accuracy": 0.5949367088607594,
+          "accuracy_3dp": "0.595",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 282,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.607981220657277
+        }
+      }
+    },
+    {
+      "reader": "C1_llama31_8b_hf_deepinfra",
+      "name": "Llama-3.1-8B",
+      "methods": {
+        "B0": {
+          "accuracy": 0.409282700421941,
+          "accuracy_3dp": "0.409",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 194,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4507042253521127
+        },
+        "M0": null,
+        "M2": {
+          "accuracy": 0.45147679324894513,
+          "accuracy_3dp": "0.451",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 214,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.45539906103286387
+        },
+        "M4": {
+          "accuracy": 0.36075949367088606,
+          "accuracy_3dp": "0.361",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 171,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.3568075117370892
+        },
+        "M5_B": {
+          "accuracy": 0.44092827004219415,
+          "accuracy_3dp": "0.441",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 209,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4647887323943662
+        },
+        "M7_B": {
+          "accuracy": 0.43037974683544306,
+          "accuracy_3dp": "0.430",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 204,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4647887323943662
+        },
+        "M7_20b": {
+          "accuracy": 0.43248945147679324,
+          "accuracy_3dp": "0.432",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 205,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.4460093896713615
+        },
+        "M7_32b": {
+          "accuracy": 0.3713080168776371,
+          "accuracy_3dp": "0.371",
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 176,
+          "reads_per_observed_question": {
+            "3": 158
+          },
+          "outcomes": {
+            "observed": 474
+          },
+          "lettered_questions": 142,
+          "lettered_accuracy": 0.392018779342723
+        },
+        "M6": {
+          "accuracy": 0.4553376906318083,
+          "accuracy_3dp": "0.455",
+          "observed_questions": 153,
+          "observed_reads": 459,
+          "correct_reads": 209,
+          "reads_per_observed_question": {
+            "3": 153
+          },
+          "outcomes": {
+            "not_sent_infeasible": 15,
+            "observed": 459
+          },
+          "lettered_questions": 137,
+          "lettered_accuracy": 0.44525547445255476
+        }
+      }
+    }
+  ],
+  "completion_adjusted_readers": [
+    {
+      "reader": "B1_dsv41flash_hf_deepinfra",
+      "name": "DeepSeek-V4.1-Flash",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.7721518987341772,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 366,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.7721518987341772,
+          "success_ci95": [
+            0.7130801687763714,
+            0.8270042194092826
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.7932489451476793,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 376,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.7932489451476793,
+          "success_ci95": [
+            0.7257383966244726,
+            0.8544303797468354
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.7932489451476793,
+        "left_ci95": [
+          0.7257383966244726,
+          0.8544303797468354
+        ],
+        "right": 0.7721518987341772,
+        "right_ci95": [
+          0.7130801687763714,
+          0.8270042194092826
+        ],
+        "difference": 0.021097046413502112,
+        "difference_ci95": [
+          -0.02531645569620253,
+          0.06751054852320675
+        ]
+      }
+    },
+    {
+      "reader": "B2_qwen3_235b_2507_hf_deepinfra",
+      "name": "Qwen3-235B-A22B",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.7257383966244726,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 344,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.7257383966244726,
+          "success_ci95": [
+            0.6708860759493671,
+            0.7805907172995781
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.7805907172995781,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 370,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.7805907172995781,
+          "success_ci95": [
+            0.7257383966244725,
+            0.8312236286919832
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.7805907172995781,
+        "left_ci95": [
+          0.7257383966244725,
+          0.8312236286919832
+        ],
+        "right": 0.7257383966244726,
+        "right_ci95": [
+          0.6708860759493671,
+          0.7805907172995781
+        ],
+        "difference": 0.05485232067510548,
+        "difference_ci95": [
+          0.01898734177215189,
+          0.09282700421940929
+        ]
+      }
+    },
+    {
+      "reader": "tierB_llama33_70b_hf_ovhcloud",
+      "name": "Llama-3.3-70B",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.620253164556962,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 294,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.620253164556962,
+          "success_ci95": [
+            0.5548523206751055,
+            0.6814345991561181
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.7151898734177216,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 339,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.7151898734177216,
+          "success_ci95": [
+            0.649789029535865,
+            0.7763713080168777
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.7151898734177216,
+        "left_ci95": [
+          0.649789029535865,
+          0.7763713080168777
+        ],
+        "right": 0.620253164556962,
+        "right_ci95": [
+          0.5548523206751055,
+          0.6814345991561181
+        ],
+        "difference": 0.0949367088607595,
+        "difference_ci95": [
+          0.0379746835443038,
+          0.15611814345991562
+        ]
+      }
+    },
+    {
+      "reader": "tierC3_gptoss120b_hf_deepinfra_low",
+      "name": "gpt-oss-120b",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.8459915611814346,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 401,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.8459915611814346,
+          "success_ci95": [
+            0.7953586497890296,
+            0.8924050632911392
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.9065817409766455,
+          "observed_questions": 157,
+          "observed_reads": 471,
+          "correct_reads": 427,
+          "planned_reads": 474,
+          "question_coverage": 0.9936708860759493,
+          "read_coverage": 0.9936708860759493,
+          "success_with_incomplete_zero": 0.9008438818565402,
+          "success_ci95": [
+            0.8523206751054851,
+            0.9451476793248946
+          ],
+          "incomplete_questions": [
+            "61d2b3925a2b4e6a59b14262b5c262605c684414da7a31560ad7514659dc331a"
+          ],
+          "nonobserved_reasons_by_reader_row": {
+            "route_timeout": 3
+          }
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.9008438818565402,
+        "left_ci95": [
+          0.8523206751054851,
+          0.9451476793248946
+        ],
+        "right": 0.8459915611814346,
+        "right_ci95": [
+          0.7953586497890296,
+          0.8924050632911392
+        ],
+        "difference": 0.054852320675105495,
+        "difference_ci95": [
+          0.0021097046413502173,
+          0.10970464135021099
+        ]
+      }
+    },
+    {
+      "reader": "tierC2_qwen3_32b_hf_nscale_nothink",
+      "name": "Qwen3-32B",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.5780590717299577,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 274,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.5780590717299577,
+          "success_ci95": [
+            0.5189873417721519,
+            0.6350210970464135
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.6859504132231405,
+          "observed_questions": 121,
+          "observed_reads": 363,
+          "correct_reads": 249,
+          "planned_reads": 474,
+          "question_coverage": 0.7658227848101266,
+          "read_coverage": 0.7658227848101266,
+          "success_with_incomplete_zero": 0.5253164556962026,
+          "success_ci95": [
+            0.44936708860759494,
+            0.6012658227848101
+          ],
+          "incomplete_questions": [
+            "05807dfce6d03bb116f3ffa03098f30591e7a34f8abe30146e39f14c17670165",
+            "1c1207d3f1c574bfd6cb1b3e3514c032dab17bb4f11cc3abe5374df61ed58376",
+            "2324fa9432e6dab0b1486c1de1b04474ecc1f578cd42e2bc53433c7c11a48cc7",
+            "3108440a045181f81c7eee0d65a8dfdcdca235c93e3d6c8018dcb9bd825bc580",
+            "337f4f96eb4056d5667789454e4bcaa1277f297c90e42537c2f1866b107526c6",
+            "35498bf48cbd6130974eeb467fa0ee0a831b592cd0c4c9b309c646a8dadcc0c7",
+            "3efd62820902ba247deca1fae0456c1c94e87f467c68e00e98a5f7fc2c213a07",
+            "3f8ce802a66767425835409a5c0f0983037761b366cf76af5c7062c41e265c37",
+            "43c605e89435712e77010b07d277973203feab37a24029195057da307ce865f5",
+            "470406d15b537171dc01585aa0ac0df71d0729b2355a207fb002f39b564358fd",
+            "5062693872664011c3586f4f3eaf07bad75b58d90950460ed34ad11701090618",
+            "589c4b0a30d7c3de034c1b2ff0f532be4a3815a3c7f023aeaf737caa61625f4f",
+            "5ae8f1cad472a835dfe9e43d5a8e21946f7525c3c89835352500ac1a92f6098e",
+            "5f42ffac92545616e700ab5494eab2bc6169907b27da2c9169299fc6a061c78c",
+            "7f362096597452913ff806f25b76910f73017ade463061c78284f30689a1be6b",
+            "88e14dcbacfa5fb341437795bcad55b7f8cecfa43aa5c4ac0fb6f0a7c47ae13f",
+            "93d3037402a2d949ef5d23816b63d19ef57c101d36aab6de160a02268d2e9cc8",
+            "969b73ef368903329cc8c32f93615a958814c7307f4e58371a892dc4d2cb4559",
+            "98bf625fb209c309ffd607b0034c374118246787673cbcbaa729e6e8d4457269",
+            "9992ad602ce49caccbed95f9d5339fdcdfd2dc3fb6dd18bf5b651f4046971e4c",
+            "a24203c136ae8dbb8dae651627095e47cc0d1233b43cdac4368a1706a89d9a8b",
+            "a98d298e71d3f107277ad447873a8423902ae59273c55cd39a779709d5cf62ca",
+            "b4b8df9d05442000f2d90cab34f6e031dcbb356b5d152c61d0c434137815a06c",
+            "b699ccc6fbd1c09112088e55a9b143366c4641ed0f91c7f0d267551728a31514",
+            "b8975a43da9ed28c4041d0994e496671922d0592fcff78008accb8c677de8c3d",
+            "bf809c12b7641ab77d56594e78f1be2534486bf51446249800cfb5102ae67560",
+            "c27cca51e911c1d02b5033e3f9ca86f15b8c5fcb960352780357a03f1417b708",
+            "ca0e841597a8313293b6831bf54555ade90a36b5ed26a7c8f8ede6fdb9f0d49c",
+            "d642e0811700a02a5e8f8612b0984ddeda14a53eb516b40f7d97bf32f6367194",
+            "dc9810b322190379b10963c899f76ed742b3b4b73aa9e120154673c0416ad96d",
+            "df5a6574d5bb82ef9c8d1b56fe4f07da62b670fa75cead4c3ab2f8932d8abbc3",
+            "e82b7b7cdf05885fad0f9dad68c6f356f19fd7e8b0fbb33671c11bdb9c3aeab4",
+            "eb6180fb04ab55cca53f92e3fc86d937d7ebb69aee225bdf7870c469a48985f1",
+            "efdcfa9ec70485895c0f56c612576f4a873882a8829dc9b02c0b1f6fabd63ae5",
+            "f2c2e020a15aefb0ebe00f10707f5993b7d823e5a4ea469190670db8641435d6",
+            "f61104f786dc4a16bdc9ba1ebb52a4e420750a902d7193839b882792c98aa4a5",
+            "fc333cd91416fe443a24539c75b9e3f6c20c637f887063463d9881dfbc6f175c"
+          ],
+          "nonobserved_reasons_by_reader_row": {
+            "route_timeout": 111
+          }
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.5253164556962026,
+        "left_ci95": [
+          0.44936708860759494,
+          0.6012658227848101
+        ],
+        "right": 0.5780590717299577,
+        "right_ci95": [
+          0.5189873417721519,
+          0.6350210970464135
+        ],
+        "difference": -0.052742616033755275,
+        "difference_ci95": [
+          -0.1308016877637131,
+          0.027426160337552748
+        ]
+      }
+    },
+    {
+      "reader": "C3_gptoss20b_hf_deepinfra_low",
+      "name": "gpt-oss-20b",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.8776371308016877,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 416,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.8776371308016877,
+          "success_ci95": [
+            0.8291139240506329,
+            0.9198312236286921
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.7341772151898734,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 348,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.7341772151898734,
+          "success_ci95": [
+            0.6708860759493671,
+            0.7932489451476793
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.7341772151898734,
+        "left_ci95": [
+          0.6708860759493671,
+          0.7932489451476793
+        ],
+        "right": 0.8776371308016877,
+        "right_ci95": [
+          0.8291139240506329,
+          0.9198312236286921
+        ],
+        "difference": -0.14345991561181434,
+        "difference_ci95": [
+          -0.2109704641350211,
+          -0.0780590717299578
+        ]
+      }
+    },
+    {
+      "reader": "C2_qwen3_8b_hf_nscale_nothink",
+      "name": "Qwen3-8B",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.609704641350211,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 289,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.609704641350211,
+          "success_ci95": [
+            0.5590717299578059,
+            0.6624472573839663
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.5949367088607594,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 282,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.5949367088607594,
+          "success_ci95": [
+            0.5316455696202531,
+            0.6540084388185654
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.5949367088607594,
+        "left_ci95": [
+          0.5316455696202531,
+          0.6540084388185654
+        ],
+        "right": 0.609704641350211,
+        "right_ci95": [
+          0.5590717299578059,
+          0.6624472573839663
+        ],
+        "difference": -0.014767932489451475,
+        "difference_ci95": [
+          -0.09071729957805907,
+          0.054852320675105495
+        ]
+      }
+    },
+    {
+      "reader": "C1_llama31_8b_hf_deepinfra",
+      "name": "Llama-3.1-8B",
+      "arms": {
+        "M2": {
+          "observed_accuracy": 0.45147679324894513,
+          "observed_questions": 158,
+          "observed_reads": 474,
+          "correct_reads": 214,
+          "planned_reads": 474,
+          "question_coverage": 1.0,
+          "read_coverage": 1.0,
+          "success_with_incomplete_zero": 0.45147679324894513,
+          "success_ci95": [
+            0.4050632911392405,
+            0.4957805907172996
+          ],
+          "incomplete_questions": [],
+          "nonobserved_reasons_by_reader_row": {}
+        },
+        "M6": {
+          "observed_accuracy": 0.4553376906318083,
+          "observed_questions": 153,
+          "observed_reads": 459,
+          "correct_reads": 209,
+          "planned_reads": 474,
+          "question_coverage": 0.9683544303797469,
+          "read_coverage": 0.9683544303797469,
+          "success_with_incomplete_zero": 0.44092827004219415,
+          "success_ci95": [
+            0.3755274261603376,
+            0.5063291139240507
+          ],
+          "incomplete_questions": [
+            "0d016b5c67dbfee4732aadd41688034e6b22bd35ab27bd3505bec5da570cc121",
+            "227abd5b7075a4c86adac2163e3b743d1dab528e8851446daefbe38014c4e4a2",
+            "3a94b2ceb7127490fd1534ab40729f5fccc8ed9df2c08563b7ee6c7004ff71f9",
+            "c27cca51e911c1d02b5033e3f9ca86f15b8c5fcb960352780357a03f1417b708",
+            "fe1018a070cea7eb29b9670998546c9462bac9fbe53fb0c8be88e59f1fb79001"
+          ],
+          "nonobserved_reasons_by_reader_row": {
+            "route_timeout": 15
+          }
+        }
+      },
+      "paired_M6_minus_M2": {
+        "left": 0.44092827004219415,
+        "left_ci95": [
+          0.3755274261603376,
+          0.5063291139240507
+        ],
+        "right": 0.45147679324894513,
+        "right_ci95": [
+          0.4050632911392405,
+          0.4957805907172996
+        ],
+        "difference": -0.010548523206751051,
+        "difference_ci95": [
+          -0.08860759493670886,
+          0.07172995780590717
+        ]
+      }
+    }
+  ],
+  "completion_adjusted_tiers": {
+    "B": {
+      "readers": [
+        "B1_dsv41flash_hf_deepinfra",
+        "B2_qwen3_235b_2507_hf_deepinfra",
+        "tierB_llama33_70b_hf_ovhcloud"
+      ],
+      "readers_resampled": false,
+      "paired_M6_minus_M2": {
+        "left": 0.7630098452883263,
+        "left_ci95": [
+          0.7088607594936709,
+          0.8115330520393812
+        ],
+        "right": 0.7060478199718706,
+        "right_ci95": [
+          0.6540084388185654,
+          0.7545710267229254
+        ],
+        "difference": 0.05696202531645569,
+        "difference_ci95": [
+          0.026019690576652606,
+          0.090014064697609
+        ]
+      },
+      "observed_common_questions": 158,
+      "observed_common_accuracy": {
+        "M2": 0.7060478199718706,
+        "M6": 0.7630098452883263
+      },
+      "observed_common_difference": 0.05696202531645567
+    },
+    "C_load_bearing": {
+      "readers": [
+        "tierC2_qwen3_32b_hf_nscale_nothink",
+        "C3_gptoss20b_hf_deepinfra_low",
+        "C2_qwen3_8b_hf_nscale_nothink",
+        "C1_llama31_8b_hf_deepinfra"
+      ],
+      "readers_resampled": false,
+      "paired_M6_minus_M2": {
+        "left": 0.5738396624472574,
+        "left_ci95": [
+          0.5363924050632911,
+          0.6123417721518988
+        ],
+        "right": 0.6292194092827005,
+        "right_ci95": [
+          0.5975738396624473,
+          0.6619198312236286
+        ],
+        "difference": -0.05537974683544303,
+        "difference_ci95": [
+          -0.09968354430379746,
+          -0.012658227848101262
+        ]
+      },
+      "observed_common_questions": 117,
+      "observed_common_accuracy": {
+        "M2": 0.6225071225071225,
+        "M6": 0.6132478632478633
+      },
+      "observed_common_difference": -0.00925925925925919
+    }
+  },
+  "gptoss20b_vs_fixed_REF_B": {
+    "left": 0.8776371308016877,
+    "left_ci95": [
+      0.8291139240506329,
+      0.9198312236286921
+    ],
+    "right": 0.7721518987341772,
+    "right_ci95": [
+      0.7130801687763714,
+      0.8270042194092826
+    ],
+    "difference": 0.10548523206751054,
+    "difference_ci95": [
+      0.04219409282700422,
+      0.17088607594936708
+    ],
+    "left_label": "gpt-oss-20b M2@4000",
+    "right_label": "DeepSeek M2@4000",
+    "exploratory_estimate": {
+      "cells": 158,
+      "units": 79,
+      "gptoss20b": 0.8776,
+      "reference": 0.7722,
+      "diff": 0.1055,
+      "ci": [
+        0.0401,
+        0.1709
+      ],
+      "cells_where_20b_higher": 34,
+      "cells_where_lower": 14
+    },
+    "note": "recomputed in sorted pair order with its own draws; point estimates must equal exploratory.py, interval endpoints are separate Monte Carlo draws"
+  },
+  "option_aware_error_mix_check": {
+    "scope": "The constrained panel's four readers, all three reads, primary population, M2/M5_B/M7_B at 4k",
+    "definition": "exploratory.py's gate (a wrong answer of class E-other/value_not_in_doc), with a literal answer letter resolved to that question's option before testing for none of these or not_in_effect.",
+    "conditions": {
+      "M2": {
+        "answered_reads": 1896,
+        "letter_c_as_none_count": 68,
+        "option_aware_none_or_not_in_effect_count": 68,
+        "letter_c_as_none_rate": 0.035864978902953586,
+        "option_aware_rate": 0.035864978902953586,
+        "exploratory_rate": 0.0359,
+        "changed_classifications": [],
+        "four_option_observed_reads": 48,
+        "raw_literal_c_predictions_on_four_option_questions": 0
+      },
+      "M5_B": {
+        "answered_reads": 1896,
+        "letter_c_as_none_count": 178,
+        "option_aware_none_or_not_in_effect_count": 178,
+        "letter_c_as_none_rate": 0.0938818565400844,
+        "option_aware_rate": 0.0938818565400844,
+        "exploratory_rate": 0.0939,
+        "changed_classifications": [],
+        "four_option_observed_reads": 48,
+        "raw_literal_c_predictions_on_four_option_questions": 0
+      },
+      "M7_B": {
+        "answered_reads": 1896,
+        "letter_c_as_none_count": 275,
+        "option_aware_none_or_not_in_effect_count": 275,
+        "letter_c_as_none_rate": 0.145042194092827,
+        "option_aware_rate": 0.145042194092827,
+        "exploratory_rate": 0.145,
+        "changed_classifications": [],
+        "four_option_observed_reads": 48,
+        "raw_literal_c_predictions_on_four_option_questions": 0
+      }
+    }
+  },
+  "primary_resource_check": {
+    "population": "158 primary questions, three reads each; 474 observed reads in each checked condition",
+    "provider_input_definition": "tokens_input_uncached + tokens_input_cached",
+    "arms": {
+      "B1_full_text": {
+        "questions": 158,
+        "reads": 474,
+        "provider_input_mean": 20132.759493670885,
+        "provider_output_mean": 63.643459915611814,
+        "provider_input_plus_output_mean": 20196.402953586497,
+        "build_tokens_mean_per_answered_read": 0.0,
+        "compression_tokens_mean_per_answered_read": 0.0,
+        "per_query_at_1000": 20196.402953586497
+      },
+      "B1_retrieval_4k": {
+        "questions": 158,
+        "reads": 474,
+        "provider_input_mean": 3819.1265822784812,
+        "provider_output_mean": 62.66244725738397,
+        "provider_input_plus_output_mean": 3881.7890295358648,
+        "build_tokens_mean_per_answered_read": 0.0,
+        "compression_tokens_mean_per_answered_read": 0.0,
+        "per_query_at_1000": 3881.7890295358648
+      },
+      "gptoss20b_retrieval_4k": {
+        "questions": 158,
+        "reads": 474,
+        "provider_input_mean": 3847.3037974683543,
+        "provider_output_mean": 175.96835443037975,
+        "provider_input_plus_output_mean": 4023.272151898734,
+        "build_tokens_mean_per_answered_read": 0.0,
+        "compression_tokens_mean_per_answered_read": 0.0,
+        "per_query_at_1000": 4023.272151898734
+      }
+    },
+    "ratios_to_B1_full_text": {
+      "B1_retrieval_4k": {
+        "input_ratio_to_B1_full_text": 0.18969712440458528,
+        "input_plus_output_ratio_to_B1_full_text": 0.19220199945785557
+      },
+      "gptoss20b_retrieval_4k": {
+        "input_ratio_to_B1_full_text": 0.19109669485088854,
+        "input_plus_output_ratio_to_B1_full_text": 0.1992073618824424
+      }
+    },
+    "exploratory_tokens_match": true,
+    "build_amortization": {
+      "queries_per_memory": 1000,
+      "scope": "Server and constrained readers, DeepSeek-built summary and records at 4k (the memories of Fig. 2)",
+      "weighting": "Mean token workload across the primary population's answered reads; not an unweighted mean over unique document revisions",
+      "share_definition": "mean(build_tokens)/1000 divided by mean(input + output + query_memory_tokens + build_tokens/1000)",
+      "configurations": [
+        {
+          "reader": "B1_dsv41flash_hf_deepinfra",
+          "name": "DeepSeek-V4.1-Flash",
+          "condition": "M5_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 31.121810126582275,
+          "total_tokens_per_query_at_1000": 3773.773708860759,
+          "build_share": 0.008246867069296913,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3743,
+            "compression": 0,
+            "build_per_memory": 31122,
+            "per_query_at_1000": 3774
+          },
+          "build_share_from_exploratory_rounded_fields": 0.008246422893481717
+        },
+        {
+          "reader": "B1_dsv41flash_hf_deepinfra",
+          "name": "DeepSeek-V4.1-Flash",
+          "condition": "M7_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 42.91803797468354,
+          "total_tokens_per_query_at_1000": 3713.308333333333,
+          "build_share": 0.011557897734863622,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3670,
+            "compression": 0,
+            "build_per_memory": 42918,
+            "per_query_at_1000": 3713
+          },
+          "build_share_from_exploratory_rounded_fields": 0.011558847293293832
+        },
+        {
+          "reader": "B2_qwen3_235b_2507_hf_deepinfra",
+          "name": "Qwen3-235B-A22B",
+          "condition": "M5_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 31.121810126582275,
+          "total_tokens_per_query_at_1000": 3923.9973375527425,
+          "build_share": 0.007931149654141162,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3893,
+            "compression": 0,
+            "build_per_memory": 31122,
+            "per_query_at_1000": 3924
+          },
+          "build_share_from_exploratory_rounded_fields": 0.007931192660550458
+        },
+        {
+          "reader": "B2_qwen3_235b_2507_hf_deepinfra",
+          "name": "Qwen3-235B-A22B",
+          "condition": "M7_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 42.91803797468354,
+          "total_tokens_per_query_at_1000": 3783.7133966244724,
+          "build_share": 0.011342835324940731,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3741,
+            "compression": 0,
+            "build_per_memory": 42918,
+            "per_query_at_1000": 3784
+          },
+          "build_share_from_exploratory_rounded_fields": 0.011341966173361522
+        },
+        {
+          "reader": "tierB_llama33_70b_hf_ovhcloud",
+          "name": "Llama-3.3-70B",
+          "condition": "M5_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 31.121810126582275,
+          "total_tokens_per_query_at_1000": 3817.518434599156,
+          "build_share": 0.00815236669049644,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3786,
+            "compression": 0,
+            "build_per_memory": 31122,
+            "per_query_at_1000": 3818
+          },
+          "build_share_from_exploratory_rounded_fields": 0.008151388161341016
+        },
+        {
+          "reader": "tierB_llama33_70b_hf_ovhcloud",
+          "name": "Llama-3.3-70B",
+          "condition": "M7_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 42.91803797468354,
+          "total_tokens_per_query_at_1000": 3726.470780590717,
+          "build_share": 0.01151707352657149,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3684,
+            "compression": 0,
+            "build_per_memory": 42918,
+            "per_query_at_1000": 3726
+          },
+          "build_share_from_exploratory_rounded_fields": 0.011518518518518518
+        },
+        {
+          "reader": "tierC2_qwen3_32b_hf_nscale_nothink",
+          "name": "Qwen3-32B",
+          "condition": "M5_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 31.121810126582275,
+          "total_tokens_per_query_at_1000": 3936.891852320675,
+          "build_share": 0.007905172733723162,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3906,
+            "compression": 0,
+            "build_per_memory": 31122,
+            "per_query_at_1000": 3937
+          },
+          "build_share_from_exploratory_rounded_fields": 0.00790500381000762
+        },
+        {
+          "reader": "tierC2_qwen3_32b_hf_nscale_nothink",
+          "name": "Qwen3-32B",
+          "condition": "M7_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 42.91803797468354,
+          "total_tokens_per_query_at_1000": 3789.266139240506,
+          "build_share": 0.011326213677692676,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3746,
+            "compression": 0,
+            "build_per_memory": 42918,
+            "per_query_at_1000": 3789
+          },
+          "build_share_from_exploratory_rounded_fields": 0.011326999208234363
+        },
+        {
+          "reader": "C3_gptoss20b_hf_deepinfra_low",
+          "name": "gpt-oss-20b",
+          "condition": "M5_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 31.121810126582275,
+          "total_tokens_per_query_at_1000": 3915.942485232067,
+          "build_share": 0.007947463540118346,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3885,
+            "compression": 0,
+            "build_per_memory": 31122,
+            "per_query_at_1000": 3916
+          },
+          "build_share_from_exploratory_rounded_fields": 0.007947395301327886
+        },
+        {
+          "reader": "C3_gptoss20b_hf_deepinfra_low",
+          "name": "gpt-oss-20b",
+          "condition": "M7_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 42.91803797468354,
+          "total_tokens_per_query_at_1000": 3810.574156118143,
+          "build_share": 0.011262879612453057,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3768,
+            "compression": 0,
+            "build_per_memory": 42918,
+            "per_query_at_1000": 3811
+          },
+          "build_share_from_exploratory_rounded_fields": 0.011261611125688796
+        },
+        {
+          "reader": "C2_qwen3_8b_hf_nscale_nothink",
+          "name": "Qwen3-8B",
+          "condition": "M5_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 31.121810126582275,
+          "total_tokens_per_query_at_1000": 3929.638687763713,
+          "build_share": 0.007919763774590976,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3899,
+            "compression": 0,
+            "build_per_memory": 31122,
+            "per_query_at_1000": 3930
+          },
+          "build_share_from_exploratory_rounded_fields": 0.007919083969465649
+        },
+        {
+          "reader": "C2_qwen3_8b_hf_nscale_nothink",
+          "name": "Qwen3-8B",
+          "condition": "M7_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 42.91803797468354,
+          "total_tokens_per_query_at_1000": 3796.3041139240504,
+          "build_share": 0.011305215990802513,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3753,
+            "compression": 0,
+            "build_per_memory": 42918,
+            "per_query_at_1000": 3796
+          },
+          "build_share_from_exploratory_rounded_fields": 0.011306111696522654
+        },
+        {
+          "reader": "C1_llama31_8b_hf_deepinfra",
+          "name": "Llama-3.1-8B",
+          "condition": "M5_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 31.121810126582275,
+          "total_tokens_per_query_at_1000": 3805.5564092827003,
+          "build_share": 0.008177992067248938,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3774,
+            "compression": 0,
+            "build_per_memory": 31122,
+            "per_query_at_1000": 3806
+          },
+          "build_share_from_exploratory_rounded_fields": 0.00817708880714661
+        },
+        {
+          "reader": "C1_llama31_8b_hf_deepinfra",
+          "name": "Llama-3.1-8B",
+          "condition": "M7_B",
+          "reads": 474,
+          "build_amortized_tokens_per_query": 42.91803797468354,
+          "total_tokens_per_query_at_1000": 3718.905379746835,
+          "build_share": 0.011540502807201078,
+          "exploratory_tokens": {
+            "cells": 474,
+            "read": 3676,
+            "compression": 0,
+            "build_per_memory": 42918,
+            "per_query_at_1000": 3719
+          },
+          "build_share_from_exploratory_rounded_fields": 0.011540198978219951
+        }
+      ],
+      "maximum": {
+        "reader": "B1_dsv41flash_hf_deepinfra",
+        "name": "DeepSeek-V4.1-Flash",
+        "condition": "M7_B",
+        "reads": 474,
+        "build_amortized_tokens_per_query": 42.91803797468354,
+        "total_tokens_per_query_at_1000": 3713.308333333333,
+        "build_share": 0.011557897734863622,
+        "exploratory_tokens": {
+          "cells": 474,
+          "read": 3670,
+          "compression": 0,
+          "build_per_memory": 42918,
+          "per_query_at_1000": 3713
+        },
+        "build_share_from_exploratory_rounded_fields": 0.011558847293293832
+      },
+      "maximum_share_below_2_percent": true
+    }
+  },
+  "example_units_check": {
+    "scope": "All observed reads; retrieval = M2@4000, summary = DeepSeek-built M5@4000; open-weight readers have three reads, the cloud comparator one",
+    "opening_pair": {
+      "unit": "o_x_m13_dual_fuel_max_emergency",
+      "both_correct_every_read_retrieval": [
+        "Claude Sonnet 5",
+        "gpt-oss-120b",
+        "gpt-oss-20b"
+      ],
+      "not_placed_on_both_every_read_retrieval": [
+        "Qwen3-32B",
+        "Qwen3-8B",
+        "Llama-3.1-8B"
+      ],
+      "placed_on_both_every_read_retrieval": [
+        "DeepSeek-V4.1-Flash",
+        "Qwen3-235B-A22B"
+      ],
+      "answers": {
+        "Claude Sonnet 5": {
+          "M2/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [],
+          "M5_B/exception": []
+        },
+        "DeepSeek-V4.1-Flash": {
+          "M2/rule": [
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ]
+        },
+        "Qwen3-235B-A22B": {
+          "M2/rule": [
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              0,
+              "insufficient_evidence"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ]
+        },
+        "Llama-3.3-70B": {
+          "M2/rule": [
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ]
+          ]
+        },
+        "gpt-oss-120b": {
+          "M2/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              0,
+              "insufficient_evidence"
+            ],
+            [
+              0,
+              "insufficient_evidence"
+            ],
+            [
+              0,
+              "none of these"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              0,
+              "not in effect"
+            ],
+            [
+              0,
+              "not in effect"
+            ],
+            [
+              0,
+              "not in effect"
+            ]
+          ]
+        },
+        "Qwen3-32B": {
+          "M2/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ]
+        },
+        "gpt-oss-20b": {
+          "M2/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              0,
+              "none of these"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "none of these"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              0,
+              "none of these"
+            ],
+            [
+              0,
+              "none of these"
+            ],
+            [
+              0,
+              "none of these"
+            ]
+          ]
+        },
+        "Qwen3-8B": {
+          "M2/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "they are to be placed in Maximum Emergency"
+            ]
+          ]
+        },
+        "Llama-3.1-8B": {
+          "M2/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M2/exception": [
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/rule": [
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              1,
+              "should not be placed in Maximum Emergency"
+            ]
+          ],
+          "M5_B/exception": [
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ],
+            [
+              0,
+              "should not be placed in Maximum Emergency"
+            ]
+          ]
+        }
+      }
+    },
+    "m36_exemption": {
+      "unit": "o_x4_m36_dynamic_reserve_ei",
+      "open_weight_readers": 8,
+      "correct_every_read_retrieval": [
+        "DeepSeek-V4.1-Flash",
+        "Qwen3-235B-A22B",
+        "Llama-3.3-70B",
+        "gpt-oss-120b",
+        "Qwen3-32B",
+        "gpt-oss-20b",
+        "Qwen3-8B"
+      ],
+      "wrong_every_read_summary": [
+        "DeepSeek-V4.1-Flash",
+        "Qwen3-235B-A22B",
+        "Llama-3.3-70B",
+        "gpt-oss-120b",
+        "Qwen3-32B",
+        "gpt-oss-20b",
+        "Qwen3-8B",
+        "Llama-3.1-8B"
+      ],
+      "rule_outcome_every_read_summary": [
+        "DeepSeek-V4.1-Flash",
+        "Qwen3-235B-A22B",
+        "Llama-3.3-70B",
+        "gpt-oss-120b",
+        "Qwen3-32B",
+        "gpt-oss-20b",
+        "Qwen3-8B",
+        "Llama-3.1-8B"
+      ],
+      "answers": {
+        "DeepSeek-V4.1-Flash": {
+          "M2": [
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        },
+        "Qwen3-235B-A22B": {
+          "M2": [
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        },
+        "Llama-3.3-70B": {
+          "M2": [
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        },
+        "gpt-oss-120b": {
+          "M2": [
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        },
+        "Qwen3-32B": {
+          "M2": [
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        },
+        "gpt-oss-20b": {
+          "M2": [
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        },
+        "Qwen3-8B": {
+          "M2": [
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ],
+            [
+              1,
+              "Calculation of Dynamic Reserve for an area connected to the Eastern Interconnection is not required"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        },
+        "Llama-3.1-8B": {
+          "M2": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ],
+          "M5_B": [
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ],
+            [
+              0,
+              "Dynamic Reserve must be calculated"
+            ]
+          ]
+        }
+      },
+      "claim": "seven of eight open-weight readers answer correctly in every retrieval run; all eight choose the rule outcome in every summary run"
+    },
+    "opening_pair_varies_between_runs": [
+      "Llama-3.3-70B"
+    ]
+  },
+  "printed": {
+    "II-A": {
+      "pairs": 79,
+      "questions": 158,
+      "documents": 50,
+      "pairs_by_source": {
+        "AESO": 21,
+        "CAISO": 14,
+        "IESO": 6,
+        "MISO": 2,
+        "NERC": 19,
+        "NYISO": 3,
+        "PJM": 14
+      },
+      "pair_kinds": {
+        "complement+rule": 4,
+        "parallel+parallel": 30,
+        "exception+rule": 44,
+        "complement+parallel": 1
+      },
+      "multiple_choice_questions": 142,
+      "numeric_questions": 16,
+      "arbitration_158": {
+        "arbitrated_answers": 60,
+        "observed_answers": 47739,
+        "unique_cases": 31,
+        "disagreements_in_population": 0,
+        "disagreements_full_run": [
+          "720b803ea919bf77"
+        ]
+      }
+    },
+    "II-B": {
+      "budget_share_of_full_procedure": 0.19868115949318702,
+      "compressor_input_tokens": 16000
+    },
+    "II-C": {
+      "single_reader_retrieval_4k_half_width": {
+        "printed": "4--6 points",
+        "report": {
+          "Claude Sonnet 5": 0.044499999999999984,
+          "DeepSeek-V4.1-Flash": 0.059,
+          "Qwen3-235B-A22B": 0.05399999999999999,
+          "Llama-3.3-70B": 0.062,
+          "gpt-oss-120b": 0.04849999999999999,
+          "Qwen3-32B": 0.056999999999999995,
+          "gpt-oss-20b": 0.04350000000000004,
+          "Qwen3-8B": 0.05049999999999999,
+          "Llama-3.1-8B": 0.046499999999999986
+        },
+        "own_bootstrap": {
+          "Claude Sonnet 5": 0.044303797468354444,
+          "DeepSeek-V4.1-Flash": 0.05696202531645561,
+          "Qwen3-235B-A22B": 0.05485232067510548,
+          "Llama-3.3-70B": 0.06329113924050633,
+          "gpt-oss-120b": 0.048523206751054815,
+          "Qwen3-32B": 0.058016877637130815,
+          "gpt-oss-20b": 0.04535864978902959,
+          "Qwen3-8B": 0.051687763713080204,
+          "Llama-3.1-8B": 0.04535864978902954
+        },
+        "widest_memory_half_width_at_4k": 0.08749999999999997
+      }
+    },
+    "Table I": {
+      "accuracy": {
+        "Claude Sonnet 5": {
+          "Retrieval": "0.899",
+          "Rule sentences": "--",
+          "Summary": "--",
+          "Records": "--",
+          "Compression": "--",
+          "Full text": "0.911",
+          "No document": "0.411"
+        },
+        "DeepSeek-V4.1-Flash": {
+          "Retrieval": "0.772",
+          "Rule sentences": "0.504",
+          "Summary": "0.686",
+          "Records": "0.544",
+          "Compression": "0.793",
+          "Full text": "0.751",
+          "No document": "0.441"
+        },
+        "Qwen3-235B-A22B": {
+          "Retrieval": "0.726",
+          "Rule sentences": "0.475",
+          "Summary": "0.614",
+          "Records": "0.584",
+          "Compression": "0.781",
+          "Full text": "0.719",
+          "No document": "0.405"
+        },
+        "Llama-3.3-70B": {
+          "Retrieval": "0.620",
+          "Rule sentences": "0.458",
+          "Summary": "0.565",
+          "Records": "0.532",
+          "Compression": "0.715",
+          "Full text": "0.616",
+          "No document": "0.464"
+        },
+        "gpt-oss-120b": {
+          "Retrieval": "0.846",
+          "Rule sentences": "0.506",
+          "Summary": "0.679",
+          "Records": "0.641",
+          "Compression": "0.907",
+          "Full text": "--",
+          "No document": "0.456"
+        },
+        "Qwen3-32B": {
+          "Retrieval": "0.578",
+          "Rule sentences": "0.373",
+          "Summary": "0.534",
+          "Records": "0.470",
+          "Compression": "0.686",
+          "Full text": "--",
+          "No document": "0.344"
+        },
+        "gpt-oss-20b": {
+          "Retrieval": "0.878",
+          "Rule sentences": "0.479",
+          "Summary": "0.654",
+          "Records": "0.612",
+          "Compression": "0.734",
+          "Full text": "--",
+          "No document": "0.390"
+        },
+        "Qwen3-8B": {
+          "Retrieval": "0.610",
+          "Rule sentences": "0.449",
+          "Summary": "0.530",
+          "Records": "0.494",
+          "Compression": "0.595",
+          "Full text": "--",
+          "No document": "0.399"
+        },
+        "Llama-3.1-8B": {
+          "Retrieval": "0.451",
+          "Rule sentences": "0.361",
+          "Summary": "0.441",
+          "Records": "0.430",
+          "Compression": "0.455",
+          "Full text": "--",
+          "No document": "0.409"
+        }
+      },
+      "token_row": {
+        "Retrieval": "3.9--4.0k",
+        "Rule sentences": "2.3--2.4k",
+        "Summary": "3.8--3.9k",
+        "Records": "3.7--3.8k",
+        "Compression": "9.9--15.0k",
+        "Full text": "20.2--20.7k",
+        "No document": "0.4k"
+      },
+      "completed_compression_questions": {
+        "gpt-oss-120b": 157,
+        "Qwen3-32B": 121,
+        "Llama-3.1-8B": 153
+      },
+      "reason_before_answering": [
+        "gpt-oss-120b",
+        "gpt-oss-20b"
+      ]
+    },
+    "Table II": {
+      "strings": {
+        "dGap-M5-B": "-0.084 [-0.143, -0.032]",
+        "dGap-M5-C_load_bearing": "-0.090 [-0.194, -0.008]",
+        "dGap-M7-B": "-0.153 [-0.241, -0.068]",
+        "dGap-M7-C_load_bearing": "-0.128 [-0.237, -0.029]",
+        "interaction-M5": "-0.005 [-0.115, 0.096]",
+        "interaction-M7": "0.025 [-0.094, 0.139]",
+        "CBUILT-gptoss20b": "0.012 [-0.032, 0.060]",
+        "CBUILT-qwen32b": "0.004 [-0.054, 0.060]",
+        "dGap-M6-B": "0.057 [0.010, 0.112]",
+        "dGap-M6-C_load_bearing": "-0.009 [-0.105, 0.092]",
+        "H_M7 rule-sentence leg": "0.086 [0.019, 0.158]",
+        "H_S retrieval leg": "0.011 [-0.044, 0.067]",
+        "H_S rule-sentence leg": "0.068 [0.011, 0.122]",
+        "REF-B": "0.772 [0.711, 0.829]",
+        "P0-A": "0.911 [0.867, 0.949]",
+        "gap retrieval": "0.143 [-0.021, 0.290]",
+        "gap compression": "0.128 [-0.008, 0.265]",
+        "gap retrieval 2k": "0.161 [-0.003, 0.297]",
+        "gap retrieval 16k": "0.151 [0.021, 0.273]"
+      },
+      "deepseek_built_memory_gaps": "0.17--0.28, lower bounds >=0.03",
+      "cloud_comparator_gaps": ">=0.28, lower bounds >=0.12"
+    },
+    "III": {
+      "deepseek_input_tokens": {
+        "retrieval": "3.82k",
+        "full_text": "20.13k"
+      }
+    },
+    "III-A": {
+      "memories_below_retrieval_every_open_weight_reader": true,
+      "points_lost": {
+        "summary": "8--9",
+        "records": "13--15",
+        "memories": "8--15"
+      },
+      "largest_build_share": 0.011557897734863622,
+      "deepseek_built_memory_gap_points": "17 to 28",
+      "no_branch_answers": {
+        "retrieval": "3.6%",
+        "summary": "9.4%",
+        "records": "14.5%"
+      },
+      "wrong_branch_answers": {
+        "retrieval": "31%",
+        "summary": "32%",
+        "records": "27%"
+      },
+      "manual_36_exemption": "seven of the eight open-weight readers right in every retrieval run; all eight choose the rule in every summary run"
+    },
+    "III-B": {
+      "server_compression_tokens": "12.0--12.1k vs 3.9--4.0k",
+      "server_compression_ratios": [
+        3.094538897475528,
+        3.0054712758020394,
+        3.0698267074413863
+      ],
+      "compression_token_split": {
+        "compressor": "B1_dsv41flash_direct_nothink",
+        "questions": 158,
+        "compressor_input_mean": 9000.556962025317,
+        "compressor_output_mean": 1388.4746835443038,
+        "compressor_input_min_max": [
+          823,
+          16853
+        ],
+        "output_cap_hits": 11,
+        "readers": {
+          "DeepSeek-V4.1-Flash": {
+            "questions": 158,
+            "reads": 474,
+            "provider_input_mean": 1563.8101265822784,
+            "provider_output_mean": 59.770042194092824,
+            "provider_input_plus_output_mean": 1623.5801687763712,
+            "build_tokens_mean_per_answered_read": 0.0,
+            "compression_tokens_mean_per_answered_read": 10389.031645569621,
+            "per_query_at_1000": 12012.611814345992
+          },
+          "Qwen3-235B-A22B": {
+            "questions": 158,
+            "reads": 474,
+            "provider_input_mean": 1624.6962025316457,
+            "provider_output_mean": 71.71729957805907,
+            "provider_input_plus_output_mean": 1696.4135021097047,
+            "build_tokens_mean_per_answered_read": 0.0,
+            "compression_tokens_mean_per_answered_read": 10389.031645569621,
+            "per_query_at_1000": 12085.445147679326
+          },
+          "Llama-3.3-70B": {
+            "questions": 158,
+            "reads": 474,
+            "provider_input_mean": 1596.4050632911392,
+            "provider_output_mean": 60.48101265822785,
+            "provider_input_plus_output_mean": 1656.886075949367,
+            "build_tokens_mean_per_answered_read": 0.0,
+            "compression_tokens_mean_per_answered_read": 10389.031645569621,
+            "per_query_at_1000": 12045.917721518987
+          }
+        }
+      },
+      "qwen3_32b_time_outs_as_failures": {
+        "completed": 121,
+        "accuracy": "0.525",
+        "retrieval": "0.578"
+      }
+    },
+    "III-C": {
+      "constrained_retrieval_range": "0.451 to 0.878",
+      "verdict_wording": {
+        "retrieval_gap_vs_REF_B": {
+          "est": 0.143,
+          "ci": [
+            -0.021,
+            0.29
+          ],
+          "n": 158,
+          "token_ratio": 0.191
+        },
+        "gptoss20b_reader_outcomes": {
+          "tier": "C1",
+          "name": "gpt-oss-20b",
+          "vs_REF_B": {
+            "outcome": "escapable",
+            "escapable_by": [
+              "M2@2000",
+              "M2@4000"
+            ]
+          },
+          "vs_A": {
+            "outcome": "indeterminate",
+            "escapable_by": []
+          }
+        },
+        "class_outcomes": {
+          "vs_REF_B": {
+            "B": {
+              "outcome": "indeterminate",
+              "escapable_by": []
+            },
+            "C3": {
+              "outcome": "escapable",
+              "escapable_by": [
+                "M2@2000",
+                "M2@4000",
+                "M6@4000/tierC3_gptoss120b_hf_deepinfra_low"
+              ]
+            },
+            "C_load_bearing": {
+              "outcome": "indeterminate",
+              "escapable_by": []
+            }
+          },
+          "vs_A": {
+            "B": {
+              "outcome": "binds",
+              "escapable_by": []
+            },
+            "C3": {
+              "outcome": "indeterminate",
+              "escapable_by": []
+            },
+            "C_load_bearing": {
+              "outcome": "binds",
+              "escapable_by": []
+            }
+          }
+        }
+      },
+      "gptoss20b_differences": {
+        "open-weight reference": "0.105 [0.040, 0.171]",
+        "cloud comparator, full text": "-0.034 [-0.084, 0.017]"
+      },
+      "rule_vs_exception": {
+        "exception": "0.72",
+        "rule": "0.54",
+        "difference": "0.18 [0.03, 0.31]",
+        "other_branch_rule": "41%",
+        "other_branch_exception": "22%",
+        "open_weight_reference": "0.93 versus 0.67"
+      },
+      "pair_consistency": {
+        "constrained panel, retrieval": "0.33",
+        "server panel, retrieval": "0.45",
+        "constrained panel, summary": "0.24",
+        "gpt-oss-20b, retrieval": "0.76",
+        "cloud comparator, full text": "0.82"
+      }
+    }
+  },
+  "reasoning_modes": {
+    "definition": "Observed read calls whose provider reasoning text is non-empty and is not an answer JSON object",
+    "ledgers": {
+      "Claude Sonnet 5": "data/runs/cloud_comparator/read__A2_sonnet5_nothink.jsonl",
+      "DeepSeek-V4.1-Flash": "data/runs/main/read__B1_dsv41flash_hf_deepinfra.jsonl",
+      "Qwen3-235B-A22B": "data/runs/main/read__B2_qwen3_235b_2507_hf_deepinfra.jsonl",
+      "Llama-3.3-70B": "data/runs/main/read__tierB_llama33_70b_hf_ovhcloud.jsonl",
+      "gpt-oss-120b": "data/runs/main/read__tierC3_gptoss120b_hf_deepinfra_low.jsonl",
+      "Qwen3-32B": "data/runs/main/read__tierC2_qwen3_32b_hf_nscale_nothink.jsonl",
+      "gpt-oss-20b": "data/runs/main/read__C3_gptoss20b_hf_deepinfra_low.jsonl",
+      "Qwen3-8B": "data/runs/main/read__C2_qwen3_8b_hf_nscale_nothink.jsonl",
+      "Llama-3.1-8B": "data/runs/main/read__C1_llama31_8b_hf_deepinfra.jsonl"
+    },
+    "readers": {
+      "Claude Sonnet 5": {
+        "observed_calls": 732,
+        "calls_with_reasoning_text": 0,
+        "share": 0.0,
+        "mean_reasoning_chars": 0
+      },
+      "DeepSeek-V4.1-Flash": {
+        "observed_calls": 6131,
+        "calls_with_reasoning_text": 0,
+        "share": 0.0,
+        "mean_reasoning_chars": 0
+      },
+      "Qwen3-235B-A22B": {
+        "observed_calls": 6131,
+        "calls_with_reasoning_text": 0,
+        "share": 0.0,
+        "mean_reasoning_chars": 0
+      },
+      "Llama-3.3-70B": {
+        "observed_calls": 6125,
+        "calls_with_reasoning_text": 0,
+        "share": 0.0,
+        "mean_reasoning_chars": 0
+      },
+      "gpt-oss-120b": {
+        "observed_calls": 5532,
+        "calls_with_reasoning_text": 5532,
+        "share": 1.0,
+        "mean_reasoning_chars": 455.734273318872
+      },
+      "Qwen3-32B": {
+        "observed_calls": 5404,
+        "calls_with_reasoning_text": 0,
+        "share": 0.0,
+        "mean_reasoning_chars": 0
+      },
+      "gpt-oss-20b": {
+        "observed_calls": 5535,
+        "calls_with_reasoning_text": 5535,
+        "share": 1.0,
+        "mean_reasoning_chars": 387.24263775971093
+      },
+      "Qwen3-8B": {
+        "observed_calls": 5535,
+        "calls_with_reasoning_text": 0,
+        "share": 0.0,
+        "mean_reasoning_chars": 0
+      },
+      "Llama-3.1-8B": {
+        "observed_calls": 5517,
+        "calls_with_reasoning_text": 0,
+        "share": 0.0,
+        "mean_reasoning_chars": 0
+      }
+    },
+    "reason_before_answering": [
+      "gpt-oss-120b",
+      "gpt-oss-20b"
+    ],
+    "answer_without_reasoning_phase": [
+      "Claude Sonnet 5",
+      "DeepSeek-V4.1-Flash",
+      "Llama-3.1-8B",
+      "Llama-3.3-70B",
+      "Qwen3-235B-A22B",
+      "Qwen3-32B",
+      "Qwen3-8B"
+    ]
+  },
+  "checks": {
+    "passed": true,
+    "values": 299,
+    "mismatches": 0,
+    "table": [
+      {
+        "where": "records",
+        "what": "every multiple-choice gold is exactly one of its options",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "no question-repeat is scored twice for one reader and path",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-120b M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-120b M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-120b M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-120b M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-120b M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-120b M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M2: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M2: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M2: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M6: one row per planned read (158 questions x 3)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M6: task success with incomplete reads as failures = correct reads / 474",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M6: a question has all three reads observed or none",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs",
+        "value": 79,
+        "printed": 79,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "questions",
+        "value": 158,
+        "printed": 158,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "two questions per pair",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "documents",
+        "value": 50,
+        "printed": 50,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs from AESO",
+        "value": 21,
+        "printed": 21,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs from NERC",
+        "value": 19,
+        "printed": 19,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs from CAISO",
+        "value": 14,
+        "printed": 14,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs from PJM",
+        "value": 14,
+        "printed": 14,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs from IESO",
+        "value": 6,
+        "printed": 6,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs from NYISO",
+        "value": 3,
+        "printed": 3,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs from MISO",
+        "value": 2,
+        "printed": 2,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "no pair from another source",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs that set a rule against its exception",
+        "value": 44,
+        "printed": 44,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "pairs that contrast parallel or complementary conditions",
+        "value": 35,
+        "printed": 35,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "multiple-choice questions",
+        "value": 142,
+        "printed": 142,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "numeric questions",
+        "value": 16,
+        "printed": 16,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "the questions without options are numeric",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "gold option letters",
+        "value": {
+          "A": 71,
+          "B": 70,
+          "C": 1
+        },
+        "printed": {
+          "A": 71,
+          "B": 70,
+          "C": 1
+        },
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "every question has an applicable branch (no gold is none of these or not in effect)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "arbitrated answers",
+        "value": 60,
+        "printed": 60,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "answers",
+        "value": 47739,
+        "printed": 47739,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "distinct arbitrated cases",
+        "value": 31,
+        "printed": 31,
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "the Claude arbiters judged only answers from other model families",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-A",
+        "what": "the two arbiters agreed on every case",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M0: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M2: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M2: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-B",
+        "what": "4k is about one fifth of an average full procedure (0.18 to 0.22 of DeepSeek's full-text input)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-B",
+        "what": "compressor input, tokens",
+        "value": 16000,
+        "printed": 16000,
+        "match": true
+      },
+      {
+        "where": "II-B",
+        "what": "the compression questions not completed are API time-outs",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "II-C",
+        "what": "half-widths of the nine readers' retrieval intervals at 4k, points (report)",
+        "value": "4--6",
+        "printed": "4--6",
+        "match": true
+      },
+      {
+        "where": "II-C",
+        "what": "half-widths of the nine readers' retrieval intervals at 4k, points (this script's draws)",
+        "value": "4--6",
+        "printed": "4--6",
+        "match": true
+      },
+      {
+        "where": "II-C",
+        "what": "the memories' intervals at 4k are wider (widest half-width over 0.065)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Claude Sonnet 5, Retrieval",
+        "value": "0.899",
+        "printed": "0.899",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Claude Sonnet 5, Rule sentences",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Claude Sonnet 5, Summary",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Claude Sonnet 5, Records",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Claude Sonnet 5, Compression",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Claude Sonnet 5, Full text",
+        "value": "0.911",
+        "printed": "0.911",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Claude Sonnet 5, No document",
+        "value": "0.411",
+        "printed": "0.411",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "DeepSeek-V4.1-Flash, Retrieval",
+        "value": "0.772",
+        "printed": "0.772",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "DeepSeek-V4.1-Flash, Rule sentences",
+        "value": "0.504",
+        "printed": "0.504",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "DeepSeek-V4.1-Flash, Summary",
+        "value": "0.686",
+        "printed": "0.686",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "DeepSeek-V4.1-Flash, Records",
+        "value": "0.544",
+        "printed": "0.544",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "DeepSeek-V4.1-Flash, Compression",
+        "value": "0.793",
+        "printed": "0.793",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "DeepSeek-V4.1-Flash, Full text",
+        "value": "0.751",
+        "printed": "0.751",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "DeepSeek-V4.1-Flash, No document",
+        "value": "0.441",
+        "printed": "0.441",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-235B-A22B, Retrieval",
+        "value": "0.726",
+        "printed": "0.726",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-235B-A22B, Rule sentences",
+        "value": "0.475",
+        "printed": "0.475",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-235B-A22B, Summary",
+        "value": "0.614",
+        "printed": "0.614",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-235B-A22B, Records",
+        "value": "0.584",
+        "printed": "0.584",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-235B-A22B, Compression",
+        "value": "0.781",
+        "printed": "0.781",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-235B-A22B, Full text",
+        "value": "0.719",
+        "printed": "0.719",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-235B-A22B, No document",
+        "value": "0.405",
+        "printed": "0.405",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.3-70B, Retrieval",
+        "value": "0.620",
+        "printed": "0.620",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.3-70B, Rule sentences",
+        "value": "0.458",
+        "printed": "0.458",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.3-70B, Summary",
+        "value": "0.565",
+        "printed": "0.565",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.3-70B, Records",
+        "value": "0.532",
+        "printed": "0.532",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.3-70B, Compression",
+        "value": "0.715",
+        "printed": "0.715",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.3-70B, Full text",
+        "value": "0.616",
+        "printed": "0.616",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.3-70B, No document",
+        "value": "0.464",
+        "printed": "0.464",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-20b, Retrieval",
+        "value": "0.878",
+        "printed": "0.878",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-20b, Rule sentences",
+        "value": "0.479",
+        "printed": "0.479",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-20b, Summary",
+        "value": "0.654",
+        "printed": "0.654",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-20b, Records",
+        "value": "0.612",
+        "printed": "0.612",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-20b, Compression",
+        "value": "0.734",
+        "printed": "0.734",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-20b, Full text",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-20b, No document",
+        "value": "0.390",
+        "printed": "0.390",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-8B, Retrieval",
+        "value": "0.610",
+        "printed": "0.610",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-8B, Rule sentences",
+        "value": "0.449",
+        "printed": "0.449",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-8B, Summary",
+        "value": "0.530",
+        "printed": "0.530",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-8B, Records",
+        "value": "0.494",
+        "printed": "0.494",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-8B, Compression",
+        "value": "0.595",
+        "printed": "0.595",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-8B, Full text",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-8B, No document",
+        "value": "0.399",
+        "printed": "0.399",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.1-8B, Retrieval",
+        "value": "0.451",
+        "printed": "0.451",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.1-8B, Rule sentences",
+        "value": "0.361",
+        "printed": "0.361",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.1-8B, Summary",
+        "value": "0.441",
+        "printed": "0.441",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.1-8B, Records",
+        "value": "0.430",
+        "printed": "0.430",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.1-8B, Compression",
+        "value": "0.455",
+        "printed": "0.455",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.1-8B, Full text",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Llama-3.1-8B, No document",
+        "value": "0.409",
+        "printed": "0.409",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-32B, Retrieval",
+        "value": "0.578",
+        "printed": "0.578",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-32B, Rule sentences",
+        "value": "0.373",
+        "printed": "0.373",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-32B, Summary",
+        "value": "0.534",
+        "printed": "0.534",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-32B, Records",
+        "value": "0.470",
+        "printed": "0.470",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-32B, Compression",
+        "value": "0.686",
+        "printed": "0.686",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-32B, Full text",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "Qwen3-32B, No document",
+        "value": "0.344",
+        "printed": "0.344",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-120b, Retrieval",
+        "value": "0.846",
+        "printed": "0.846",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-120b, Rule sentences",
+        "value": "0.506",
+        "printed": "0.506",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-120b, Summary",
+        "value": "0.679",
+        "printed": "0.679",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-120b, Records",
+        "value": "0.641",
+        "printed": "0.641",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-120b, Compression",
+        "value": "0.907",
+        "printed": "0.907",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-120b, Full text",
+        "value": "--",
+        "printed": "--",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "gpt-oss-120b, No document",
+        "value": "0.456",
+        "printed": "0.456",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "tokens per question, Retrieval",
+        "value": "3.9--4.0k",
+        "printed": "3.9--4.0k",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "tokens per question, Rule sentences",
+        "value": "2.3--2.4k",
+        "printed": "2.3--2.4k",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "tokens per question, Summary",
+        "value": "3.8--3.9k",
+        "printed": "3.8--3.9k",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "tokens per question, Records",
+        "value": "3.7--3.8k",
+        "printed": "3.7--3.8k",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "tokens per question, Compression",
+        "value": "9.9--15.0k",
+        "printed": "9.9--15.0k",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "tokens per question, Full text",
+        "value": "20.2--20.7k",
+        "printed": "20.2--20.7k",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "tokens per question, No document",
+        "value": "0.4k",
+        "printed": "0.4k",
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "compression questions completed, gpt-oss-120b",
+        "value": 157,
+        "printed": 157,
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "compression questions completed, Qwen3-32B",
+        "value": 121,
+        "printed": 121,
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "compression questions completed, Llama-3.1-8B",
+        "value": 153,
+        "printed": 153,
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "every other reader completed every compression question",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "dGap-M5-B",
+        "value": "-0.084 [-0.143, -0.032]",
+        "printed": "-0.084 [-0.143, -0.032]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "dGap-M5-C_load_bearing",
+        "value": "-0.090 [-0.194, -0.008]",
+        "printed": "-0.090 [-0.194, -0.008]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "dGap-M7-B",
+        "value": "-0.153 [-0.241, -0.068]",
+        "printed": "-0.153 [-0.241, -0.068]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "dGap-M7-C_load_bearing",
+        "value": "-0.128 [-0.237, -0.029]",
+        "printed": "-0.128 [-0.237, -0.029]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "interaction-M5",
+        "value": "-0.005 [-0.115, 0.096]",
+        "printed": "-0.005 [-0.115, 0.096]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "interaction-M7",
+        "value": "0.025 [-0.094, 0.139]",
+        "printed": "0.025 [-0.094, 0.139]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "CBUILT-gptoss20b",
+        "value": "0.012 [-0.032, 0.060]",
+        "printed": "0.012 [-0.032, 0.060]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "CBUILT-qwen32b",
+        "value": "0.004 [-0.054, 0.060]",
+        "printed": "0.004 [-0.054, 0.060]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "dGap-M6-B",
+        "value": "0.057 [0.010, 0.112]",
+        "printed": "0.057 [0.010, 0.112]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "dGap-M6-C_load_bearing",
+        "value": "-0.009 [-0.105, 0.092]",
+        "printed": "-0.009 [-0.105, 0.092]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "H_M7 rule-sentence leg",
+        "value": "0.086 [0.019, 0.158]",
+        "printed": "0.086 [0.019, 0.158]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "H_S retrieval leg",
+        "value": "0.011 [-0.044, 0.067]",
+        "printed": "0.011 [-0.044, 0.067]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "H_S rule-sentence leg",
+        "value": "0.068 [0.011, 0.122]",
+        "printed": "0.068 [0.011, 0.122]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "REF-B",
+        "value": "0.772 [0.711, 0.829]",
+        "printed": "0.772 [0.711, 0.829]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "P0-A",
+        "value": "0.911 [0.867, 0.949]",
+        "printed": "0.911 [0.867, 0.949]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "gap retrieval",
+        "value": "0.143 [-0.021, 0.290]",
+        "printed": "0.143 [-0.021, 0.290]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "gap compression",
+        "value": "0.128 [-0.008, 0.265]",
+        "printed": "0.128 [-0.008, 0.265]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "gap retrieval 2k",
+        "value": "0.161 [-0.003, 0.297]",
+        "printed": "0.161 [-0.003, 0.297]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "gap retrieval 16k",
+        "value": "0.151 [0.021, 0.273]",
+        "printed": "0.151 [0.021, 0.273]",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "summaries and records: clear loss in both panels",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "no gain detected from a larger builder",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "records beat rule sentences, but not retrieval",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "no clear increase detected in wrong-branch answers with summaries",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "verdicts of H_M7 and H_S",
+        "value": [
+          "fail",
+          "does not hold"
+        ],
+        "printed": [
+          "fail",
+          "does not hold"
+        ],
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "compression: clear gain on servers only",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "constrained panel against the open-weight reference / the cloud comparator",
+        "value": [
+          "indeterminate",
+          "binds"
+        ],
+        "printed": [
+          "indeterminate",
+          "binds"
+        ],
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "the compression gap to the open-weight reference spans zero and reaches past 5 points",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "every memory path binds against the open-weight reference (12 gaps of at least 10 points, intervals above zero)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "DeepSeek-built memory paths",
+        "value": 6,
+        "printed": 6,
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "gaps of the DeepSeek-built memories to the open-weight reference",
+        "value": "0.17--0.28, lower bounds >=0.03",
+        "printed": "0.17--0.28, lower bounds >=0.03",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "gaps to the cloud comparator, every path and budget",
+        "value": ">=0.28, lower bounds >=0.12",
+        "printed": ">=0.28, lower bounds >=0.12",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "compression questions all four constrained readers completed",
+        "value": 117,
+        "printed": 117,
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "questions of the report's compression gap",
+        "value": 117,
+        "printed": 117,
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "constrained compression minus retrieval on those questions (rows)",
+        "value": "-0.009",
+        "printed": "-0.009",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "constrained compression minus retrieval on those questions (report)",
+        "value": "-0.009",
+        "printed": "-0.009",
+        "match": true
+      },
+      {
+        "where": "III",
+        "what": "DeepSeek input tokens per question, retrieval",
+        "value": "3.82k",
+        "printed": "3.82k",
+        "match": true
+      },
+      {
+        "where": "III",
+        "what": "DeepSeek input tokens per question, full text",
+        "value": "20.13k",
+        "printed": "20.13k",
+        "match": true
+      },
+      {
+        "where": "III",
+        "what": "DeepSeek accuracy, retrieval",
+        "value": "0.772",
+        "printed": "0.772",
+        "match": true
+      },
+      {
+        "where": "III",
+        "what": "DeepSeek accuracy, full text",
+        "value": "0.751",
+        "printed": "0.751",
+        "match": true
+      },
+      {
+        "where": "III",
+        "what": "every path at 2k or 4k meets the reader-input criterion (at most 1/4 of the full-text input)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III",
+        "what": "at 16k every path but rule sentences exceeds it",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III",
+        "what": "tokens per question with compression",
+        "value": "9.9--15.0k",
+        "printed": "9.9--15.0k",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "for every open-weight reader both memories score below retrieval",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M5_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M7_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M5_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M7_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M5_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M7_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M5_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-32B M7_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M5_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b M7_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M5_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-8B M7_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M5_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.1-8B M7_B: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "exploratory.py's token counts per answered read agree with the rows' (17 configurations)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "memory configurations of the build-share check",
+        "value": 14,
+        "printed": 14,
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "builds amortized over 1,000 queries per memory add less than 2%",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "points lost per panel, summaries",
+        "value": "8--9",
+        "printed": "8--9",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "points lost per panel, records",
+        "value": "13--15",
+        "printed": "13--15",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "points lost per panel, memories (abstract)",
+        "value": "8--15",
+        "printed": "8--15",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "DeepSeek-built memories below the open-weight reference, points",
+        "value": "17 to 28",
+        "printed": "17 to 28",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "'no branch applies' answers, retrieval",
+        "value": "3.6%",
+        "printed": "3.6%",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "'no branch applies' answers, summaries",
+        "value": "9.4%",
+        "printed": "9.4%",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "'no branch applies' answers, records",
+        "value": "14.5%",
+        "printed": "14.5%",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "wrong-branch answers, retrieval",
+        "value": "31%",
+        "printed": "31%",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "wrong-branch answers, summaries",
+        "value": "32%",
+        "printed": "32%",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "wrong-branch answers, records",
+        "value": "27%",
+        "printed": "27%",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "compression reads the constrained panel answered (exploratory.py)",
+        "value": 1770,
+        "printed": 1770,
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "compression reads the constrained panel answered (rows)",
+        "value": 1770,
+        "printed": 1770,
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "'no branch applies' share, M2: rows, the letter c read as none of these (exploratory.py's reading)",
+        "value": 0.0359,
+        "printed": 0.0359,
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "'no branch applies' share, M2, each answer letter resolved to its option",
+        "value": "3.6%",
+        "printed": "3.6%",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "'no branch applies' share, M5_B: rows, the letter c read as none of these (exploratory.py's reading)",
+        "value": 0.0939,
+        "printed": 0.0939,
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "'no branch applies' share, M5_B, each answer letter resolved to its option",
+        "value": "9.4%",
+        "printed": "9.4%",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "'no branch applies' share, M7_B: rows, the letter c read as none of these (exploratory.py's reading)",
+        "value": 0.145,
+        "printed": 0.145,
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "'no branch applies' share, M7_B, each answer letter resolved to its option",
+        "value": "14.5%",
+        "printed": "14.5%",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "Manual 36: open-weight readers right on the exemption in every retrieval run",
+        "value": 7,
+        "printed": 7,
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "Manual 36: open-weight readers wrong on it in every summary run",
+        "value": 8,
+        "printed": 8,
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "Manual 36: each of them chooses the rule",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-A",
+        "what": "Manual 36: the reader that misses it with retrieval",
+        "value": [
+          "Llama-3.1-8B"
+        ],
+        "printed": [
+          "Llama-3.1-8B"
+        ],
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "server tokens per question, compression",
+        "value": "12.0--12.1k",
+        "printed": "12.0--12.1k",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "server tokens per question, retrieval",
+        "value": "3.9--4.0k",
+        "printed": "3.9--4.0k",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "triple the tokens (each server reader's ratio within 2.9 to 3.15)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek compressed all 158 questions",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "the compressor reads",
+        "value": "9.0k",
+        "printed": "9.0k",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "the compressor writes",
+        "value": "1.4k",
+        "printed": "1.4k",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "the compressor's input stays within the 16k packing (under 17,000 provider tokens)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash M6: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "DeepSeek-V4.1-Flash reads after compression",
+        "value": "1.6k",
+        "printed": "1.6k",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "DeepSeek-V4.1-Flash writes under 0.1k after compression",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "DeepSeek-V4.1-Flash: the compression tokens its rows carry are the compressor's",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B M6: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Qwen3-235B-A22B reads after compression",
+        "value": "1.6k",
+        "printed": "1.6k",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Qwen3-235B-A22B writes under 0.1k after compression",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Qwen3-235B-A22B: the compression tokens its rows carry are the compressor's",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B M6: 474 answered reads of the 158 questions, each with its token counts",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Llama-3.3-70B reads after compression",
+        "value": "1.6k",
+        "printed": "1.6k",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Llama-3.3-70B writes under 0.1k after compression",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "Llama-3.3-70B: the compression tokens its rows carry are the compressor's",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Qwen3-32B compression questions completed",
+        "value": 121,
+        "printed": 121,
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Qwen3-32B with time-outs counted as failures",
+        "value": "0.525",
+        "printed": "0.525",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Qwen3-32B with retrieval",
+        "value": "0.578",
+        "printed": "0.578",
+        "match": true
+      },
+      {
+        "where": "III-B",
+        "what": "Qwen3-32B with time-outs as failures is below its retrieval accuracy",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "constrained readers with retrieval",
+        "value": "0.451 to 0.878",
+        "printed": "0.451 to 0.878",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "constrained readers with retrieval (abstract, Sec. IV)",
+        "value": "0.45 to 0.88",
+        "printed": "0.45 to 0.88",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "retrieval gap to the open-weight reference",
+        "value": "0.143 [-0.021, 0.290]",
+        "printed": "0.143 [-0.021, 0.290]",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "an interval that includes zero and extends past 5 points",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "gpt-oss-20b against the open-weight reference",
+        "value": "escapable",
+        "printed": "escapable",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "gpt-oss-20b is navigable through retrieval",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "gpt-oss-20b against the cloud comparator",
+        "value": "indeterminate",
+        "printed": "indeterminate",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "constrained panel against the open-weight reference",
+        "value": "indeterminate",
+        "printed": "indeterminate",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "constrained panel against the cloud comparator",
+        "value": "binds",
+        "printed": "binds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "gpt-oss-20b's retrieval interval lies above the open-weight reference's",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "the other three constrained readers' intervals lie below it",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "Table II",
+        "what": "those three score below both gpt-oss-20b and the open-weight reference",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "gpt-oss-20b with retrieval minus the open-weight reference",
+        "value": "0.105 [0.040, 0.171]",
+        "printed": "0.105 [0.040, 0.171]",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "gpt-oss-20b with retrieval minus the cloud comparator, full text",
+        "value": "-0.034 [-0.084, 0.017]",
+        "printed": "-0.034 [-0.084, 0.017]",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "input tokens per question with retrieval, DeepSeek and gpt-oss-20b",
+        "value": [
+          "3.8k"
+        ],
+        "printed": [
+          "3.8k"
+        ],
+        "match": true
+      },
+      {
+        "where": "records",
+        "what": "gpt-oss-20b minus the open-weight reference recomputed from the rows: the point estimates of exploratory.py",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "that difference's interval excludes zero (this script's draws and exploratory.py's)",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "opening pair: readers that change their answer with the fuel inventory in every run",
+        "value": [
+          "Claude Sonnet 5",
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "printed": [
+          "Claude Sonnet 5",
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "opening pair: readers that keep the turbine out on both questions",
+        "value": [
+          "Llama-3.1-8B",
+          "Qwen3-32B",
+          "Qwen3-8B"
+        ],
+        "printed": [
+          "Llama-3.1-8B",
+          "Qwen3-32B",
+          "Qwen3-8B"
+        ],
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "opening pair: readers that place it there on both",
+        "value": [
+          "DeepSeek-V4.1-Flash",
+          "Qwen3-235B-A22B"
+        ],
+        "printed": [
+          "DeepSeek-V4.1-Flash",
+          "Qwen3-235B-A22B"
+        ],
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "opening pair: readers whose answer varies between runs",
+        "value": [
+          "Llama-3.3-70B"
+        ],
+        "printed": [
+          "Llama-3.3-70B"
+        ],
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "pairs that set a rule against its exception (exploratory.py)",
+        "value": 44,
+        "printed": 44,
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "rule questions / exception questions",
+        "value": [
+          48,
+          44
+        ],
+        "printed": [
+          48,
+          44
+        ],
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "rule vs exception, exception",
+        "value": "0.72",
+        "printed": "0.72",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "rule vs exception, rule",
+        "value": "0.54",
+        "printed": "0.54",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "rule vs exception, difference",
+        "value": "0.18 [0.03, 0.31]",
+        "printed": "0.18 [0.03, 0.31]",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "rule vs exception, other branch rule",
+        "value": "41%",
+        "printed": "41%",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "rule vs exception, other branch exception",
+        "value": "22%",
+        "printed": "22%",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "rule vs exception, open weight reference",
+        "value": "0.93 versus 0.67",
+        "printed": "0.93 versus 0.67",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "both questions of a pair correct, constrained panel, retrieval",
+        "value": "0.33",
+        "printed": "0.33",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "both questions of a pair correct, server panel, retrieval",
+        "value": "0.45",
+        "printed": "0.45",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "both questions of a pair correct, constrained panel, summary",
+        "value": "0.24",
+        "printed": "0.24",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "both questions of a pair correct, gpt-oss-20b, retrieval",
+        "value": "0.76",
+        "printed": "0.76",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "both questions of a pair correct, cloud comparator, full text",
+        "value": "0.82",
+        "printed": "0.82",
+        "match": true
+      },
+      {
+        "where": "III-C",
+        "what": "gpt-oss-20b misses one pair in",
+        "value": 4,
+        "printed": 4,
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "readers that reason before answering (note r)",
+        "value": [
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "printed": [
+          "gpt-oss-120b",
+          "gpt-oss-20b"
+        ],
+        "match": true
+      },
+      {
+        "where": "Table I",
+        "what": "the other readers answer without a reasoning phase",
+        "value": "holds",
+        "printed": "holds",
+        "match": true
+      }
+    ]
+  }
+}

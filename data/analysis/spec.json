@@ -1,0 +1,1016 @@
+{
+ "builders": {
+  "B-built": "B1_dsv41flash_direct_nothink",
+  "C-built": [
+   "C3_gptoss20b_hf_deepinfra_low",
+   "tierC2_qwen3_32b_hf_nscale_nothink"
+  ]
+ },
+ "comparison_kinds": [
+  "accuracy",
+  "reference_rule",
+  "tier_outcome",
+  "tier_dgap",
+  "interaction",
+  "h_m7",
+  "h_s"
+ ],
+ "comparisons": [
+  {
+   "condition": "M0@full",
+   "id": "P0-B1",
+   "kind": "accuracy",
+   "profile_id": "B1_dsv41flash_hf_deepinfra",
+   "question": "the B reference: B1 DeepSeek-V4.1-Flash reading the full text"
+  },
+  {
+   "condition": "M0@full",
+   "id": "P0-A",
+   "k1": true,
+   "kind": "accuracy",
+   "profile_id": "A2_sonnet5_nothink",
+   "question": "the A reference arm reading the full text (k = 1)"
+  },
+  {
+   "candidates": [
+    "M0@full",
+    "M2@4000"
+   ],
+   "id": "REF-B",
+   "kind": "reference_rule",
+   "profile_id": "B1_dsv41flash_hf_deepinfra",
+   "question": "the B tier's best available reference (B1's full text is no upper bound)",
+   "rule": "the candidate with the higher population accuracy (point estimate, primary clusters, mapped answers); a tie goes to the first; chosen once, held fixed under every sensitivity"
+  },
+  {
+   "id": "OUTCOME-C_load_bearing",
+   "kind": "tier_outcome",
+   "note": "over every readable local condition (budget <= 32k) of the tier's models: the measured representations x budgets, nothing beyond them; escapable's token clause (query input <= 1/4 of the full text's, reference tokenizer, against the reference reader's M0@full) can only be met at budgets <= 4k",
+   "question": "trilemma outcome of tier C_load_bearing against REF-B",
+   "reference": "REF-B",
+   "role": "verdict",
+   "tier": "C_load_bearing",
+   "token_reference": {
+    "condition": "M0@full",
+    "profile_id": "B1_dsv41flash_hf_deepinfra"
+   }
+  },
+  {
+   "id": "OUTCOME-C_load_bearing-A",
+   "k1": true,
+   "kind": "tier_outcome",
+   "note": "over every readable local condition (budget <= 32k) of the tier's models: the measured representations x budgets, nothing beyond them; escapable's token clause (query input <= 1/4 of the full text's, reference tokenizer, against the reference reader's M0@full) can only be met at budgets <= 4k",
+   "question": "trilemma outcome of tier C_load_bearing against the A reference arm",
+   "reference": "P0-A",
+   "role": "reported",
+   "tier": "C_load_bearing",
+   "token_reference": {
+    "condition": "M0@full",
+    "profile_id": "A2_sonnet5_nothink"
+   }
+  },
+  {
+   "from": "M2@4000",
+   "id": "dGap-M5-B",
+   "kind": "tier_dgap",
+   "question": "zero-LLM retrieval -> M5 at 4k, tier B (B1-built)",
+   "tier": "B",
+   "to": "M5@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": "M2@4000",
+   "id": "dGap-M5-C_load_bearing",
+   "kind": "tier_dgap",
+   "question": "zero-LLM retrieval -> M5 at 4k, tier C_load_bearing (B1-built)",
+   "tier": "C_load_bearing",
+   "to": "M5@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": "M2@4000",
+   "id": "dGap-M7-B",
+   "kind": "tier_dgap",
+   "question": "zero-LLM retrieval -> M7 at 4k, tier B (B1-built)",
+   "tier": "B",
+   "to": "M7@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": "M2@4000",
+   "id": "dGap-M7-C_load_bearing",
+   "kind": "tier_dgap",
+   "question": "zero-LLM retrieval -> M7 at 4k, tier C_load_bearing (B1-built)",
+   "tier": "C_load_bearing",
+   "to": "M7@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": "M2@4000",
+   "id": "dGap-M6-B",
+   "kind": "tier_dgap",
+   "question": "zero-LLM retrieval -> M6 at 4k, tier B (B1-compressed in B, self-compressed in C)",
+   "tier": "B",
+   "to": "M6@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": "M2@4000",
+   "id": "dGap-M6-C_load_bearing",
+   "kind": "tier_dgap",
+   "question": "zero-LLM retrieval -> M6 at 4k, tier C_load_bearing (B1-compressed in B, self-compressed in C)",
+   "tier": "C_load_bearing",
+   "to": "M6@4000/{reader}"
+  },
+  {
+   "from": "M2@4000",
+   "id": "interaction-M5",
+   "kind": "interaction",
+   "local": "C_load_bearing",
+   "question": "dGap(C_load_bearing) - dGap(B) for M2 -> M5 at 4k",
+   "server": "B",
+   "to": "M5@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": "M2@4000",
+   "id": "interaction-M7",
+   "kind": "interaction",
+   "local": "C_load_bearing",
+   "question": "dGap(C_load_bearing) - dGap(B) for M2 -> M7 at 4k",
+   "server": "B",
+   "to": "M7@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": [
+    "M2@4000",
+    "M4@4000"
+   ],
+   "id": "H_M7",
+   "kind": "h_m7",
+   "question": "H_M7: the B1-built M7 against M2 and M4 at 4k, tier C_load_bearing (>= 5pp with CI low > 0 on both)",
+   "tier": "C_load_bearing",
+   "to": "M7@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "control_scope": "S2",
+   "id": "H_S",
+   "kind": "h_s",
+   "llm": "M5@4000/B1_dsv41flash_direct_nothink",
+   "main_scope": "primary",
+   "question": "H_S: branch-error rate (E-cond + E-ver + E-exc over all cells) of the B1-built M5 minus M2 / M4 at 4k, tier C_load_bearing; main pool the population (L3), control S2 (|diff| < 5pp)",
+   "reading": "rate_diff",
+   "tier": "C_load_bearing",
+   "zero_llm": [
+    "M2@4000",
+    "M4@4000"
+   ]
+  },
+  {
+   "from": "M7@4000/C3_gptoss20b_hf_deepinfra_low",
+   "id": "CBUILT-gptoss20b",
+   "kind": "tier_dgap",
+   "question": "C-built (C3_gptoss20b_hf_deepinfra_low) -> B-built M7 at 4k, tier C_load_bearing (positive = the B-side build narrows the gap)",
+   "tier": "C_load_bearing",
+   "to": "M7@4000/B1_dsv41flash_direct_nothink"
+  },
+  {
+   "from": "M7@4000/tierC2_qwen3_32b_hf_nscale_nothink",
+   "id": "CBUILT-qwen32b",
+   "kind": "tier_dgap",
+   "question": "C-built (tierC2_qwen3_32b_hf_nscale_nothink) -> B-built M7 at 4k, tier C_load_bearing (positive = the B-side build narrows the gap)",
+   "tier": "C_load_bearing",
+   "to": "M7@4000/B1_dsv41flash_direct_nothink"
+  }
+ ],
+ "exploratory": "every estimate of the report that is not a primary comparison",
+ "intermediate_tier": "C3",
+ "items": {
+  "n": 326,
+  "path": "data/items/questions_with_earlier_cells.jsonl",
+  "sha256": "fd00353f7968e6e49d892e7d6ebf3cf5e28db88de9c2aa3abaf7d88997631b43"
+ },
+ "load_bearing_tier": "C_load_bearing",
+ "panel_sha256": "15146ba15ea1d14a5075b36ceced9ed1c8047b599aeee20f8040db0e753023c9",
+ "population": {
+  "cells": 158,
+  "item_ids": [
+   "05807dfce6d03bb116f3ffa03098f30591e7a34f8abe30146e39f14c17670165",
+   "074ea795dd1a6db2de2af5835058893541b7c2a6a8b8716ca5d6dd6262d0b28c",
+   "0d016b5c67dbfee4732aadd41688034e6b22bd35ab27bd3505bec5da570cc121",
+   "0ff7d667fbb46cee0e0d51c088545a54eb2fbf88f8f91d623aca930b14924958",
+   "1477ca17bb73b25321e974326991a1e98148544aa6a087d999fd1e98d218c654",
+   "15c35ae35cc0e36cd05f6a324a593aaaae830ee515940037fb6781d90d781bec",
+   "189715feb26eb32c0112cd25dcd9e76d83a60767ebd4bea1e8b30392161e7d7e",
+   "1929e0300a95c3be64fb112f15e1770f0c195d2846a39cc89583e855ed2aa340",
+   "19acf340acede6e9ffa306e64a0d573e3f074ec0910e36946f46f65e1165d248",
+   "1b175d74d389e0cdcc2845083b2a8bd53c639e3af8826be13c879762170b8633",
+   "1b67baa8429e1bdcd9bf8775da76e313cdcd60d69108805fbb7a22b599842706",
+   "1c1207d3f1c574bfd6cb1b3e3514c032dab17bb4f11cc3abe5374df61ed58376",
+   "1c634c553345cecac7c51c5bc81c870b4089c724751436e5e71b463035c705a6",
+   "1c96f29bc393b012f673947fd0ddfe06e65cb8b161ed035968738abc7f913edd",
+   "1ce60b71cc7d2f52506e5b43156f45d932aa5ba2a9cb0a6c1a838ed700064bc6",
+   "20348ca022a8043283091cbbce3fca26441a8c351a6826e2b00fda2aad09922a",
+   "2241cd4f60c239f4a2b4db01fbcb87132ccdba6fae8b26511454f7ca5e64a9d6",
+   "22716e2a6b5390fa4d51ab7d749ce6e65c907160d2f425204caace69fe0d6c78",
+   "227abd5b7075a4c86adac2163e3b743d1dab528e8851446daefbe38014c4e4a2",
+   "22c3d6e709cb488915b41df8584257fbb87a33796f4bb1ba4d4d181fb5f30838",
+   "2324fa9432e6dab0b1486c1de1b04474ecc1f578cd42e2bc53433c7c11a48cc7",
+   "292b190adf421f87abdb110eb1ef7e0e5b3e67798fcc6c0310d62a2bbe5c6565",
+   "2a537f7dcd29f15d3643bb34ddc0c4a06bd8ceb14927c7474be350185c125cce",
+   "2b3514acd1b216d3888027c568a60a5d889eb719f190b403fbe52d0e1d65ad43",
+   "2e77b6f493d2204d6d54f296c185cfd0ace6faf3b4c5aa2502d4952bdc2f5654",
+   "3108440a045181f81c7eee0d65a8dfdcdca235c93e3d6c8018dcb9bd825bc580",
+   "319363e400c53922184417ee65ed0cae757444ad2c87fa2bee341a6f0448deb1",
+   "31e891f3a1410dd1bc3e7557544661f590ecd7050c168fba935f8f9707d00296",
+   "337f4f96eb4056d5667789454e4bcaa1277f297c90e42537c2f1866b107526c6",
+   "33c70a0f4dcedf67ec858e528e99b73f820fc437bfe5edd9a0a6a5b15b27ca68",
+   "33cf7bdf599438824b981dbf8bce1f9c5d3ca3272d7c42bebbd6fb74176ec337",
+   "346dc26ea9a517de8a67e44b06f92294ad541441c8dd354fd7ba2a3d3d3aca57",
+   "35498bf48cbd6130974eeb467fa0ee0a831b592cd0c4c9b309c646a8dadcc0c7",
+   "36f5e182c5cbf21a27731006d94714fa636fca361040bd6575f5217295643cc6",
+   "37456181f07b5a25f61ed3faef4bdaf0dffa92f45e2d4d226ffd477e0b52cb0e",
+   "3a94b2ceb7127490fd1534ab40729f5fccc8ed9df2c08563b7ee6c7004ff71f9",
+   "3c7e3ccc772f56bd7b71792b1a3c73672fad622329a21dd18957e7bcf9ede040",
+   "3cb86a3bd864d442eb65813113d532b19d4b9cd2cb79eb5edc6f3ae47ab59ba3",
+   "3efd62820902ba247deca1fae0456c1c94e87f467c68e00e98a5f7fc2c213a07",
+   "3f14919344b132db1d1b8c47a52af49fd2e95cec280bc65cbf61b207c649ab09",
+   "3f8ce802a66767425835409a5c0f0983037761b366cf76af5c7062c41e265c37",
+   "4085e145cea971f3dacf691048970f184a1882dd53aeea15347fc0c8251c5641",
+   "4221320cfa84b3170c06f997d4bf6a341c5c2d574ac34aed6548a194459f64a2",
+   "4399778f9485025d673b2cf6448a839e0fa9f65136e1ff778fd59a21ef9444f2",
+   "43c605e89435712e77010b07d277973203feab37a24029195057da307ce865f5",
+   "457cff48a336719b60d222f3069865230e93aec5022129a4cd128d054261b113",
+   "460bdbcaed0334955447e188b56f35fb842230847f4ef745846d4e8ae250a1ed",
+   "470406d15b537171dc01585aa0ac0df71d0729b2355a207fb002f39b564358fd",
+   "4a451cbe9db4b8a4f30bffb68c1e0ea22b026c7d7034e3458a3014958ebed1b1",
+   "5062693872664011c3586f4f3eaf07bad75b58d90950460ed34ad11701090618",
+   "518356d5acb290ca52fd2e483e30957e4450efe38f3f331f6a4bb31e4510b418",
+   "51c582991f93b0a9ad9f4e811f06a8e00d5fb34bc2e76b82ed2abb61020e6276",
+   "51f6e737df5ad7fb288a92de8eca7aa7b6bca28ea11e085cec89d5f6df095fef",
+   "52c7dd420a296ca67819f15d21fbf934b089c94fcbd14f2b4b1360f707860dfc",
+   "5374c8c6ebfd949a2481d92148ae5949e53273aa90a33bd73ad728616901b96b",
+   "589c4b0a30d7c3de034c1b2ff0f532be4a3815a3c7f023aeaf737caa61625f4f",
+   "5a7f3fe58c33670fb5d2ca986067db6960f59b5cba1c093febd728c8514eb5a2",
+   "5ae8f1cad472a835dfe9e43d5a8e21946f7525c3c89835352500ac1a92f6098e",
+   "5da52facb43688e4adac8095f48cffedabbd789e651eee5965975e8248775f1a",
+   "5f42ffac92545616e700ab5494eab2bc6169907b27da2c9169299fc6a061c78c",
+   "61d2b3925a2b4e6a59b14262b5c262605c684414da7a31560ad7514659dc331a",
+   "627af301b8e333698c770cbb2aebfe433375415cc2c1e846ea6c2dc360f4db4f",
+   "6471ec7bd2d25b2be2a6991bf417b2582a1895addd9bfe62fb3e1f367e8dfcd1",
+   "66a4f94109ba0efd02e8a7a6ac3eecdfe1efd4d185439677ac727d61948a3df7",
+   "6727f70e8aa302283527d390a8efad0ff41e58986a74661bef95a8206e81b8fe",
+   "67ec0ae7094514aa1722ed47d96c08a623836d4b39d1162502cab4bf3bf1f249",
+   "69a38ab0ebc93c66a1d89f6da46bf30729d22dadaa4c1144903ac124084ba8a1",
+   "69a562bc6e9ee2e2b13a419ccee15223be64f827dfb589142b142e612f5e4db4",
+   "6a2811eef5ceca9132ba6cbf1c1ea5b0a37172f964af97cd27d5ae164ed5b8ec",
+   "6d39a1a81b37deaa2d035132bf88c1c73d4ab7b7437fa381f5c1f5d13b2285ed",
+   "6dad5fa73ad73448877bf15f9888d3940e36a29eef305a5825e3902b4eb1c767",
+   "7188d10fbc62d93e34f63d04fd977510e7fa8ca415ea2803370a6038f4d4f285",
+   "72d7d5a80aab7a2ae5977555a41b46e147f732ff6ab495fe77366e59abe29d9e",
+   "78f78b957d51bcca656020f9352c1a541b709951ca499a999d5841db0c3c91ba",
+   "7abf4c1d5b5ce446bee0e3befa512e54d3e00673d551dec58453ffbda21ab015",
+   "7b59b5c013a0ee854edf713e8d10e13f0959092f31782cc12169d9fdb767ec11",
+   "7c2f811c4f5afc3e5ab49560dc368fec435e55c816cbf7502dd7b8919b0112da",
+   "7d3bf241624deaff36760a10d2167a3ac0282f9d0251fbacebe7b6ee3101e2c3",
+   "7f26974e2f3c1b7f91644b24842ac5c44fa27367bc0b1d058218b22698e4ab48",
+   "7f362096597452913ff806f25b76910f73017ade463061c78284f30689a1be6b",
+   "80526658ddad2adae51777baabf333931dd95c05e9a6a699265ff39d7ca651e1",
+   "8131a7bb6c789294214d4e296ef196b3d1ea954b7fe7adfd618d38a28758eba4",
+   "837f4292cccd7c208c72bf7ff7a7e963d32cf262f055cb9e069795e7a0e90962",
+   "840217e6244d4e2c52ab1fcc32e8ccca6e8fbb1be10f6fae1da462e6b5ab1545",
+   "8778f7781f8e673a6f2348428b86ecd3ae84bc7d0a166c694b2acc753369d602",
+   "88e14dcbacfa5fb341437795bcad55b7f8cecfa43aa5c4ac0fb6f0a7c47ae13f",
+   "8dabe6268d8f19e3a4c22a3e352110aa31260c303ef62fe53b5f9800f6a371d6",
+   "9017279311eba81728259bc8c785b02bed185da39b06729d50f7515ea9c8f019",
+   "914554f4b548a41eff4f5678a9e7a885f874ed817f850457a0e0b83c6facda0d",
+   "91a30fb39121b36eac885ea868b23b242e24bf617b08346ddabc6227bc86b1b8",
+   "91cfd690097ea9e35275fb90af842806d88f9f53c7b3a23a2166b3f0c2b0b32d",
+   "92ff07e6787f0f3bc9f79bc115b4a7cceaefbdd2587eb4b4cfb537341e065d18",
+   "93d3037402a2d949ef5d23816b63d19ef57c101d36aab6de160a02268d2e9cc8",
+   "96408d798583f4dea943d1105f18772d2d572f97e0ed2c56ae74ce0bb30e53b5",
+   "969b73ef368903329cc8c32f93615a958814c7307f4e58371a892dc4d2cb4559",
+   "98bf625fb209c309ffd607b0034c374118246787673cbcbaa729e6e8d4457269",
+   "99594adb68c856b68b99d6044ac2b2a096ea8fd87cbef01485350a595586c43a",
+   "9992ad602ce49caccbed95f9d5339fdcdfd2dc3fb6dd18bf5b651f4046971e4c",
+   "9b78b6b62846a462220d41e6e0c774a7ea2b08c00ef7e55910f61852768c6be8",
+   "9c20979d914bb8a03fe2997a2c824796d30cecd1f285a42d104ce2536b196e04",
+   "9dc808ded62cf8d78dab54aac29dd8dd0c88f4e14b57593292946792dd4c8537",
+   "9e8da65aa321d56affa3dbcb43a4d998a92698d7ffc004df9db06fee309f62b4",
+   "a09b97dd0327b7182b0c1effbf73e4f23412191139db6c9e594ef961e4e71d06",
+   "a24203c136ae8dbb8dae651627095e47cc0d1233b43cdac4368a1706a89d9a8b",
+   "a43d387105954e6c4531a15560eed11cf63c1d4415521cb94bf635ef3a8cfc79",
+   "a690db41c12118d4d0681bc1cb11c4aaa01b89d0ab8d9c9fbf88ae3ace0c3b1e",
+   "a8bf495ada1affa2f19c567a18d912724b63fda74683a08fa10e4fb86f50da5e",
+   "a8c299a7978b261ea432b052d02533db1cd40ff4c770865f812aaa9ae6875d0d",
+   "a98d298e71d3f107277ad447873a8423902ae59273c55cd39a779709d5cf62ca",
+   "aa3fe20120b71ae4905fee151b5489d6c72bd3194637f63e78ee7dc49fb6f56d",
+   "aaa90b3090317d92d9da705c2686ede0b1e494dd6b017303920c87e4a54ebec9",
+   "adbca2accad31650436e5c944fe471abc7212b4f65ef91bda4957e8e75df3f1e",
+   "ae6620fdecda01f2f9e2c96647b878330c089cc6d8003eb35a3fdb08202eeb56",
+   "af949df76ede32c42cb924640f32b6e67f1e5e90689937f30ecbecaf417b607c",
+   "b37594e0c3968e4c59fa77521a12eedf84d0c5b07210c15d6e2a836dbd139762",
+   "b3fc88e85e9e1cc3e0e77479c122d1e27313a81e59d64f89c4ff2ee4bc943583",
+   "b4b8df9d05442000f2d90cab34f6e031dcbb356b5d152c61d0c434137815a06c",
+   "b61b308708c608c4285b7bf5452ef8935be45e0728f9e8aabcba2e34839db2e8",
+   "b699ccc6fbd1c09112088e55a9b143366c4641ed0f91c7f0d267551728a31514",
+   "b8975a43da9ed28c4041d0994e496671922d0592fcff78008accb8c677de8c3d",
+   "b9ca8bd1ce5d6fde1c48a1ac257f9109e95d6d29b0f870ccbfb7659955d2baf8",
+   "be989b04a4a1185631acdea5fa88aa1d46a85b3e33ef7ef4439179f83de14485",
+   "bf4ce2a8d1d081d2b90aecf36ac97744811218f9ef66dcbb1fac677bba2b2402",
+   "bf809c12b7641ab77d56594e78f1be2534486bf51446249800cfb5102ae67560",
+   "c1af5abbcd6f01c4ac0a380752bf8a90d4b312cfd8586fdd499cc4da7d59cd89",
+   "c25c514fa1d44edbff013be9d0a3eb6b18868f0faec53177d1ec80c7bfcd343d",
+   "c2682ddb8b93aad770186bbf23d5ee984118e1836822dc83472aefddc1482e71",
+   "c27cca51e911c1d02b5033e3f9ca86f15b8c5fcb960352780357a03f1417b708",
+   "c40c1584a084d84793a924db7cd1b1a29b7006d733c20e990a60cf4c6a19852f",
+   "c578912fb4cd0861c0017b17f87fd730f8ee4ce44f736e6cfa4c9550c47edf56",
+   "c699acd958eee3d5247f4133939f731a12613a4abe6d76d12979885b2f7e41bf",
+   "c96e66210b00712e76bdc8b1e468e95334f8b718349546a0ac20c350bc3cdccf",
+   "ca0e841597a8313293b6831bf54555ade90a36b5ed26a7c8f8ede6fdb9f0d49c",
+   "cfa4dd146d27ff4c5945e558dca9e29bc57da5a34067853b13ab05bfd0afef79",
+   "d1882d6704fd498fff23d064e83c244902871ddcdef2e1c02c75de4b8e123f40",
+   "d3a2676e83b2148e3e77fbc5aeb175f23a182626594e43accd8341e00dd1bb66",
+   "d642e0811700a02a5e8f8612b0984ddeda14a53eb516b40f7d97bf32f6367194",
+   "d6547bded56228fedcb9c6cdb4f142c7f0804496790df8c81dce6d9ae0bdadb4",
+   "dc9810b322190379b10963c899f76ed742b3b4b73aa9e120154673c0416ad96d",
+   "dd8a4514c91e7443dad5d23dfd021c9c95949d093d2f313e1f0c11982afaf957",
+   "df5a6574d5bb82ef9c8d1b56fe4f07da62b670fa75cead4c3ab2f8932d8abbc3",
+   "e82b7b7cdf05885fad0f9dad68c6f356f19fd7e8b0fbb33671c11bdb9c3aeab4",
+   "eb6180fb04ab55cca53f92e3fc86d937d7ebb69aee225bdf7870c469a48985f1",
+   "efdcfa9ec70485895c0f56c612576f4a873882a8829dc9b02c0b1f6fabd63ae5",
+   "f0d3870db9d56de68c97de7aacc3bbb9676483ba2abdab3e78689a4ea7304532",
+   "f10cbac1009d7303083a56c7949951ed0fa8aff72890fe7d3b7dd789e3ffba88",
+   "f1d9fac2438485e99198407549dd0a25d58de05431adea2b9748ba67d7a89e3d",
+   "f2c2e020a15aefb0ebe00f10707f5993b7d823e5a4ea469190670db8641435d6",
+   "f5cf721f8672a1e15d4a156a7e54214342b9c12b558a8899c4020ede2a9719b5",
+   "f5e83d1a9e1d552152b46ef5b6f5189377d807887115ef990380586575262738",
+   "f61104f786dc4a16bdc9ba1ebb52a4e420750a902d7193839b882792c98aa4a5",
+   "f6d17ea598eb3683bf2798cf86dc6272a3529f1fcf8f12572e70689dd176719e",
+   "fc333cd91416fe443a24539c75b9e3f6c20c637f887063463d9881dfbc6f175c",
+   "fcbe73e54e07720de98bd845916174f4084148fd98a7fc0d07cf5b5e966f7e55",
+   "fd2add35fd587c5ff16e794bc80e2e67d5a69ef7594b2532d27b8a3c6f093905",
+   "fe1018a070cea7eb29b9670998546c9462bac9fbe53fb0c8be88e59f1fb79001",
+   "ff8621278524a51fe8cbaac4fae62b66e1cc75307f8c7b90b78b6a3ca6af1564",
+   "ff97f53a9aa713ce31030e6d927fb481b957ae7651d440a1e3a2cf70687aa8e6"
+  ],
+  "rule": {
+   "analysis_stratum": "primary",
+   "domain": [
+    "ops",
+    "technical"
+   ],
+   "load_bearing": true,
+   "rule2_spirit": [
+    "abstracted"
+   ]
+  },
+  "template_families": {
+   "aeso_repair_plan_exemption": [
+    "o_x_aeso_304_9_repair_exemption",
+    "o_x_aeso_503_16_repair_exemption"
+   ],
+   "directive_ramp_inability": [
+    "o_5110_comply_or_inform",
+    "o_x4_top001_r3_r4_inability"
+   ]
+  },
+  "unit_of": {
+   "05807dfce6d03bb116f3ffa03098f30591e7a34f8abe30146e39f14c17670165": "o_x_m13_dual_fuel_max_emergency",
+   "074ea795dd1a6db2de2af5835058893541b7c2a6a8b8716ca5d6dd6262d0b28c": "o_eop012_r2_r3",
+   "0d016b5c67dbfee4732aadd41688034e6b22bd35ab27bd3505bec5da570cc121": "o_var002_r4_capability_restore",
+   "0ff7d667fbb46cee0e0d51c088545a54eb2fbf88f8f91d623aca930b14924958": "o_prc024_att2_voltage",
+   "1477ca17bb73b25321e974326991a1e98148544aa6a087d999fd1e98d218c654": "o_m07_loe_redundancy",
+   "15c35ae35cc0e36cd05f6a324a593aaaae830ee515940037fb6781d90d781bec": "o_prc004_r3_later_of",
+   "189715feb26eb32c0112cd25dcd9e76d83a60767ebd4bea1e8b30392161e7d7e": "o_3220_planned_or_forced",
+   "1929e0300a95c3be64fb112f15e1770f0c195d2846a39cc89583e855ed2aa340": "o_aeso_304_8_island_category",
+   "19acf340acede6e9ffa306e64a0d573e3f074ec0910e36946f46f65e1165d248": "s2_d8c929b588b9ad1a",
+   "1b175d74d389e0cdcc2845083b2a8bd53c639e3af8826be13c879762170b8633": "o_aeso_503_22_anticascade",
+   "1b67baa8429e1bdcd9bf8775da76e313cdcd60d69108805fbb7a22b599842706": "o_prc006serc_anti_stall_stage",
+   "1c1207d3f1c574bfd6cb1b3e3514c032dab17bb4f11cc3abe5374df61ed58376": "o_prc006npcc_r10_r13",
+   "1c634c553345cecac7c51c5bc81c870b4089c724751436e5e71b463035c705a6": "s2_ba0371d99662f624",
+   "1c96f29bc393b012f673947fd0ddfe06e65cb8b161ed035968738abc7f913edd": "o_eop004_r2_later_of",
+   "1ce60b71cc7d2f52506e5b43156f45d932aa5ba2a9cb0a6c1a838ed700064bc6": "o_x4_nyiso12_cam_participation_limit",
+   "20348ca022a8043283091cbbce3fca26441a8c351a6826e2b00fda2aad09922a": "o_x4_m14d_pmu_location",
+   "2241cd4f60c239f4a2b4db01fbcb87132ccdba6fae8b26511454f7ca5e64a9d6": "o_x_rc0420_eop004_weekend",
+   "22716e2a6b5390fa4d51ab7d749ce6e65c907160d2f425204caace69fe0d6c78": "o_m39_npir_restrictive",
+   "227abd5b7075a4c86adac2163e3b743d1dab528e8851446daefbe38014c4e4a2": "o_m10_week_36th_wednesday",
+   "22c3d6e709cb488915b41df8584257fbb87a33796f4bb1ba4d4d181fb5f30838": "o_x4_nyiso12_cam_participation_limit",
+   "2324fa9432e6dab0b1486c1de1b04474ecc1f578cd42e2bc53433c7c11a48cc7": "o_ieso73_lowimpact_submission",
+   "292b190adf421f87abdb110eb1ef7e0e5b3e67798fcc6c0310d62a2bbe5c6565": "o_4420_downgrade_notice",
+   "2a537f7dcd29f15d3643bb34ddc0c4a06bd8ceb14927c7474be350185c125cce": "o_prc024_att1_western",
+   "2b3514acd1b216d3888027c568a60a5d889eb719f190b403fbe52d0e1d65ad43": "s2_d8c929b588b9ad1a",
+   "2e77b6f493d2204d6d54f296c185cfd0ace6faf3b4c5aa2502d4952bdc2f5654": "o_eop008_r3_backup_outage",
+   "3108440a045181f81c7eee0d65a8dfdcdca235c93e3d6c8018dcb9bd825bc580": "o_x4_bpm007_checkout_discrepancy",
+   "319363e400c53922184417ee65ed0cae757444ad2c87fa2bee341a6f0448deb1": "o_var002_r4_capability_restore",
+   "31e891f3a1410dd1bc3e7557544661f590ecd7050c168fba935f8f9707d00296": "o_4420_lssrr_notice",
+   "337f4f96eb4056d5667789454e4bcaa1277f297c90e42537c2f1866b107526c6": "s2_ebaf1a886e62fb18",
+   "33c70a0f4dcedf67ec858e528e99b73f820fc437bfe5edd9a0a6a5b15b27ca68": "o_ieso73_lowimpact_submission",
+   "33cf7bdf599438824b981dbf8bce1f9c5d3ca3272d7c42bebbd6fb74176ec337": "o_3220_immediate_or_imminent",
+   "346dc26ea9a517de8a67e44b06f92294ad541441c8dd354fd7ba2a3d3d3aca57": "o_x4_top001_r3_r4_inability",
+   "35498bf48cbd6130974eeb467fa0ee0a831b592cd0c4c9b309c646a8dadcc0c7": "o_x_aeso_503_16_repair_exemption",
+   "36f5e182c5cbf21a27731006d94714fa636fca361040bd6575f5217295643cc6": "s2_73c26f25affe8a1a",
+   "37456181f07b5a25f61ed3faef4bdaf0dffa92f45e2d4d226ffd477e0b52cb0e": "o_x_m03_switching_delay_notice",
+   "3a94b2ceb7127490fd1534ab40729f5fccc8ed9df2c08563b7ee6c7004ff71f9": "o_aeso_503_22_gust_factor",
+   "3c7e3ccc772f56bd7b71792b1a3c73672fad622329a21dd18957e7bcf9ede040": "o_x_aeso_304_9_repair_exemption",
+   "3cb86a3bd864d442eb65813113d532b19d4b9cd2cb79eb5edc6f3ae47ab59ba3": "o_iro006east_r2_alternate_actions",
+   "3efd62820902ba247deca1fae0456c1c94e87f467c68e00e98a5f7fc2c213a07": "o_eop004_theft",
+   "3f14919344b132db1d1b8c47a52af49fd2e95cec280bc65cbf61b207c649ab09": "o_aeso_304_7_theft",
+   "3f8ce802a66767425835409a5c0f0983037761b366cf76af5c7062c41e265c37": "s2_921bf9c2c426849b",
+   "4085e145cea971f3dacf691048970f184a1882dd53aeea15347fc0c8251c5641": "o_ieso71_desn_offload",
+   "4221320cfa84b3170c06f997d4bf6a341c5c2d574ac34aed6548a194459f64a2": "o_rc0310_voltage_contact",
+   "4399778f9485025d673b2cf6448a839e0fa9f65136e1ff778fd59a21ef9444f2": "o_m10_week_36th_wednesday",
+   "43c605e89435712e77010b07d277973203feab37a24029195057da307ce865f5": "o_rc0130_forced_derate",
+   "457cff48a336719b60d222f3069865230e93aec5022129a4cd128d054261b113": "o_ieso71_desn_offload",
+   "460bdbcaed0334955447e188b56f35fb842230847f4ef745846d4e8ae250a1ed": "s2_2e9a59f445c9bcc2",
+   "470406d15b537171dc01585aa0ac0df71d0729b2355a207fb002f39b564358fd": "o_x_m03_vsched_full_lead",
+   "4a451cbe9db4b8a4f30bffb68c1e0ea22b026c7d7034e3458a3014958ebed1b1": "o_3220_planned_or_forced",
+   "5062693872664011c3586f4f3eaf07bad75b58d90950460ed34ad11701090618": "o_aeso_503_22_anticascade",
+   "518356d5acb290ca52fd2e483e30957e4450efe38f3f331f6a4bb31e4510b418": "o_x_m03_switching_delay_notice",
+   "51c582991f93b0a9ad9f4e811f06a8e00d5fb34bc2e76b82ed2abb61020e6276": "o_aeso_503_7_pss_phase_lag",
+   "51f6e737df5ad7fb288a92de8eca7aa7b6bca28ea11e085cec89d5f6df095fef": "o_m36_comed_uf_trip",
+   "52c7dd420a296ca67819f15d21fbf934b089c94fcbd14f2b4b1360f707860dfc": "o_prc004_r3_later_of",
+   "5374c8c6ebfd949a2481d92148ae5949e53273aa90a33bd73ad728616901b96b": "o_eop012_r2_r3",
+   "589c4b0a30d7c3de034c1b2ff0f532be4a3815a3c7f023aeaf737caa61625f4f": "s2_ebaf1a886e62fb18",
+   "5a7f3fe58c33670fb5d2ca986067db6960f59b5cba1c093febd728c8514eb5a2": "o_m14d_avr_pss_notice",
+   "5ae8f1cad472a835dfe9e43d5a8e21946f7525c3c89835352500ac1a92f6098e": "o_bal001tre_r2_eight_fme",
+   "5da52facb43688e4adac8095f48cffedabbd789e651eee5965975e8248775f1a": "o_x_aeso_304_9_repair_exemption",
+   "5f42ffac92545616e700ab5494eab2bc6169907b27da2c9169299fc6a061c78c": "o_aeso_503_16_scada_latency",
+   "61d2b3925a2b4e6a59b14262b5c262605c684414da7a31560ad7514659dc331a": "o_aeso_503_22_gust_factor",
+   "627af301b8e333698c770cbb2aebfe433375415cc2c1e846ea6c2dc360f4db4f": "o_m14d_avr_pss_notice",
+   "6471ec7bd2d25b2be2a6991bf417b2582a1895addd9bfe62fb3e1f367e8dfcd1": "o_x_aeso_503_19_ambient_test",
+   "66a4f94109ba0efd02e8a7a6ac3eecdfe1efd4d185439677ac727d61948a3df7": "o_nyiso15_irol_stability_margin",
+   "6727f70e8aa302283527d390a8efad0ff41e58986a74661bef95a8206e81b8fe": "o_rc0130_momentary_exemption",
+   "67ec0ae7094514aa1722ed47d96c08a623836d4b39d1162502cab4bf3bf1f249": "s2_2e9a59f445c9bcc2",
+   "69a38ab0ebc93c66a1d89f6da46bf30729d22dadaa4c1144903ac124084ba8a1": "o_aeso_304_7_theft",
+   "69a562bc6e9ee2e2b13a419ccee15223be64f827dfb589142b142e612f5e4db4": "o_x_ieso71_capacity_export_backing",
+   "6a2811eef5ceca9132ba6cbf1c1ea5b0a37172f964af97cd27d5ae164ed5b8ec": "o_eop008_r3_backup_outage",
+   "6d39a1a81b37deaa2d035132bf88c1c73d4ab7b7437fa381f5c1f5d13b2285ed": "o_aeso_503_21_mobile_transformer",
+   "6dad5fa73ad73448877bf15f9888d3940e36a29eef305a5825e3902b4eb1c767": "o_aeso_306_4_change_assessment",
+   "7188d10fbc62d93e34f63d04fd977510e7fa8ca415ea2803370a6038f4d4f285": "o_x4_mod025_nuclear_min_output",
+   "72d7d5a80aab7a2ae5977555a41b46e147f732ff6ab495fe77366e59abe29d9e": "o_aeso_304_3_additions",
+   "78f78b957d51bcca656020f9352c1a541b709951ca499a999d5841db0c3c91ba": "o_4110_major_outage_share",
+   "7abf4c1d5b5ce446bee0e3befa512e54d3e00673d551dec58453ffbda21ab015": "s2_621777105095d1ca",
+   "7b59b5c013a0ee854edf713e8d10e13f0959092f31782cc12169d9fdb767ec11": "o_var501_r3_untunable",
+   "7c2f811c4f5afc3e5ab49560dc368fec435e55c816cbf7502dd7b8919b0112da": "o_aeso_306_4_change_assessment",
+   "7d3bf241624deaff36760a10d2167a3ac0282f9d0251fbacebe7b6ee3101e2c3": "o_m39_npir_restrictive",
+   "7f26974e2f3c1b7f91644b24842ac5c44fa27367bc0b1d058218b22698e4ab48": "o_aeso_503_20_in_plant",
+   "7f362096597452913ff806f25b76910f73017ade463061c78284f30689a1be6b": "o_rc0310_filter_or_validate",
+   "80526658ddad2adae51777baabf333931dd95c05e9a6a699265ff39d7ca651e1": "s2_ba0371d99662f624",
+   "8131a7bb6c789294214d4e296ef196b3d1ea954b7fe7adfd618d38a28758eba4": "o_prc024_att1_western",
+   "837f4292cccd7c208c72bf7ff7a7e963d32cf262f055cb9e069795e7a0e90962": "o_4420_lssrr_notice",
+   "840217e6244d4e2c52ab1fcc32e8ccca6e8fbb1be10f6fae1da462e6b5ab1545": "o_eop004_firm_load",
+   "8778f7781f8e673a6f2348428b86ecd3ae84bc7d0a166c694b2acc753369d602": "o_aeso_503_17_insitu_interval",
+   "88e14dcbacfa5fb341437795bcad55b7f8cecfa43aa5c4ac0fb6f0a7c47ae13f": "o_x_m12_blackstart_designation",
+   "8dabe6268d8f19e3a4c22a3e352110aa31260c303ef62fe53b5f9800f6a371d6": "o_306_4_significance",
+   "9017279311eba81728259bc8c785b02bed185da39b06729d50f7515ea9c8f019": "o_x_ieso71_capacity_export_backing",
+   "914554f4b548a41eff4f5678a9e7a885f874ed817f850457a0e0b83c6facda0d": "o_x4_m14d_pmu_location",
+   "91a30fb39121b36eac885ea868b23b242e24bf617b08346ddabc6227bc86b1b8": "o_x4_ieso71_ufls_small_customer",
+   "91cfd690097ea9e35275fb90af842806d88f9f53c7b3a23a2166b3f0c2b0b32d": "o_x_aeso_503_19_ambient_test",
+   "92ff07e6787f0f3bc9f79bc115b4a7cceaefbdd2587eb4b4cfb537341e065d18": "o_aeso_304_3_additions",
+   "93d3037402a2d949ef5d23816b63d19ef57c101d36aab6de160a02268d2e9cc8": "s2_921bf9c2c426849b",
+   "96408d798583f4dea943d1105f18772d2d572f97e0ed2c56ae74ce0bb30e53b5": "o_4110_major_outage_share",
+   "969b73ef368903329cc8c32f93615a958814c7307f4e58371a892dc4d2cb4559": "o_prc006npcc_r10_r13",
+   "98bf625fb209c309ffd607b0034c374118246787673cbcbaa729e6e8d4457269": "o_eop004_theft",
+   "99594adb68c856b68b99d6044ac2b2a096ea8fd87cbef01485350a595586c43a": "o_x_aeso_304_4_connecting_adjustment",
+   "9992ad602ce49caccbed95f9d5339fdcdfd2dc3fb6dd18bf5b651f4046971e4c": "o_nyiso15_state_lte_duration",
+   "9b78b6b62846a462220d41e6e0c774a7ea2b08c00ef7e55910f61852768c6be8": "o_var002_r3_status_restore",
+   "9c20979d914bb8a03fe2997a2c824796d30cecd1f285a42d104ce2536b196e04": "o_ieso71_overfrequency",
+   "9dc808ded62cf8d78dab54aac29dd8dd0c88f4e14b57593292946792dd4c8537": "o_ieso71_overfrequency",
+   "9e8da65aa321d56affa3dbcb43a4d998a92698d7ffc004df9db06fee309f62b4": "o_aeso_503_21_mobile_transformer",
+   "a09b97dd0327b7182b0c1effbf73e4f23412191139db6c9e594ef961e4e71d06": "o_aeso_304_8_island_category",
+   "a24203c136ae8dbb8dae651627095e47cc0d1233b43cdac4368a1706a89d9a8b": "o_x4_bpm007_checkout_discrepancy",
+   "a43d387105954e6c4531a15560eed11cf63c1d4415521cb94bf635ef3a8cfc79": "o_rc0310_filter_or_validate",
+   "a690db41c12118d4d0681bc1cb11c4aaa01b89d0ab8d9c9fbf88ae3ace0c3b1e": "o_rc0130_forced_derate",
+   "a8bf495ada1affa2f19c567a18d912724b63fda74683a08fa10e4fb86f50da5e": "o_x_m07_lowside_lead_redundancy",
+   "a8c299a7978b261ea432b052d02533db1cd40ff4c770865f812aaa9ae6875d0d": "o_prc006serc_anti_stall_stage",
+   "a98d298e71d3f107277ad447873a8423902ae59273c55cd39a779709d5cf62ca": "o_x4_m36_dynamic_reserve_ei",
+   "aa3fe20120b71ae4905fee151b5489d6c72bd3194637f63e78ee7dc49fb6f56d": "o_4420_downgrade_notice",
+   "aaa90b3090317d92d9da705c2686ede0b1e494dd6b017303920c87e4a54ebec9": "o_var501_r3_untunable",
+   "adbca2accad31650436e5c944fe471abc7212b4f65ef91bda4957e8e75df3f1e": "o_x_aeso_503_19_retest_exemption",
+   "ae6620fdecda01f2f9e2c96647b878330c089cc6d8003eb35a3fdb08202eeb56": "o_rc0130_momentary_exemption",
+   "af949df76ede32c42cb924640f32b6e67f1e5e90689937f30ecbecaf417b607c": "o_x_m03_vsched_full_lead",
+   "b37594e0c3968e4c59fa77521a12eedf84d0c5b07210c15d6e2a836dbd139762": "o_x_aeso_304_4_connecting_adjustment",
+   "b3fc88e85e9e1cc3e0e77479c122d1e27313a81e59d64f89c4ff2ee4bc943583": "o_m07_loe_redundancy",
+   "b4b8df9d05442000f2d90cab34f6e031dcbb356b5d152c61d0c434137815a06c": "o_x_rc0420_eop004_weekend",
+   "b61b308708c608c4285b7bf5452ef8935be45e0728f9e8aabcba2e34839db2e8": "o_prc024_att2_voltage",
+   "b699ccc6fbd1c09112088e55a9b143366c4641ed0f91c7f0d267551728a31514": "o_aeso_503_16_scada_latency",
+   "b8975a43da9ed28c4041d0994e496671922d0592fcff78008accb8c677de8c3d": "o_x_m13_dual_fuel_max_emergency",
+   "b9ca8bd1ce5d6fde1c48a1ac257f9109e95d6d29b0f870ccbfb7659955d2baf8": "o_x_m07_lowside_lead_redundancy",
+   "be989b04a4a1185631acdea5fa88aa1d46a85b3e33ef7ef4439179f83de14485": "o_rc0310_voltage_contact",
+   "bf4ce2a8d1d081d2b90aecf36ac97744811218f9ef66dcbb1fac677bba2b2402": "o_4420_forecast_window_actions",
+   "bf809c12b7641ab77d56594e78f1be2534486bf51446249800cfb5102ae67560": "o_bpm008_reschedule_window",
+   "c1af5abbcd6f01c4ac0a380752bf8a90d4b312cfd8586fdd499cc4da7d59cd89": "o_nyiso15_irol_stability_margin",
+   "c25c514fa1d44edbff013be9d0a3eb6b18868f0faec53177d1ec80c7bfcd343d": "o_iro006east_r2_alternate_actions",
+   "c2682ddb8b93aad770186bbf23d5ee984118e1836822dc83472aefddc1482e71": "s2_6c4f77d3b86dd6d5",
+   "c27cca51e911c1d02b5033e3f9ca86f15b8c5fcb960352780357a03f1417b708": "o_aeso_503_15_transformer",
+   "c40c1584a084d84793a924db7cd1b1a29b7006d733c20e990a60cf4c6a19852f": "s2_621777105095d1ca",
+   "c578912fb4cd0861c0017b17f87fd730f8ee4ce44f736e6cfa4c9550c47edf56": "o_aeso_503_20_in_plant",
+   "c699acd958eee3d5247f4133939f731a12613a4abe6d76d12979885b2f7e41bf": "o_3220_immediate_or_imminent",
+   "c96e66210b00712e76bdc8b1e468e95334f8b718349546a0ac20c350bc3cdccf": "o_x_m12_blackstart_designation",
+   "ca0e841597a8313293b6831bf54555ade90a36b5ed26a7c8f8ede6fdb9f0d49c": "o_x4_m36_dynamic_reserve_ei",
+   "cfa4dd146d27ff4c5945e558dca9e29bc57da5a34067853b13ab05bfd0afef79": "o_306_4_significance",
+   "d1882d6704fd498fff23d064e83c244902871ddcdef2e1c02c75de4b8e123f40": "o_5110_comply_or_inform",
+   "d3a2676e83b2148e3e77fbc5aeb175f23a182626594e43accd8341e00dd1bb66": "o_4420_forecast_window_actions",
+   "d642e0811700a02a5e8f8612b0984ddeda14a53eb516b40f7d97bf32f6367194": "o_aeso_503_15_transformer",
+   "d6547bded56228fedcb9c6cdb4f142c7f0804496790df8c81dce6d9ae0bdadb4": "o_x_aeso_503_19_retest_exemption",
+   "dc9810b322190379b10963c899f76ed742b3b4b73aa9e120154673c0416ad96d": "o_x_aeso_503_16_repair_exemption",
+   "dd8a4514c91e7443dad5d23dfd021c9c95949d093d2f313e1f0c11982afaf957": "o_5110_comply_or_inform",
+   "df5a6574d5bb82ef9c8d1b56fe4f07da62b670fa75cead4c3ab2f8932d8abbc3": "o_bal001tre_r2_eight_fme",
+   "e82b7b7cdf05885fad0f9dad68c6f356f19fd7e8b0fbb33671c11bdb9c3aeab4": "s2_73c26f25affe8a1a",
+   "eb6180fb04ab55cca53f92e3fc86d937d7ebb69aee225bdf7870c469a48985f1": "o_eop012_r2_duration",
+   "efdcfa9ec70485895c0f56c612576f4a873882a8829dc9b02c0b1f6fabd63ae5": "o_var002_r3_status_restore",
+   "f0d3870db9d56de68c97de7aacc3bbb9676483ba2abdab3e78689a4ea7304532": "s2_6c4f77d3b86dd6d5",
+   "f10cbac1009d7303083a56c7949951ed0fa8aff72890fe7d3b7dd789e3ffba88": "o_aeso_503_1_line_extension",
+   "f1d9fac2438485e99198407549dd0a25d58de05431adea2b9748ba67d7a89e3d": "o_aeso_503_7_pss_phase_lag",
+   "f2c2e020a15aefb0ebe00f10707f5993b7d823e5a4ea469190670db8641435d6": "o_eop012_r2_duration",
+   "f5cf721f8672a1e15d4a156a7e54214342b9c12b558a8899c4020ede2a9719b5": "o_eop004_r2_later_of",
+   "f5e83d1a9e1d552152b46ef5b6f5189377d807887115ef990380586575262738": "o_aeso_503_17_insitu_interval",
+   "f61104f786dc4a16bdc9ba1ebb52a4e420750a902d7193839b882792c98aa4a5": "o_nyiso15_state_lte_duration",
+   "f6d17ea598eb3683bf2798cf86dc6272a3529f1fcf8f12572e70689dd176719e": "o_eop004_firm_load",
+   "fc333cd91416fe443a24539c75b9e3f6c20c637f887063463d9881dfbc6f175c": "o_bpm008_reschedule_window",
+   "fcbe73e54e07720de98bd845916174f4084148fd98a7fc0d07cf5b5e966f7e55": "o_x4_ieso71_ufls_small_customer",
+   "fd2add35fd587c5ff16e794bc80e2e67d5a69ef7594b2532d27b8a3c6f093905": "o_aeso_503_1_line_extension",
+   "fe1018a070cea7eb29b9670998546c9462bac9fbe53fb0c8be88e59f1fb79001": "o_x4_mod025_nuclear_min_output",
+   "ff8621278524a51fe8cbaac4fae62b66e1cc75307f8c7b90b78b6a3ca6af1564": "o_x4_top001_r3_r4_inability",
+   "ff97f53a9aa713ce31030e6d927fb481b957ae7651d440a1e3a2cf70687aa8e6": "o_m36_comed_uf_trip"
+  },
+  "units": 79,
+  "units_by_family": {
+   "AESO": 21,
+   "CAISO": 14,
+   "IESO": 6,
+   "MISO": 2,
+   "NERC": 19,
+   "NYISO": 3,
+   "PJM": 14
+  }
+ },
+ "reference": {
+  "condition": "M0@full",
+  "profile_id": "B1_dsv41flash_hf_deepinfra"
+ },
+ "reference_arms": {
+  "A": [
+   "A2_sonnet5_nothink"
+  ]
+ },
+ "repeats": {
+  "cell_value": "mean over the cell's reads, before the bootstrap",
+  "k1_marked": "the reference arms and every condition outside k1_scope_conditions",
+  "k1_scope_conditions": [
+   "B0@full",
+   "M0@full",
+   "M2@4000",
+   "M4@4000",
+   "M5@4000/B1_dsv41flash_direct_nothink",
+   "M7@4000/B1_dsv41flash_direct_nothink",
+   "M6@4000/B1_dsv41flash_direct_nothink",
+   "M6@4000/{reader}",
+   "M7@4000/C3_gptoss20b_hf_deepinfra_low",
+   "M7@4000/tierC2_qwen3_32b_hf_nscale_nothink"
+  ],
+  "k1_warning_withdrawn_when": "every answered cell of the population in k1_scope_conditions, read by a reader of the tiers, has at least 2 reads",
+  "repeat_level_resampling": false
+ },
+ "schema": "procedures.analysis.spec.v1",
+ "sensitivities": [
+  {
+   "clusters": "template_family",
+   "id": "clusters:template_family",
+   "kind": "clusters"
+  },
+  {
+   "clusters": "document",
+   "id": "clusters:document",
+   "kind": "clusters"
+  },
+  {
+   "id": "drop:same_rule_medium",
+   "kind": "drop_units",
+   "units": [
+    "o_306_4_significance",
+    "o_4420_lssrr_notice",
+    "o_aeso_304_8_island_category",
+    "o_aeso_503_20_in_plant",
+    "o_eop004_r2_later_of",
+    "o_eop012_r2_r3",
+    "o_ieso73_lowimpact_submission",
+    "o_nyiso15_state_lte_duration",
+    "o_prc004_r3_later_of",
+    "o_x4_top001_r3_r4_inability",
+    "s2_921bf9c2c426849b",
+    "s2_ebaf1a886e62fb18"
+   ]
+  },
+  {
+   "id": "drop:k6_medium",
+   "kind": "drop_units",
+   "units": [
+    "o_4110_major_outage_share",
+    "o_5110_comply_or_inform",
+    "o_bal001tre_r2_eight_fme",
+    "o_bpm008_reschedule_window",
+    "o_eop012_r2_duration",
+    "o_ieso73_lowimpact_submission",
+    "o_x4_ieso71_ufls_small_customer",
+    "o_x4_top001_r3_r4_inability",
+    "o_x_aeso_304_4_connecting_adjustment",
+    "o_x_aeso_503_19_ambient_test",
+    "o_x_ieso71_capacity_export_backing",
+    "o_x_m07_lowside_lead_redundancy",
+    "o_x_rc0420_eop004_weekend"
+   ]
+  },
+  {
+   "id": "drop:pin_medium",
+   "kind": "drop_units",
+   "units": [
+    "o_4420_forecast_window_actions",
+    "o_nyiso15_state_lte_duration",
+    "o_prc006serc_anti_stall_stage"
+   ]
+  },
+  {
+   "id": "drop:normative_medium",
+   "kind": "drop_units",
+   "units": [
+    "o_4420_forecast_window_actions",
+    "o_4420_lssrr_notice",
+    "o_rc0310_filter_or_validate",
+    "o_x4_bpm007_checkout_discrepancy",
+    "o_x4_nyiso12_cam_participation_limit",
+    "o_x_ieso71_capacity_export_backing",
+    "o_x_m13_dual_fuel_max_emergency",
+    "s2_2e9a59f445c9bcc2"
+   ]
+  },
+  {
+   "id": "drop:exemption_outcome",
+   "kind": "drop_units",
+   "units": [
+    "o_4420_downgrade_notice",
+    "o_aeso_304_7_theft",
+    "o_aeso_503_20_in_plant",
+    "o_aeso_503_21_mobile_transformer",
+    "o_aeso_503_22_anticascade",
+    "o_aeso_503_7_pss_phase_lag",
+    "o_eop004_theft",
+    "o_eop008_r3_backup_outage",
+    "o_ieso71_desn_offload",
+    "o_m07_loe_redundancy",
+    "o_m14d_avr_pss_notice",
+    "o_prc006serc_anti_stall_stage",
+    "o_rc0130_momentary_exemption",
+    "o_var002_r3_status_restore",
+    "o_var002_r4_capability_restore",
+    "o_var501_r3_untunable",
+    "o_x4_ieso71_ufls_small_customer",
+    "o_x4_m36_dynamic_reserve_ei",
+    "o_x4_mod025_nuclear_min_output",
+    "o_x_aeso_304_9_repair_exemption",
+    "o_x_aeso_503_16_repair_exemption",
+    "o_x_aeso_503_19_retest_exemption",
+    "o_x_m03_switching_delay_notice",
+    "o_x_m03_vsched_full_lead",
+    "o_x_m07_lowside_lead_redundancy"
+   ]
+  },
+  {
+   "id": "drop:outside_pool",
+   "kind": "drop_units",
+   "units": [
+    "o_bal001tre_r2_eight_fme",
+    "o_eop008_r3_backup_outage",
+    "o_iro006east_r2_alternate_actions",
+    "o_prc006serc_anti_stall_stage",
+    "o_x4_ieso71_ufls_small_customer",
+    "o_x4_m36_dynamic_reserve_ei",
+    "o_x4_mod025_nuclear_min_output",
+    "o_x_aeso_304_9_repair_exemption",
+    "o_x_aeso_503_16_repair_exemption",
+    "o_x_aeso_503_19_retest_exemption"
+   ]
+  },
+  {
+   "id": "drop:outside_union_pool",
+   "kind": "drop_units",
+   "units": [
+    "o_bal001tre_r2_eight_fme",
+    "o_iro006east_r2_alternate_actions"
+   ]
+  },
+  {
+   "id": "drop:owner_restates_inconsistent",
+   "kind": "drop_units",
+   "units": [
+    "o_x_rc0420_eop004_weekend"
+   ]
+  },
+  {
+   "id": "leave_out:AESO",
+   "kind": "drop_units",
+   "units": [
+    "o_306_4_significance",
+    "o_aeso_304_3_additions",
+    "o_aeso_304_7_theft",
+    "o_aeso_304_8_island_category",
+    "o_aeso_306_4_change_assessment",
+    "o_aeso_503_15_transformer",
+    "o_aeso_503_16_scada_latency",
+    "o_aeso_503_17_insitu_interval",
+    "o_aeso_503_1_line_extension",
+    "o_aeso_503_20_in_plant",
+    "o_aeso_503_21_mobile_transformer",
+    "o_aeso_503_22_anticascade",
+    "o_aeso_503_22_gust_factor",
+    "o_aeso_503_7_pss_phase_lag",
+    "o_x_aeso_304_4_connecting_adjustment",
+    "o_x_aeso_304_9_repair_exemption",
+    "o_x_aeso_503_16_repair_exemption",
+    "o_x_aeso_503_19_ambient_test",
+    "o_x_aeso_503_19_retest_exemption",
+    "s2_621777105095d1ca",
+    "s2_ebaf1a886e62fb18"
+   ]
+  },
+  {
+   "id": "leave_out:CAISO",
+   "kind": "drop_units",
+   "units": [
+    "o_3220_immediate_or_imminent",
+    "o_3220_planned_or_forced",
+    "o_4110_major_outage_share",
+    "o_4420_downgrade_notice",
+    "o_4420_forecast_window_actions",
+    "o_4420_lssrr_notice",
+    "o_5110_comply_or_inform",
+    "o_rc0130_forced_derate",
+    "o_rc0130_momentary_exemption",
+    "o_rc0310_filter_or_validate",
+    "o_rc0310_voltage_contact",
+    "o_x_rc0420_eop004_weekend",
+    "s2_6c4f77d3b86dd6d5",
+    "s2_921bf9c2c426849b"
+   ]
+  },
+  {
+   "id": "leave_out:IESO",
+   "kind": "drop_units",
+   "units": [
+    "o_ieso71_desn_offload",
+    "o_ieso71_overfrequency",
+    "o_ieso73_lowimpact_submission",
+    "o_x4_ieso71_ufls_small_customer",
+    "o_x_ieso71_capacity_export_backing",
+    "s2_ba0371d99662f624"
+   ]
+  },
+  {
+   "id": "leave_out:MISO",
+   "kind": "drop_units",
+   "units": [
+    "o_bpm008_reschedule_window",
+    "o_x4_bpm007_checkout_discrepancy"
+   ]
+  },
+  {
+   "id": "leave_out:NERC",
+   "kind": "drop_units",
+   "units": [
+    "o_bal001tre_r2_eight_fme",
+    "o_eop004_firm_load",
+    "o_eop004_r2_later_of",
+    "o_eop004_theft",
+    "o_eop008_r3_backup_outage",
+    "o_eop012_r2_duration",
+    "o_eop012_r2_r3",
+    "o_iro006east_r2_alternate_actions",
+    "o_prc004_r3_later_of",
+    "o_prc006npcc_r10_r13",
+    "o_prc006serc_anti_stall_stage",
+    "o_prc024_att1_western",
+    "o_prc024_att2_voltage",
+    "o_var002_r3_status_restore",
+    "o_var002_r4_capability_restore",
+    "o_var501_r3_untunable",
+    "o_x4_mod025_nuclear_min_output",
+    "o_x4_top001_r3_r4_inability",
+    "s2_d8c929b588b9ad1a"
+   ]
+  },
+  {
+   "id": "leave_out:NYISO",
+   "kind": "drop_units",
+   "units": [
+    "o_nyiso15_irol_stability_margin",
+    "o_nyiso15_state_lte_duration",
+    "o_x4_nyiso12_cam_participation_limit"
+   ]
+  },
+  {
+   "id": "leave_out:PJM",
+   "kind": "drop_units",
+   "units": [
+    "o_m07_loe_redundancy",
+    "o_m10_week_36th_wednesday",
+    "o_m14d_avr_pss_notice",
+    "o_m36_comed_uf_trip",
+    "o_m39_npir_restrictive",
+    "o_x4_m14d_pmu_location",
+    "o_x4_m36_dynamic_reserve_ei",
+    "o_x_m03_switching_delay_notice",
+    "o_x_m03_vsched_full_lead",
+    "o_x_m07_lowside_lead_redundancy",
+    "o_x_m12_blackstart_designation",
+    "o_x_m13_dual_fuel_max_emergency",
+    "s2_2e9a59f445c9bcc2",
+    "s2_73c26f25affe8a1a"
+   ]
+  },
+  {
+   "id": "unmapped",
+   "kind": "values",
+   "note": "cells answered from the reasoning field counted wrong",
+   "values": "correct_unmapped"
+  }
+ ],
+ "sensitivity_callout": "a primary comparison whose sign a sensitivity flips, or whose interval (excluding 0) it makes span 0, or whose verdict it changes, is named in the text",
+ "server_tier": "B",
+ "status_rules": {
+  "min_models_per_tier": 3,
+  "rule": "a tier estimate on fewer models is AMBER"
+ },
+ "supply": {
+  "item_file": {
+   "abstracted_units_other_domains": 15,
+   "cell_kind_share": 0.5366,
+   "cells": 164,
+   "checks": {
+    "cells": true,
+    "families": true,
+    "literal_share": true,
+    "max_units_per_doc": true,
+    "units": true
+   },
+   "domain_fallback_units": 3,
+   "families": 7,
+   "literal_fallback_units": 3,
+   "literal_share": 0.5244,
+   "literal_units": 43,
+   "literal_units_by_kind": {
+    "exception": 43,
+    "not_in_effect": 0
+   },
+   "max_units_per_doc": 5,
+   "met": true,
+   "sensitivity": {
+    "drop normative_medium": {
+     "literal_share": 0.527,
+     "literal_units": 39,
+     "units": 74
+    },
+    "drop outside_pool": {
+     "literal_share": 0.4583,
+     "literal_units": 33,
+     "units": 72
+    },
+    "drop outside_union_pool": {
+     "literal_share": 0.5125,
+     "literal_units": 41,
+     "units": 80
+    },
+    "drop owner_restates_inconsistent": {
+     "literal_share": 0.5185,
+     "literal_units": 42,
+     "units": 81
+    },
+    "drop pin_medium": {
+     "literal_share": 0.5316,
+     "literal_units": 42,
+     "units": 79
+    },
+    "drop same_rule_medium": {
+     "literal_share": 0.5714,
+     "literal_units": 40,
+     "units": 70
+    },
+    "exemption_outcome not literal": {
+     "literal_share": 0.2439,
+     "literal_units": 20,
+     "units": 82
+    },
+    "k6_medium not literal": {
+     "literal_share": 0.3659,
+     "literal_units": 30,
+     "units": 82
+    },
+    "one unit per template_family": {
+     "literal_share": 0.5125,
+     "literal_units": 41,
+     "units": 80
+    }
+   },
+   "units": 82,
+   "units_by_family": {
+    "AESO": 21,
+    "CAISO": 14,
+    "IESO": 6,
+    "MISO": 2,
+    "NERC": 20,
+    "NYISO": 3,
+    "PJM": 16
+   }
+  },
+  "population": {
+   "abstracted_units_other_domains": 0,
+   "cell_kind_share": 0.557,
+   "cells": 158,
+   "checks": {
+    "cells": true,
+    "families": true,
+    "literal_share": true,
+    "max_units_per_doc": true,
+    "units": true
+   },
+   "domain_fallback_units": 0,
+   "families": 7,
+   "literal_fallback_units": 0,
+   "literal_share": 0.5443,
+   "literal_units": 43,
+   "literal_units_by_kind": {
+    "exception": 43,
+    "not_in_effect": 0
+   },
+   "max_units_per_doc": 5,
+   "met": true,
+   "sensitivity": {
+    "drop normative_medium": {
+     "literal_share": 0.5493,
+     "literal_units": 39,
+     "units": 71
+    },
+    "drop outside_pool": {
+     "literal_share": 0.4783,
+     "literal_units": 33,
+     "units": 69
+    },
+    "drop outside_union_pool": {
+     "literal_share": 0.5325,
+     "literal_units": 41,
+     "units": 77
+    },
+    "drop owner_restates_inconsistent": {
+     "literal_share": 0.5385,
+     "literal_units": 42,
+     "units": 78
+    },
+    "drop pin_medium": {
+     "literal_share": 0.5526,
+     "literal_units": 42,
+     "units": 76
+    },
+    "drop same_rule_medium": {
+     "literal_share": 0.597,
+     "literal_units": 40,
+     "units": 67
+    },
+    "exemption_outcome not literal": {
+     "literal_share": 0.2532,
+     "literal_units": 20,
+     "units": 79
+    },
+    "k6_medium not literal": {
+     "literal_share": 0.3797,
+     "literal_units": 30,
+     "units": 79
+    },
+    "one unit per template_family": {
+     "literal_share": 0.5325,
+     "literal_units": 41,
+     "units": 77
+    }
+   },
+   "units": 79,
+   "units_by_family": {
+    "AESO": 21,
+    "CAISO": 14,
+    "IESO": 6,
+    "MISO": 2,
+    "NERC": 19,
+    "NYISO": 3,
+    "PJM": 14
+   }
+  }
+ },
+ "tiers": {
+  "B": [
+   "B1_dsv41flash_hf_deepinfra",
+   "B2_qwen3_235b_2507_hf_deepinfra",
+   "tierB_llama33_70b_hf_ovhcloud"
+  ],
+  "C3": [
+   "tierC3_gptoss120b_hf_deepinfra_low"
+  ],
+  "C_load_bearing": [
+   "C1_llama31_8b_hf_deepinfra",
+   "C2_qwen3_8b_hf_nscale_nothink",
+   "C3_gptoss20b_hf_deepinfra_low",
+   "tierC2_qwen3_32b_hf_nscale_nothink"
+  ]
+ }
+}

@@ -1,0 +1,284 @@
+{
+  "schema": "procedures.readers.panel.v1",
+  "pinned": "2026-09-24",
+  "panel_version": "2026-09-26",
+  "notes": "17 profiles. The seven panel slots were fixed in the pilot (profiles.json) and smoke-tested for connectivity; three extension readers and one unpriced candidate were added on 2026-09-25 (the pin date names the price snapshot, panel_version dates the extension); the third B reader was chosen offline from the 2026-09-24 router snapshot; on 2026-09-26 every sendable HF profile received route_context, the pinned route's context length in its router snapshot, as a per-route reader ceiling, and max_workers = 1 for the Llama-3.3-70B ovhcloud route",
+  "price_snapshot": {
+    "path": "data/prices/prices.json",
+    "sha256_lf": "8129d24a2376aeb0cc9eee0dd591690774e0dc0bccf33a72f62b9827d8bfbe52"
+  },
+  "pilot_profiles": {
+    "path": "data/panel/profiles.json",
+    "sha256_lf": "dd5985a7dd568906b7ae60fc44ffd9becb20337c7dcdf9db5f52cfe5e8658acc",
+    "deviations_format": "profile_id -> {changed field path: reason}; client.* paths are inside the client spec, user_message_suffix and answer_from_reasoning_field are panel-level; a test diffs every field against the pilot's profile file and allows exactly these paths",
+    "deviations": {
+      "Aalt_gemini38flash_low": {
+        "client.generation.temperature": "temperature=1.0 is sent explicitly (the pilot left temperature unset); Google recommends keeping 1.0, and every generation default is recorded explicitly",
+        "client.capabilities.temperature": "no longer declared false, so the explicit temperature=1.0 above can be sent"
+      },
+      "C2_qwen3_8b_hf_nscale_nothink": {
+        "client.generation.max_output_tokens": "1024 -> 2048: room for leaked thinking so a failed enable_thinking=false shows up as reasoning_leak instead of finish_reason=length scored 0",
+        "user_message_suffix": "none -> ' /no_think' (Qwen3 soft switch on the last user message): nscale does not forward chat_template_kwargs.enable_thinking; connectivity smoke probe 2026-09-24: 104 -> 6 completion tokens, reasoning_content whitespace-only",
+        "answer_from_reasoning_field": "none -> true: in the pilot nscale's vLLM returned the whole closed-book answer JSON in reasoning_content with a blank content in 44 of 102 B0 cells (one complete JSON object each, median 73 tokens; a system-line probe leaked 5 of 5), so a blank content with exactly one JSON object in reasoning_content is scored as the answer and flagged; the request is unchanged"
+      },
+      "C3_gptoss20b_hf_deepinfra_low": {
+        "client.generation.max_output_tokens": "2048 -> 4096: gpt-oss reasoning cannot be disabled; the pilot's HIGH scenario (300 visible + 3000 reasoning) no longer hits the cap"
+      }
+    }
+  },
+  "plan_deviations": {
+    "format": "profile_id -> {setting: reason} for a profile outside the pilot whose settings depart from the planned panel",
+    "profiles": {
+      "tierB_llama33_70b_hf_ovhcloud": {
+        "hf_provider": "the plan named HF deepinfra; the 2026-09-24 router snapshot has no deepinfra route for Llama-3.3-70B-Instruct, so the route is ovhcloud, the cheapest priced route with >= 64k context",
+        "price": "the plan quoted 0.10 / 0.32 $/1M (no source found); the snapshot price of the ovhcloud route is 0.74 / 0.74 $/1M, entered in the price book from the snapshot",
+        "role": "extension, not a panel slot: the pilot's panel keeps its seven slots; this is the third B reader the main run requires"
+      }
+    }
+  },
+  "field_notes": {
+    "role": "panel = the seven models of the pilot; control = GPT-6 reasoning=none + T=0 contrast; alternate = priced backups; extension = readers added on a route priced in the snapshot; candidate = no priced route in the 2026-09-24 HF router snapshot or no price-book entry, never sent and kept out of every run grid; negative = must be rejected by configuration",
+    "access_tier": "access tier (A | B | C3 | C2 | C1, bf16-weight hardware sub-tier of C); tier stays the governance tier A | B | C and slot the pilot's panel position, so the pilot's slots C1/C2/C3 are all access tier C1",
+    "route_snapshot": "HF profiles only: the router catalogue snapshot the pinned hf_provider route was checked against (tests/readers/test_panel.py: priced routes match the price book in, out and context; a candidate has no priced route there)",
+    "route_context": "sendable HF profiles only: context_length of the pinned route in route_snapshot (tests/readers/test_panel.py checks it against the snapshot). procedures.readers.cells records a cell as infeasible for the reader (reason route_context, not sent) when ceil(planned reference tokens x 1.03) + max_output_tokens exceeds it; the local access-tier ceiling (C: 32,768) is checked first and unchanged",
+    "max_workers": "client spec field: most requests of this profile in flight at once (procedures.readers.executor.run_cells never exceeds it). 4 everywhere except the Llama-3.3-70B ovhcloud route, 1 (four 96k-121k-token prefills sent together hit HF's 120 s gateway, 3 x HTTP 504; the same three sent one at a time answered in 34-49 s). Transport only: the client fingerprint excludes it, so request hashes and ledger identities do not depend on it",
+    "thinking_soft_switch": "true exactly when user_message_suffix carries the Qwen3 /no_think soft switch",
+    "answer_from_reasoning_field": "wire-level answer-field mapping, true exactly when thinking_soft_switch: an answered response whose content is blank while its reasoning_content, stripped, parses as exactly one JSON object is scored on that object and its row flagged answer_from_reasoning_field; anything else is scored on the content (E-parse when blank). Reader-side only: no request changes",
+    "tokenizer_factor": "provider tokens per o200k reference token used for HIGH estimates and spend-cap bounds; Sonnet 5 new tokenizer ~1.3 (verified in the pilot); others 1.0 (assumed)",
+    "expected_reasoning_tokens": "reasoning/thinking tokens per answer call in the pilot's LOW/HIGH cost scenarios",
+    "reasoning_expected": "false means any non-whitespace reasoning text or <think> block, or a reasoning token count > 0, is logged as reasoning_leak (mechanism check)",
+    "user_message_suffix": "optional; appended to the last user message (never a system message) before validation, hashing and sending; recorded in every ledger record and bound into the ledger header identity"
+  },
+  "profiles": {
+    "A1_gpt6sol_reason_low": {
+      "role": "panel", "tier": "A", "access_tier": "A", "slot": "A1", "price_key": "gpt-6-sol",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 1000, "high": 3000}, "reasoning_expected": true,
+      "notes": "OpenAI direct; reasoning_effort=low pinned; temperature/top_p/seed refused by capabilities",
+      "client": {
+        "adapter": "openai_chat", "provider": "openai",
+        "base_url": "https://api.openai.com/v1", "model": "gpt-6-sol",
+        "api_key_env": "OPENAI_API_KEY",
+        "parameter_map": {"max_output_tokens": "max_completion_tokens"},
+        "generation": {"max_output_tokens": 4096, "reasoning_effort": "low"},
+        "capabilities": {"temperature": false, "top_p": false, "seed": false},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "A1_gpt6sol_none_T0": {
+      "role": "control", "tier": "A", "access_tier": "A", "slot": null, "price_key": "gpt-6-sol",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "notes": "reasoning_effort=none is the only GPT-6 mode that accepts temperature=0",
+      "client": {
+        "adapter": "openai_chat", "provider": "openai",
+        "base_url": "https://api.openai.com/v1", "model": "gpt-6-sol",
+        "api_key_env": "OPENAI_API_KEY",
+        "parameter_map": {"max_output_tokens": "max_completion_tokens"},
+        "generation": {"max_output_tokens": 1024, "reasoning_effort": "none", "temperature": 0},
+        "capabilities": {"seed": false},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "A2_sonnet5_nothink": {
+      "role": "panel", "tier": "A", "access_tier": "A", "slot": "A2", "price_key": "claude-sonnet-5",
+      "tokenizer_factor": 1.3, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "notes": "thinking disabled explicitly (default is adaptive); non-default temperature/top_p/top_k return HTTP 400",
+      "client": {
+        "adapter": "anthropic_messages", "provider": "anthropic",
+        "base_url": "https://api.anthropic.com/v1", "model": "claude-sonnet-5",
+        "api_key_env": "ANTHROPIC_API_KEY",
+        "generation": {"max_output_tokens": 1024},
+        "extra_body": {"thinking": {"type": "disabled"}},
+        "capabilities": {"temperature": false, "top_p": false, "seed": false},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "A2_sonnet5_adaptive_low": {
+      "role": "alternate", "tier": "A", "access_tier": "A", "slot": null, "price_key": "claude-sonnet-5",
+      "tokenizer_factor": 1.3, "expected_reasoning_tokens": {"low": 1000, "high": 3000}, "reasoning_expected": true,
+      "notes": "reasoning variant of A2: adaptive thinking with output_config.effort=low",
+      "client": {
+        "adapter": "anthropic_messages", "provider": "anthropic",
+        "base_url": "https://api.anthropic.com/v1", "model": "claude-sonnet-5",
+        "api_key_env": "ANTHROPIC_API_KEY",
+        "generation": {"max_output_tokens": 4096},
+        "extra_body": {"thinking": {"type": "adaptive"}, "output_config": {"effort": "low"}},
+        "capabilities": {"temperature": false, "top_p": false, "seed": false},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "Aalt_gemini38flash_low": {
+      "role": "alternate", "tier": "A", "access_tier": "A", "slot": null, "price_key": "gemini-3.8-flash",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 1000, "high": 3000}, "reasoning_expected": true,
+      "notes": "thinking cannot be disabled (lowest level is low); temperature kept at the recommended 1.0; paid tier required; prices double from 2027-01-01; REST field name thinkingLevel to be confirmed by the connectivity smoke",
+      "client": {
+        "adapter": "gemini_generate_content", "provider": "google-ai-studio",
+        "base_url": "https://generativelanguage.googleapis.com/v1beta", "model": "gemini-3.8-flash",
+        "api_key_env": "GEMINI_API_KEY",
+        "generation": {"max_output_tokens": 4096, "temperature": 1.0},
+        "extra_body": {"generationConfig": {"thinkingConfig": {"thinkingLevel": "low"}}},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "B1_dsv41flash_direct_nothink": {
+      "role": "alternate", "tier": "B", "access_tier": "B", "slot": null, "price_key": "deepseek-flash(V4.1-Flash)@direct",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "notes": "DeepSeek direct alias deepseek-flash (no pinnable snapshot); thinking disabled explicitly; peak/off-peak prices",
+      "client": {
+        "adapter": "openai_chat", "provider": "deepseek",
+        "base_url": "https://api.deepseek.com", "model": "deepseek-flash",
+        "api_key_env": "DEEPSEEK_API_KEY",
+        "generation": {"max_output_tokens": 1024, "temperature": 0},
+        "extra_body": {"thinking": {"type": "disabled"}},
+        "capabilities": {"seed": false},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "B1_dsv41flash_direct_think": {
+      "role": "alternate", "tier": "B", "access_tier": "B", "slot": null, "price_key": "deepseek-flash(V4.1-Flash)@direct",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 1000, "high": 3000}, "reasoning_expected": true,
+      "notes": "thinking enabled; temperature is silently ignored in thinking mode, so it is declared unsupported",
+      "client": {
+        "adapter": "openai_chat", "provider": "deepseek",
+        "base_url": "https://api.deepseek.com", "model": "deepseek-flash",
+        "api_key_env": "DEEPSEEK_API_KEY",
+        "generation": {"max_output_tokens": 4096, "reasoning_effort": "high"},
+        "extra_body": {"thinking": {"type": "enabled"}},
+        "capabilities": {"temperature": false, "top_p": false, "seed": false},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "B1_dsv41flash_hf_deepinfra": {
+      "role": "panel", "tier": "B", "access_tier": "B", "slot": "B1", "price_key": "deepseek-ai/DeepSeek-V4.1-Flash:deepinfra",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "hf_repo_sha_prefix": "dba1be0a",
+      "route_snapshot": "data/prices/router_snapshots/hf_router/deepseek-ai_DeepSeek-V4.1-Flash.json", "route_context": 1048576,
+      "notes": "HF router pinned to deepinfra; no thinking switch is sent (whether the route forwards one is unverified), so the connectivity smoke must confirm that no reasoning appears",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+        "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 1024, "temperature": 0},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "B2_qwen3_235b_2507_hf_deepinfra": {
+      "role": "panel", "tier": "B", "access_tier": "B", "slot": "B2", "price_key": "Qwen/Qwen3-235B-A22B-Instruct-2507:deepinfra",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/Qwen_Qwen3-235B-A22B-Instruct-2507.json", "route_context": 262144,
+      "notes": "non-thinking Instruct-2507; 262k context on deepinfra; fp8 label inferred from OpenRouter",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+        "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 1024, "temperature": 0, "seed": 22},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "C1_llama31_8b_hf_deepinfra": {
+      "role": "panel", "tier": "C", "access_tier": "C1", "slot": "C1", "price_key": "meta-llama/Llama-3.1-8B-Instruct:deepinfra",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/meta-llama_Llama-3.1-8B-Instruct.json", "route_context": 131072,
+      "notes": "continuity with the original manuscript (same weights, served at fp8 per OpenRouter label)",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "meta-llama/Llama-3.1-8B-Instruct",
+        "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 1024, "temperature": 0, "seed": 22},
+        "max_workers": 4, "max_attempts": 3, "timeout": 120
+      }
+    },
+    "C2_qwen3_8b_hf_nscale_nothink": {
+      "role": "panel", "tier": "C", "access_tier": "C1", "slot": "C2", "price_key": "Qwen/Qwen3-8B:nscale",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 1000}, "reasoning_expected": false,
+      "user_message_suffix": " /no_think", "thinking_soft_switch": true, "answer_from_reasoning_field": true,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/Qwen_Qwen3-8B.json", "route_context": 40960,
+      "notes": "enable_thinking=false is still sent via chat_template_kwargs, but nscale does not forward it (connectivity smoke 2026-09-24), so the /no_think soft switch rides on the last user message; the HIGH scenario still budgets 1000 leaked reasoning tokens",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "Qwen/Qwen3-8B",
+        "hf_provider": "nscale", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 2048, "temperature": 0, "seed": 22},
+        "extra_body": {"chat_template_kwargs": {"enable_thinking": false}},
+        "max_workers": 4, "max_attempts": 3, "timeout": 120
+      }
+    },
+    "C3_gptoss20b_hf_deepinfra_low": {
+      "role": "panel", "tier": "C", "access_tier": "C1", "slot": "C3", "price_key": "openai/gpt-oss-20b:deepinfra",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 1000, "high": 3000}, "reasoning_expected": true,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/openai_gpt-oss-20b.json", "route_context": 131072,
+      "notes": "reasoning cannot be disabled; effort=low; MXFP4 native weights",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "openai/gpt-oss-20b",
+        "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 4096, "temperature": 0, "reasoning_effort": "low"},
+        "max_workers": 4, "max_attempts": 3, "timeout": 120
+      }
+    },
+    "tierC2_qwen3_32b_hf_nscale_nothink": {
+      "role": "extension", "tier": "C", "access_tier": "C2", "slot": null, "price_key": "Qwen/Qwen3-32B:nscale",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 1000}, "reasoning_expected": false,
+      "user_message_suffix": " /no_think", "thinking_soft_switch": true, "answer_from_reasoning_field": true,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/Qwen_Qwen3-32B.json", "route_context": 40960,
+      "notes": "access tier C2 (workstation 48 GB, <= ~32B); HF nscale 0.08/0.25, ctx 40,960 (deepinfra 0.08/0.28 is the other priced route). Hybrid-thinking Qwen3 on nscale, so the Qwen3-8B treatment applies: enable_thinking=false is sent but not forwarded (connectivity smoke 2026-09-24), the /no_think soft switch rides on the last user message, output cap 2048. Timeout 300 s: the snapshot's ~42 tok/s puts a leaked 2,048-token answer at ~49 s after a 16k prefill. Not yet smoke-tested",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "Qwen/Qwen3-32B",
+        "hf_provider": "nscale", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 2048, "temperature": 0, "seed": 22},
+        "extra_body": {"chat_template_kwargs": {"enable_thinking": false}},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "tierC3_gptoss120b_hf_deepinfra_low": {
+      "role": "extension", "tier": "C", "access_tier": "C3", "slot": null, "price_key": "openai/gpt-oss-120b:deepinfra",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 1000, "high": 3000}, "reasoning_expected": true,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/openai_gpt-oss-120b.json", "route_context": 131072,
+      "notes": "access tier C3 (one 80 GB card; MXFP4 weights ~60-65 GB); HF deepinfra 0.037/0.17, ctx 131,072. Reasoning cannot be disabled: effort=low pinned, output cap 4096 as gpt-oss-20b. Timeout 300 s: 4,096 tokens at the snapshot's ~45 tok/s is ~91 s. Not yet smoke-tested",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "openai/gpt-oss-120b",
+        "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 4096, "temperature": 0, "reasoning_effort": "low"},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "tierB_llama33_70b_hf_ovhcloud": {
+      "role": "extension", "tier": "B", "access_tier": "B", "slot": null, "price_key": "meta-llama/Llama-3.3-70B-Instruct:ovhcloud",
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/meta-llama_Llama-3.3-70B-Instruct.json", "route_context": 131072,
+      "notes": "access tier B (bf16 checkpoint 70.6B params ~141 GB > 80 GB, multi-GPU); the third B reader. The only non-DeepSeek/Qwen model in the 2026-09-24 router snapshot whose published weights exceed 80 GB; its priced routes with >= 64k context are ovhcloud 0.74/0.74 and together 1.04/1.04 (ctx 131,072; scaleway 1.026/1.026 states no context, novita 0.135/0.40 has 12,288), so ovhcloud, cheapest at any input/output mix; structured output listed for the route. Not a hybrid-thinking or gpt-oss model: no thinking switch or reasoning effort to pin; same generation settings as C1 Llama-3.1-8B (T=0, seed 22, cap 1024). The catalogue does not state the served precision. Timeout 300 s: the snapshot's ~18 tok/s puts a 1,024-token answer at ~56 s after a long prefill. Connectivity smoke passed 2026-09-26 (served Meta-Llama-3_3-70B-Instruct, seed accepted). Long-context probe 2026-09-26: max_workers 1 (concurrent 100k-token prefills hit the HF gateway), route_context 131,072 (M0@full cells over it are not sent)",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "meta-llama/Llama-3.3-70B-Instruct",
+        "hf_provider": "ovhcloud", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 1024, "temperature": 0, "seed": 22},
+        "max_workers": 1, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "tierB_llama33_70b_hf_deepinfra": {
+      "role": "candidate", "tier": "B", "access_tier": "B", "slot": null, "price_key": null,
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "route_snapshot": "data/prices/router_snapshots/hf_router/meta-llama_Llama-3.3-70B-Instruct.json",
+      "notes": "the planned route of Llama-3.3-70B: the 2026-09-24 router snapshot has no deepinfra route (the planned 0.10/0.32 price is unverified), so it is never sent and stays out of every run grid. The model is on the panel through tierB_llama33_70b_hf_ovhcloud",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "meta-llama/Llama-3.3-70B-Instruct",
+        "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 1024, "temperature": 0, "seed": 22},
+        "max_workers": 4, "max_attempts": 3, "timeout": 300
+      }
+    },
+    "NEGATIVE_hf_auto_routing": {
+      "role": "negative", "tier": null, "slot": null, "price_key": null,
+      "tokenizer_factor": 1.0, "expected_reasoning_tokens": {"low": 0, "high": 0}, "reasoning_expected": false,
+      "notes": "automatic HF routing must be refused before any request is built",
+      "client": {
+        "adapter": "openai_chat", "provider": "huggingface",
+        "base_url": "https://router.huggingface.co/v1", "model": "Qwen/Qwen3-8B",
+        "hf_provider": "cheapest", "api_key_env": "HF_TOKEN",
+        "generation": {"max_output_tokens": 64}
+      }
+    }
+  }
+}

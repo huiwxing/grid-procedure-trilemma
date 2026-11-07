@@ -1,0 +1,108 @@
+{
+ "schema": "procedures.analysis.energy_bands.v1",
+ "units": "J/token",
+ "status": "placeholder: no band is set. The analysis makes no energy statement until a band is filled from a cited measurement.",
+ "how_to_fill": {
+  "band": "{\"low\": <J per token>, \"high\": <J per token>} with 0 < low <= high; input = prefill (per input token), output = decode (per output token, reasoning included); leave a kind null if it is not modelled, and the analysis then states nothing for conditions read or built by that profile",
+  "source": "required once any band of the profile is set: the measurement (e.g. ML.ENERGY leaderboard entry or TokenPowerBench row: model, hardware, batch size, date, URL)",
+  "basis": "how the band was derived from the source (hardware assumed for the tier, batch-size range, PUE included or not)",
+  "candidate_sources": [
+   "ML.ENERGY leaderboard",
+   "TokenPowerBench",
+   "EcoLogits (cheapest estimator baseline: output tokens only)"
+  ],
+  "statement_rule": "energy per query = input tokens x input band + output tokens x output band (+ build tokens / N on the builder's bands); A < B is stated only when A's high end is below B's low end"
+ },
+ "profiles": {
+  "A1_gpt6sol_none_T0": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "A1_gpt6sol_reason_low": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "A2_sonnet5_adaptive_low": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "A2_sonnet5_nothink": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "Aalt_gemini38flash_low": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "B1_dsv41flash_direct_nothink": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "B1_dsv41flash_direct_think": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "B1_dsv41flash_hf_deepinfra": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "B2_qwen3_235b_2507_hf_deepinfra": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "C1_llama31_8b_hf_deepinfra": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "C2_qwen3_8b_hf_nscale_nothink": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "C3_gptoss20b_hf_deepinfra_low": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "tierB_llama33_70b_hf_deepinfra": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "tierC2_qwen3_32b_hf_nscale_nothink": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  },
+  "tierC3_gptoss120b_hf_deepinfra_low": {
+   "input": null,
+   "output": null,
+   "source": null,
+   "basis": null
+  }
+ }
+}

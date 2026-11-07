@@ -1,0 +1,50 @@
+{
+ "builds": {
+  "builder": null,
+  "escalations_possible": 0,
+  "escalations_possible_usd_high": 0,
+  "imports": null,
+  "pending": 0,
+  "pending_by_cap_level": {},
+  "usd_high": 0
+ },
+ "note": "LLM-built memories are planned as dry runs: their reader cells are sized at the full budget and stay pending in this estimate until built; the build cost is tg.memory's own HIGH estimate per sub-block request not yet answered in the build ledger (nor importable), level by level up the cap ladder; a level above an unanswered one is a possible escalation, counted apart and in the cap check. M6 compressions are per-question cost: tg.memory's HIGH estimate per distinct request not yet answered in its compressor's query ledger.",
+ "pending_usd_high": 24.037257200000017,
+ "queries": null,
+ "readers": {
+  "A2_sonnet5_nothink": {
+   "by_stage_high": {
+    "read/B0@full": {
+     "calls": 244,
+     "usd": 1.2657854
+    },
+    "read/M0@full": {
+     "calls": 244,
+     "usd": 18.707086200000013
+    },
+    "read/M2@4000": {
+     "calls": 244,
+     "usd": 4.064385599999999
+    }
+   },
+   "cells": 732,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 9498626,
+   "pending": 732,
+   "repeat_cells": 0,
+   "shared_requests": 0,
+   "usd_high": 24.037257200000017,
+   "usd_low": 10.587990800000005,
+   "usd_upper_bound": 31.24212200000003
+  }
+ },
+ "repeats": {
+  "items": 0,
+  "k": 1
+ },
+ "run_id": "cloud_comparator",
+ "spent_usd": 0,
+ "token_method": "tiktoken:o200k_base"
+}

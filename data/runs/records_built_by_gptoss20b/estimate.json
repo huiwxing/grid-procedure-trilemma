@@ -1,0 +1,164 @@
+{
+ "builds": {
+  "builder": "C3_gptoss20b_hf_deepinfra_low",
+  "escalations_possible": 0,
+  "escalations_possible_usd_high": 0,
+  "imports": null,
+  "pending": 0,
+  "pending_by_cap_level": {},
+  "usd_high": 0
+ },
+ "note": "LLM-built memories are planned as dry runs: their reader cells are sized at the full budget and stay pending in this estimate until built; the build cost is tg.memory's own HIGH estimate per sub-block request not yet answered in the build ledger (nor importable), level by level up the cap ladder; a level above an unanswered one is a possible escalation, counted apart and in the cap check. M6 compressions are per-question cost: tg.memory's HIGH estimate per distinct request not yet answered in its compressor's query ledger.",
+ "pending_usd_high": 4.582928901100006,
+ "queries": null,
+ "readers": {
+  "C1_llama31_8b_hf_deepinfra": {
+   "by_stage_high": {
+    "read/M7@16000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.12844869399999992
+    },
+    "read/M7@2000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.023112694000000003
+    },
+    "read/M7@4000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 596,
+     "usd": 0.06655041800000001
+    }
+   },
+   "cells": 1280,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 8954173,
+   "pending": 1280,
+   "repeat_cells": 548,
+   "shared_requests": 0,
+   "usd_high": 0.21811180600000013,
+   "usd_low": 0.19828346,
+   "usd_upper_bound": 0.2894005400000001
+  },
+  "C2_qwen3_8b_hf_nscale_nothink": {
+   "by_stage_high": {
+    "read/M7@16000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.5178507290000002
+    },
+    "read/M7@2000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.14917472899999984
+    },
+    "read/M7@4000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 596,
+     "usd": 0.3519178630000003
+    }
+   },
+   "cells": 1280,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 8954173,
+   "pending": 1280,
+   "repeat_cells": 548,
+   "shared_requests": 0,
+   "usd_high": 1.0189433210000012,
+   "usd_low": 0.69591211,
+   "usd_upper_bound": 1.255385089999997
+  },
+  "C3_gptoss20b_hf_deepinfra_low": {
+   "by_stage_high": {
+    "read/M7@16000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.35801294099999975
+    },
+    "read/M7@2000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.20000894099999997
+    },
+    "read/M7@4000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 596,
+     "usd": 0.3879618269999999
+    }
+   },
+   "cells": 1280,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 8954173,
+   "pending": 1280,
+   "repeat_cells": 548,
+   "shared_requests": 0,
+   "usd_high": 0.9459837090000032,
+   "usd_low": 0.5015851899999995,
+   "usd_upper_bound": 1.0698000099999998
+  },
+  "tierC2_qwen3_32b_hf_nscale_nothink": {
+   "by_stage_high": {
+    "read/M7@16000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.6134877759999997
+    },
+    "read/M7@2000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.192143776
+    },
+    "read/M7@4000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 596,
+     "usd": 0.4399356719999997
+    }
+   },
+   "cells": 1280,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 8954173,
+   "pending": 1280,
+   "repeat_cells": 548,
+   "shared_requests": 0,
+   "usd_high": 1.2455672240000006,
+   "usd_low": 0.8123338400000015,
+   "usd_upper_bound": 1.5508181599999975
+  },
+  "tierC3_gptoss120b_hf_deepinfra_low": {
+   "by_stage_high": {
+    "read/M7@16000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.4382387338999996
+    },
+    "read/M7@2000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 342,
+     "usd": 0.2433671339000001
+    },
+    "read/M7@4000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 596,
+     "usd": 0.4727169732999997
+    }
+   },
+   "cells": 1280,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 8954173,
+   "pending": 1280,
+   "repeat_cells": 548,
+   "shared_requests": 0,
+   "usd_high": 1.1543228411000015,
+   "usd_low": 0.6141844010000006,
+   "usd_upper_bound": 1.3054389989999997
+  }
+ },
+ "repeats": {
+  "items": 49,
+  "k": 3,
+  "k1_slice": {
+   "conditions": [
+    "M7@4000"
+   ],
+   "items": 176
+  }
+ },
+ "run_id": "records_built_by_gptoss20b",
+ "spent_usd": 0.32047946000000005,
+ "token_method": "tiktoken:o200k_base"
+}

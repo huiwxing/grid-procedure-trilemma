@@ -1,0 +1,43 @@
+{
+ "run_id": "records_built_by_gptoss20b",
+ "queue_file": "data/runs/records_built_by_gptoss20b/arbitration_queue.jsonl",
+ "queue_sha256": "2c5d0a77459d56384b056f00b8144114c0614db94795e1a86d82b4c5ff3618fa",
+ "arbiter": "first arbiter (Claude Fable 5.1) + one independent second arbiter (Claude Opus), both blind: judged from the queue only (no reader identity, no evidence span, no source text); the pack was identical for both",
+ "n_arbiters": 2,
+ "date": "2026-09-28",
+ "rule": "scorer rules N11 / N5 (procedures/scoring), fixed before the pack was read: unit null or unresolved unit on a dimensional gold = ambiguous. Read the value under (i) the unit the question names or implies, else (ii) the unit carried inside the answer's value or unit string, else (iii) the gold's unit. TRUE iff the value equals the gold under the reading the question fixes, after exact same-dimension conversion (s/min/h/day/week, kW-MW, kV-V, kA-A; % never a fraction; month/year never converted). FALSE if unequal under every admissible reading, or equal only under a unit the question does not name and the answer does not state; a range, a conditional two-valued answer or not_in_effect against a numeric gold is FALSE.",
+ "decisions": {
+  "1bc7378755764132": false,
+  "59562a51dbed8151": false,
+  "6efcfa0170aeb587": false,
+  "6f53b078c263366b": false,
+  "b6392c0e057445f3": true,
+  "bb7813367c68aa39": true,
+  "bff255b39cf2818e": false,
+  "ca17eaeea8217e61": false
+ },
+ "second_arbiter_decisions": {
+  "1bc7378755764132": false,
+  "59562a51dbed8151": false,
+  "6efcfa0170aeb587": false,
+  "6f53b078c263366b": false,
+  "b6392c0e057445f3": true,
+  "bb7813367c68aa39": true,
+  "bff255b39cf2818e": false,
+  "ca17eaeea8217e61": false
+ },
+ "disagreements": [],
+ "disagreement_rate": "0 / 8",
+ "rationale": {
+  "1bc7378755764132": "0 != 0.50 s",
+  "59562a51dbed8151": "1100 hours EST is a clock time, not a 48 h duration",
+  "6efcfa0170aeb587": "two business days != 5 business day",
+  "6f53b078c263366b": "4 != 2 years",
+  "b6392c0e057445f3": "five (5) business days = 5 business day",
+  "bb7813367c68aa39": "two (2) business days = 2 business day",
+  "bff255b39cf2818e": "3 != 4 s",
+  "ca17eaeea8217e61": "15 min != 30 min"
+ },
+ "judgement_calls": [],
+ "wiring_note": "applied by scripts/rescore.py --decisions, matched to answers by request_hash; the rows of the re-scoring are passed to report.py with --rows/--summary because load_run takes the last live invocation"
+}

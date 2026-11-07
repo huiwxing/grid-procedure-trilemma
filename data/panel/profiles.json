@@ -1,0 +1,110 @@
+{
+  "default_profile": "A1_gpt6sol_reason_low",
+  "profiles": {
+    "A1_gpt6sol_reason_low": {
+      "adapter": "openai_chat", "provider": "openai",
+      "base_url": "https://api.openai.com/v1", "model": "gpt-6-sol",
+      "api_key_env": "OPENAI_API_KEY",
+      "parameter_map": {"max_output_tokens": "max_completion_tokens"},
+      "generation": {"max_output_tokens": 4096, "reasoning_effort": "low"},
+      "capabilities": {"temperature": false, "top_p": false, "seed": false},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "A1_gpt6sol_none_T0": {
+      "adapter": "openai_chat", "provider": "openai",
+      "base_url": "https://api.openai.com/v1", "model": "gpt-6-sol",
+      "api_key_env": "OPENAI_API_KEY",
+      "parameter_map": {"max_output_tokens": "max_completion_tokens"},
+      "generation": {"max_output_tokens": 1024, "reasoning_effort": "none", "temperature": 0},
+      "capabilities": {"seed": false},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "A2_sonnet5_nothink": {
+      "adapter": "anthropic_messages", "provider": "anthropic",
+      "base_url": "https://api.anthropic.com/v1", "model": "claude-sonnet-5",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "generation": {"max_output_tokens": 1024},
+      "extra_body": {"thinking": {"type": "disabled"}},
+      "capabilities": {"temperature": false, "top_p": false, "seed": false},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "A2_sonnet5_adaptive_low": {
+      "adapter": "anthropic_messages", "provider": "anthropic",
+      "base_url": "https://api.anthropic.com/v1", "model": "claude-sonnet-5",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "generation": {"max_output_tokens": 4096},
+      "extra_body": {"thinking": {"type": "adaptive"}, "output_config": {"effort": "low"}},
+      "capabilities": {"temperature": false, "top_p": false, "seed": false},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "Aalt_gemini38flash_low": {
+      "adapter": "gemini_generate_content", "provider": "google-ai-studio",
+      "base_url": "https://generativelanguage.googleapis.com/v1beta", "model": "gemini-3.8-flash",
+      "api_key_env": "GEMINI_API_KEY",
+      "generation": {"max_output_tokens": 4096},
+      "extra_body": {"generationConfig": {"thinkingConfig": {"thinkingLevel": "low"}}},
+      "capabilities": {"temperature": false},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "B1_dsv41flash_direct_nothink": {
+      "adapter": "openai_chat", "provider": "deepseek",
+      "base_url": "https://api.deepseek.com", "model": "deepseek-flash",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "generation": {"max_output_tokens": 1024, "temperature": 0},
+      "extra_body": {"thinking": {"type": "disabled"}},
+      "capabilities": {"seed": false},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "B1_dsv41flash_direct_think": {
+      "adapter": "openai_chat", "provider": "deepseek",
+      "base_url": "https://api.deepseek.com", "model": "deepseek-flash",
+      "api_key_env": "DEEPSEEK_API_KEY",
+      "generation": {"max_output_tokens": 4096, "reasoning_effort": "high"},
+      "extra_body": {"thinking": {"type": "enabled"}},
+      "capabilities": {"temperature": false, "top_p": false, "seed": false},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "B1_dsv41flash_hf_deepinfra": {
+      "adapter": "openai_chat", "provider": "huggingface",
+      "base_url": "https://router.huggingface.co/v1", "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+      "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+      "generation": {"max_output_tokens": 1024, "temperature": 0},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "B2_qwen3_235b_2507_hf_deepinfra": {
+      "adapter": "openai_chat", "provider": "huggingface",
+      "base_url": "https://router.huggingface.co/v1", "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+      "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+      "generation": {"max_output_tokens": 1024, "temperature": 0, "seed": 22},
+      "max_workers": 4, "max_attempts": 3, "timeout": 300
+    },
+    "C1_llama31_8b_hf_deepinfra": {
+      "adapter": "openai_chat", "provider": "huggingface",
+      "base_url": "https://router.huggingface.co/v1", "model": "meta-llama/Llama-3.1-8B-Instruct",
+      "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+      "generation": {"max_output_tokens": 1024, "temperature": 0, "seed": 22},
+      "max_workers": 4, "max_attempts": 3, "timeout": 120
+    },
+    "C2_qwen3_8b_hf_nscale_nothink": {
+      "adapter": "openai_chat", "provider": "huggingface",
+      "base_url": "https://router.huggingface.co/v1", "model": "Qwen/Qwen3-8B",
+      "hf_provider": "nscale", "api_key_env": "HF_TOKEN",
+      "generation": {"max_output_tokens": 1024, "temperature": 0, "seed": 22},
+      "extra_body": {"chat_template_kwargs": {"enable_thinking": false}},
+      "max_workers": 4, "max_attempts": 3, "timeout": 120
+    },
+    "C3_gptoss20b_hf_deepinfra_low": {
+      "adapter": "openai_chat", "provider": "huggingface",
+      "base_url": "https://router.huggingface.co/v1", "model": "openai/gpt-oss-20b",
+      "hf_provider": "deepinfra", "api_key_env": "HF_TOKEN",
+      "generation": {"max_output_tokens": 2048, "temperature": 0, "reasoning_effort": "low"},
+      "max_workers": 4, "max_attempts": 3, "timeout": 120
+    },
+    "NEGATIVE_hf_auto_routing": {
+      "adapter": "openai_chat", "provider": "huggingface",
+      "base_url": "https://router.huggingface.co/v1", "model": "Qwen/Qwen3-8B",
+      "hf_provider": "cheapest", "api_key_env": "HF_TOKEN",
+      "generation": {"max_output_tokens": 64}
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+ "build_calls": {},
+ "builds": {},
+ "calls_without_request": 0,
+ "corpus_manifest": {
+  "path": "data/corpus/manifest.csv",
+  "sha256": "660d187b1e3bcdf45687666207b8635f659c64074afd6e9e5a8206faa081307d"
+ },
+ "failures": [],
+ "infeasible_by_reader": {},
+ "items_sha256_lf": "3290f663ecb4febca46f9642f95386f44e2d4d02ab17c3dc4338d75b68d2d6ea",
+ "m7_records": {
+  "candidates": 0,
+  "checks": {
+   "malformed_records": 0,
+   "over_budget": 0,
+   "subblocks_not_stop": 0,
+   "subblocks_over_quota": 0,
+   "subblocks_without_array": 0,
+   "unlocated_records": 0
+  },
+  "located": 0,
+  "memories": 0,
+  "packed": 0
+ },
+ "query_calls": {},
+ "reader_calls_by_condition": {
+  "B0@full": 244,
+  "M0@full": 244,
+  "M2@4000": 244
+ },
+ "repeat_calls": 0,
+ "run_dir": "data/runs/cloud_comparator",
+ "scores": {},
+ "text_from_reasoning_field": {}
+}

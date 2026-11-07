@@ -1,0 +1,410 @@
+{
+ "builds": {
+  "builder": "B1_dsv41flash_direct_nothink",
+  "escalations_possible": 0,
+  "escalations_possible_usd_high": 0,
+  "imports": null,
+  "pending": 0,
+  "pending_by_cap_level": {},
+  "usd_high": 0
+ },
+ "note": "LLM-built memories are planned as dry runs: their reader cells are sized at the full budget and stay pending in this estimate until built; the build cost is tg.memory's own HIGH estimate per sub-block request not yet answered in the build ledger (nor importable), level by level up the cap ladder; a level above an unanswered one is a possible escalation, counted apart and in the cap check. M6 compressions are per-question cost: tg.memory's HIGH estimate per distinct request not yet answered in its compressor's query ledger.",
+ "pending_usd_high": 35.9724893165,
+ "queries": {
+  "by_compressor": {},
+  "over_ceiling": 0,
+  "pending": 0,
+  "route_timeout": {
+   "C1_llama31_8b_hf_deepinfra": 7,
+   "tierC2_qwen3_32b_hf_nscale_nothink": 49,
+   "tierC3_gptoss120b_hf_deepinfra_low": 1
+  },
+  "usd_high": 0
+ },
+ "readers": {
+  "B1_dsv41flash_hf_deepinfra": {
+   "by_stage_high": {
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 1.2957729400000009
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.24241601999999987
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.6851893400000006
+    },
+    "read/M6@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.6851721800000006
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 1.2957729400000009
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.24241293999999988
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.6851721800000006
+    }
+   },
+   "cells": 6908,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 20486457,
+   "pending": 3156,
+   "repeat_cells": 3248,
+   "shared_requests": 578,
+   "usd_high": 5.131908539999991,
+   "usd_low": 4.665371399999998,
+   "usd_upper_bound": 7.060913000000058
+  },
+  "B2_qwen3_235b_2507_hf_deepinfra": {
+   "by_stage_high": {
+    "read/M2@16000": {
+     "calls": 5,
+     "usd": 0.008989463999999999
+    },
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.614698622999999
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.14068800899999995
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.36340560299999985
+    },
+    "read/M6@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.36339788099999976
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.614698622999999
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.14068662299999993
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.36339788099999976
+    }
+   },
+   "cells": 6908,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 20568093,
+   "pending": 3161,
+   "repeat_cells": 3248,
+   "shared_requests": 578,
+   "usd_high": 2.6099627069999998,
+   "usd_low": 2.3726933700000017,
+   "usd_upper_bound": 4.094299310000012
+  },
+  "C1_llama31_8b_hf_deepinfra": {
+   "by_stage_high": {
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.12844869399999992
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.023113002000000004
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.06655213400000001
+    },
+    "read/M6@4000/C1_llama31_8b_hf_deepinfra": {
+     "calls": 579,
+     "usd": 0.06465707600000002
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.12844869399999992
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.023112694000000003
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.06655041800000001
+    }
+   },
+   "cells": 6312,
+   "infeasible": 17,
+   "infeasible_by_reason": {
+    "route_timeout": 17
+   },
+   "infeasible_by_stage": {
+    "read/M6@4000/C1_llama31_8b_hf_deepinfra": 17
+   },
+   "input_tokens_high": 20413146,
+   "pending": 3139,
+   "repeat_cells": 2896,
+   "shared_requests": 578,
+   "usd_high": 0.5008827119999965,
+   "usd_low": 0.45534791999999935,
+   "usd_upper_bound": 0.6710704999999991
+  },
+  "C2_qwen3_8b_hf_nscale_nothink": {
+   "by_stage_high": {
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.5178507290000002
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.14917580699999983
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.3519238690000003
+    },
+    "read/M6@4000/C2_qwen3_8b_hf_nscale_nothink": {
+     "calls": 596,
+     "usd": 0.3519178630000003
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.5178507290000002
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.14917472899999984
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.3519178630000003
+    }
+   },
+   "cells": 6312,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 20486457,
+   "pending": 3156,
+   "repeat_cells": 2896,
+   "shared_requests": 578,
+   "usd_high": 2.3898115889999954,
+   "usd_low": 1.604475989999995,
+   "usd_upper_bound": 2.9560811499999944
+  },
+  "C3_gptoss20b_hf_deepinfra_low": {
+   "by_stage_high": {
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.35801294099999975
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.20000940299999997
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.3879644009999999
+    },
+    "read/M6@4000/C3_gptoss20b_hf_deepinfra_low": {
+     "calls": 596,
+     "usd": 0.3879618269999999
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.35801294099999975
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.20000894099999997
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.3879618269999999
+    }
+   },
+   "cells": 6312,
+   "infeasible": 0,
+   "infeasible_by_reason": {},
+   "infeasible_by_stage": {},
+   "input_tokens_high": 20486457,
+   "pending": 3156,
+   "repeat_cells": 2896,
+   "shared_requests": 578,
+   "usd_high": 2.2799322810000002,
+   "usd_low": 1.1889857099999943,
+   "usd_upper_bound": 2.5780566300000016
+  },
+  "tierB_llama33_70b_hf_ovhcloud": {
+   "by_stage_high": {
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 4.627327078000003
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.729906474
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 2.244114157999999
+    },
+    "read/M6@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 2.2440506659999993
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 4.627327078000003
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.729895078
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 2.2440506659999993
+    }
+   },
+   "cells": 6908,
+   "infeasible": 6,
+   "infeasible_by_reason": {
+    "route_context": 6
+   },
+   "infeasible_by_stage": {
+    "read/M0@full": 6
+   },
+   "input_tokens_high": 20486457,
+   "pending": 3156,
+   "repeat_cells": 3248,
+   "shared_requests": 578,
+   "usd_high": 17.446671198000026,
+   "usd_low": 15.860610180000048,
+   "usd_upper_bound": 21.342396979999997
+  },
+  "tierC2_qwen3_32b_hf_nscale_nothink": {
+   "by_stage_high": {
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.6134877759999997
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.192145008
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.4399425359999998
+    },
+    "read/M6@4000/tierC2_qwen3_32b_hf_nscale_nothink": {
+     "calls": 465,
+     "usd": 0.34318816399999996
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.6134877759999997
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.192143776
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.4399356719999997
+    }
+   },
+   "cells": 6312,
+   "infeasible": 131,
+   "infeasible_by_reason": {
+    "route_timeout": 131
+   },
+   "infeasible_by_stage": {
+    "read/M6@4000/tierC2_qwen3_32b_hf_nscale_nothink": 131
+   },
+   "input_tokens_high": 19919241,
+   "pending": 3025,
+   "repeat_cells": 2896,
+   "shared_requests": 578,
+   "usd_high": 2.834330707999996,
+   "usd_low": 1.820414280000004,
+   "usd_upper_bound": 3.5408205599999953
+  },
+  "tierC3_gptoss120b_hf_deepinfra_low": {
+   "by_stage_high": {
+    "read/M5@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.4382387338999996
+    },
+    "read/M5@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.24336770370000008
+    },
+    "read/M5@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.47272014789999967
+    },
+    "read/M6@4000/tierC3_gptoss120b_hf_deepinfra_low": {
+     "calls": 593,
+     "usd": 0.47034015489999975
+    },
+    "read/M7@16000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.4382387338999996
+    },
+    "read/M7@2000/B1_dsv41flash_direct_nothink": {
+     "calls": 342,
+     "usd": 0.2433671339000001
+    },
+    "read/M7@4000/B1_dsv41flash_direct_nothink": {
+     "calls": 596,
+     "usd": 0.4727169732999997
+    }
+   },
+   "cells": 6312,
+   "infeasible": 3,
+   "infeasible_by_reason": {
+    "route_timeout": 3
+   },
+   "infeasible_by_stage": {
+    "read/M6@4000/tierC3_gptoss120b_hf_deepinfra_low": 3
+   },
+   "input_tokens_high": 20473545,
+   "pending": 3153,
+   "repeat_cells": 2896,
+   "shared_requests": 578,
+   "usd_high": 2.778989581499996,
+   "usd_low": 1.4543341649999997,
+   "usd_upper_bound": 3.142445100999996
+  }
+ },
+ "repeats": {
+  "items": 49,
+  "k": 3,
+  "k1_slice": {
+   "conditions": [
+    "B0@full",
+    "M0@full",
+    "M2@4000",
+    "M4@4000",
+    "M5@4000",
+    "M6@4000/B1_dsv41flash_direct_nothink",
+    "M6@4000",
+    "M7@4000"
+   ],
+   "items": 176
+  }
+ },
+ "run_id": "main",
+ "spent_usd": 46.37619707,
+ "token_method": "tiktoken:o200k_base"
+}

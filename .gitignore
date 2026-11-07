@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+*.egg-info/
+# what the scripts write by default: reports, re-scorings, specs, the paper's values and figures, new runs, rebuild
+# summaries, connectivity checks (the files the paper was written from are in paper/ and data/)
+out/
+# plain rows and call ledgers written beside a run's released .gz files (a re-scoring, a new run)
+data/runs/*/rows_*.jsonl
+data/runs/*/*__*.jsonl
+# spend approvals (scripts/approval.py)
+data/budget/
+# rebuilt procedure texts and the raw documents they come from (the publishers allow pointers only; scripts/corpus/rebuild.py)
+data/raw/
+data/corpus/*/

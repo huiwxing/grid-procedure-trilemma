@@ -1,0 +1,31 @@
+{
+ "run_id": "records_built_by_qwen32b",
+ "queue_file": "data/runs/records_built_by_qwen32b/arbitration_queue.jsonl",
+ "queue_sha256": "58092893a4c9d4a99ffd06006bbd5c7328373fbebfafdac8127ae503c4712692",
+ "arbiter": "first arbiter (Claude Fable 5.1) + one independent second arbiter (Claude Opus), both blind: judged from the queue only (no reader identity, no evidence span, no source text); the pack was identical for both",
+ "n_arbiters": 2,
+ "date": "2026-09-28",
+ "rule": "scorer rules N11 / N5 (procedures/scoring), fixed before the pack was read: unit null or unresolved unit on a dimensional gold = ambiguous. Read the value under (i) the unit the question names or implies, else (ii) the unit carried inside the answer's value or unit string, else (iii) the gold's unit. TRUE iff the value equals the gold under the reading the question fixes, after exact same-dimension conversion (s/min/h/day/week, kW-MW, kV-V, kA-A; % never a fraction; month/year never converted). FALSE if unequal under every admissible reading, or equal only under a unit the question does not name and the answer does not state; a range, a conditional two-valued answer or not_in_effect against a numeric gold is FALSE.",
+ "decisions": {
+  "01a115b70bfcbf6b": true,
+  "3fec29ecc02ed4a9": false,
+  "7cc6920f15f7f347": true,
+  "9ab19ea1fa31a376": false
+ },
+ "second_arbiter_decisions": {
+  "01a115b70bfcbf6b": true,
+  "3fec29ecc02ed4a9": false,
+  "7cc6920f15f7f347": true,
+  "9ab19ea1fa31a376": false
+ },
+ "disagreements": [],
+ "disagreement_rate": "0 / 4",
+ "rationale": {
+  "01a115b70bfcbf6b": "48 hours = 48 h; 'after the operating hour' is a qualifier, not a unit",
+  "3fec29ecc02ed4a9": "5 business days != 2 business day",
+  "7cc6920f15f7f347": "5 business days = 5 business day",
+  "9ab19ea1fa31a376": "30 min != 15 min"
+ },
+ "judgement_calls": [],
+ "wiring_note": "applied by scripts/rescore.py --decisions, matched to answers by request_hash; the rows of the re-scoring are passed to report.py with --rows/--summary because load_run takes the last live invocation"
+}
